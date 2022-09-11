@@ -11,6 +11,15 @@ import {MatIconModule} from '@angular/material/icon';
 import { ReaderComponent } from './reader/reader.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreatebookComponent } from './createbook/createbook.component';
+import { BookdetailsComponent } from './bookdetails/bookdetails.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -18,7 +27,11 @@ import { LoginComponent } from './login/login.component';
     MasterComponent,
     ReaderComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    CreatebookComponent,
+    BookdetailsComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +39,13 @@ import { LoginComponent } from './login/login.component';
     MatToolbarModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [MasterComponent]

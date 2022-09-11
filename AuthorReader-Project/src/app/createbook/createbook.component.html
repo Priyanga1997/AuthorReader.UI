@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Create Books</h1>
+<div mat-dialog-content>
+    <form class="example-form">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Title">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Category</mat-label>
+            <mat-select placeholder="Category">
+                <mat-option value="Fantasy">Fantasy</mat-option>
+                <mat-option value="Spirituality">Spirituality</mat-option>
+                <mat-option value="Fiction">Fiction</mat-option>
+                <mat-option value="Science Fiction">Science Fiction</mat-option>
+                <mat-option value="Thriller">Thriller</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Image</mat-label>
+            <input matInput>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" placeholder="Price">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Publisher</mat-label>
+            <input matInput placeholder="Publisher">
+        </mat-form-field>
+
+        <label for="">
+            <h4>Active</h4>
+        </label>
+        <mat-radio-group>
+            <mat-radio-button *ngFor="let active of activeList" [value]="active">
+                {{active}}
+            </mat-radio-button>
+        </mat-radio-group>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Content</mat-label>
+            <textarea matInput></textarea>
+      </mat-form-field>     
+</form>
+</div>
+<div mat-dialog-action [align]="'end'">
+<button mat-raised-button color="warn" mat-dialog-close>Close</button>
+<button style="margin-left: 8px;" mat-raised-button color="primary">Save</button>
+</div>

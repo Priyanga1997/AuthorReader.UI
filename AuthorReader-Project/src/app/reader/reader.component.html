@@ -1,5 +1,6 @@
-<table class="table">
-    <th colspan="4">Search Books</th>
+<div class="reader">
+    <h2>Search Books</h2>
+<table>
   <tr>
   <td>Title</td>
   <td><input type="text" placeholder="Enter title"/></td>
@@ -16,7 +17,10 @@
   <td>Released Date</td>
   <td><input type="text" placeholder="Enter released date"/></td>
   </tr>
-  <tr><td></td>
-  <td><input type="button" value="Search"/></td>
-  </tr>
-  </table>
+</table>
+<div class="btn">
+ <button (click)="backClick()">Go Back</button>
+ <button (click)="searchClick()">Search</button>
+</div>
+</div>
+

@@ -1,4 +1,17 @@
-.table{
-    margin-left:auto; 
-    margin-right:auto;
+.reader{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-left:450px;
+    margin-right: 400px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: aqua;
+    height:70vh;
+}
+.btn{
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
 }
