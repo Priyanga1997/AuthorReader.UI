@@ -1,14 +1,14 @@
 <h1 mat-dialog-title>Create Books</h1>
 <div mat-dialog-content>
-    <form class="example-form">
+    <form class="example-form" [formGroup]="createForm">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Title</mat-label>
-            <input matInput placeholder="Title">
+            <input matInput placeholder="Title" formControlName="title"> 
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Category</mat-label>
-            <mat-select placeholder="Category">
+            <mat-select placeholder="Category" formControlName="category">
                 <mat-option value="Fantasy">Fantasy</mat-option>
                 <mat-option value="Spirituality">Spirituality</mat-option>
                 <mat-option value="Fiction">Fiction</mat-option>
@@ -17,25 +17,25 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="example-full-width" appearance="fill">
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Image</mat-label>
             <input matInput>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Price</mat-label>
-            <input matInput type="number" placeholder="Price">
+            <input matInput type="number" placeholder="Price" formControlName="price">
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Publisher</mat-label>
-            <input matInput placeholder="Publisher">
+            <input matInput placeholder="Publisher" formControlName="publisher">
         </mat-form-field>
 
         <label for="">
             <h4>Active</h4>
         </label>
-        <mat-radio-group>
+        <mat-radio-group formControlName="active">
             <mat-radio-button *ngFor="let active of activeList" [value]="active">
                 {{active}}
             </mat-radio-button>
@@ -43,11 +43,11 @@
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Content</mat-label>
-            <textarea matInput></textarea>
-      </mat-form-field>     
+            <textarea matInput formControlName="content"></textarea>
+      </mat-form-field>         
 </form>
 </div>
 <div mat-dialog-action [align]="'end'">
 <button mat-raised-button color="warn" mat-dialog-close>Close</button>
-<button style="margin-left: 8px;" mat-raised-button color="primary">Save</button>
+<button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addBook()">{{actionBtn}}</button>
 </div>

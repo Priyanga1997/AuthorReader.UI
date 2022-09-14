@@ -13,7 +13,7 @@ form{
     padding: 10px 25px;
     margin: 10px;
 }
-.btn{
+.registerbtn{
     display: flex;
     justify-content: space-between;
     width: 70%;

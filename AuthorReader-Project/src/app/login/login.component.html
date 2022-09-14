@@ -4,7 +4,7 @@
     <h2>Login</h2>
     <input type="text" placeholder="Username" class="input" formControlName="username">
     <input type="password" placeholder="Password" class="input" formControlName="password">
-    <div class="btn">
+    <div class="loginbtn">
         <button (click)="loginSubmit(login.value)" [disabled]="login.invalid">Login</button>
         <button (click)="goToSignup()">Sign Up</button>
     </div>

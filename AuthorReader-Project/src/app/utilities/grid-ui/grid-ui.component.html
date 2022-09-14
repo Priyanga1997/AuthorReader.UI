@@ -1,0 +1,19 @@
+<table>
+    <tr>
+        <th *ngFor="let col of gridColumns">
+            {{col.colName}}
+            </th>
+    </tr>
+        <tr *ngFor="let colObj of gridData">
+            <td *ngFor="let col of gridColumns">
+             {{colObj[col.colName]}}
+             </td>
+             <td>
+                <a (click)="selectedGrid(colObj)" class="btn btn-primary">Edit</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary">Delete</a>
+                    </td>
+         </tr>
+
+</table>

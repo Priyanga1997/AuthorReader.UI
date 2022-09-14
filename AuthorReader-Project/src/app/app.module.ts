@@ -20,6 +20,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
+import {HttpClientModule} from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GridUiComponent } from './utilities/grid-ui/grid-ui.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     RegisterComponent,
     CreatebookComponent,
     BookdetailsComponent,
-    NavigationComponent
+    NavigationComponent,
+    GridUiComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [MasterComponent]
