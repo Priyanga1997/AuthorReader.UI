@@ -57,7 +57,7 @@
 </form>
 <div mat-dialog-action [align]="'end'">
 <button mat-raised-button color="warn">Close</button>
-<button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addBook()">Save</button>
+<button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addBook()">{{actionBtn}}</button>
 </div>
 </div>
 <mat-form-field appearance="standard">
@@ -65,6 +65,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
   </mat-form-field>
   
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="id">

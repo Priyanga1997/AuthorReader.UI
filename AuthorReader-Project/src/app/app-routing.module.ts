@@ -1,6 +1,6 @@
 import { Host, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BookdetailsComponent } from './bookdetails/bookdetails.component';
+import {PurchaseComponent} from './purchase/purchase.component';
 import { CreatebookComponent } from './createbook/createbook.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'createbook',component:CreatebookComponent},
   {path:'navigation',component:NavigationComponent},
-  {path:'bookdetails',component:BookdetailsComponent}
+  {path:'purchase',component:PurchaseComponent}
 ];
 
 @NgModule({
