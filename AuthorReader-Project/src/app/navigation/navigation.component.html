@@ -26,10 +26,15 @@
             </mat-select>
         </mat-form-field>
 
-        <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Image</mat-label>
             <input matInput>
-        </mat-form-field> -->
+            <img *ngFor='let url of urls' [src]="url">
+            <input
+            type="file"
+            (change)="uploadFileEvt($event)" formControlName="image"
+          />
+        </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Price</mat-label>
@@ -60,6 +65,7 @@
 <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addBook()">{{actionBtn}}</button>
 </div>
 </div>
+<div class= "tbl">
 <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
@@ -132,4 +138,5 @@
   
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
+</div>
 </div>

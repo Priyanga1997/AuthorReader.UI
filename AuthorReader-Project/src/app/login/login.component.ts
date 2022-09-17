@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserData } from '../models/userdata';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
  login:any=FormGroup;
-  constructor(private fb:FormBuilder,private router:Router) { }
+ UserDataModel:UserData=new UserData();
+ ErrorMessage:any='';
+  constructor(private fb:FormBuilder,private router:Router, private _service:LoginService) { }
 
   ngOnInit(): void {
     this.login=this.fb.group({
@@ -20,9 +24,19 @@ export class LoginComponent implements OnInit {
         //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')])]
     });
   }
-  loginSubmit(data:any){
-    console.log(data);
-    this.router.navigate(['navigation']);
+  loginSubmit(){
+    //console.log(data);
+    this._service.loginUser(this.UserDataModel).subscribe(res=>{
+      console.log('Hi You are able to login');
+      // alert('Hi');
+      localStorage.setItem('token',res.token);
+      this.router.navigate(['navigation']);
+    },res=>
+    {
+      console.log(res);
+      this.ErrorMessage="Some error have occured";
+      document.getElementById('btnErrorMsg')?.click();
+    });
     
   }
   goToSignup(){

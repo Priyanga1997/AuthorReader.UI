@@ -31,12 +31,25 @@
     max-width:1200px;
     margin: 0 auto;
 }
-table {
-    width: 100%;
+
+  .tbl{
+    align-items: center;
+    width: 60%;
   }
   
   .mat-form-field {
     font-size: 14px;
     width: 100%;
   }
+  #uploadFile {
+    
+    /* top: 0px;
+    left: 0px;
+    width: 100%; 
+    z-index: 9;
+    opacity: 0;
+    height: 100%;
+    cursor: pointer;
+    position: absolute; */
+}
   

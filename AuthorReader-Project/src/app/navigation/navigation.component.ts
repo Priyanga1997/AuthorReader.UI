@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Injectable, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Injectable, Input, OnInit, Output, ViewChild,ElementRef } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreatebookComponent } from '../createbook/createbook.component';
 import { ApiService } from '../services/api.service';
@@ -33,10 +33,36 @@ export class NavigationComponent implements OnInit {
   ) {
   }
 
+  selectedFile=null;
+  // @ViewChild('fileInput') fileInput!: ElementRef;
+  // fileAttr = 'Choose File';
+  // uploadFileEvt(imgFile: any) {
+  //   if (imgFile.target.files && imgFile.target.files[0]) {
+  //     this.fileAttr = '';
+  //     Array.from(imgFile.target.files).forEach((file: any) => {
+  //       this.fileAttr += file.name + ' - ';
+  //     });
+  //     // HTML5 FileReader API
+  //     let reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       let image = new Image();
+  //       image.src = e.target.result;
+  //       image.onload = (rs) => {
+  //         let imgBase64Path = e.target.result;
+  //       };
+  //     };
+  //     reader.readAsDataURL(imgFile.target.files[0]);
+  //     // Reset if duplicate image uploaded again
+  //     this.fileInput.nativeElement.value = '';
+  //   } else {
+  //     this.fileAttr = 'Choose File';
+  //   }
+  // }
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
+      image:[''],
       publisher: ['', Validators.required],
       price: ['', Validators.required],
       active: ['', Validators.required],
@@ -44,6 +70,20 @@ export class NavigationComponent implements OnInit {
     });
     this.getAllBooks();
   }
+  urls: string[] = [];
+  uploadFileEvt(e:any){
+   if(e.target.files){
+     //for(let i=0;i<File.length;i++){
+       var reader = new FileReader();
+       reader.readAsDataURL(e.target.files[0]);
+       //reader.onload=(events:any)=>{
+        // this.urls.push(events.target.result);
+      // }
+    // }
+   }
+  }
+
+
 
   openDialog(): void {
     this.dialog.open(CreatebookComponent, {

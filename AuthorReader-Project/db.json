@@ -1,66 +1,73 @@
 {
   "bookList": [
     {
-      "title": "aaa",
+      "title": "The Name Of The Wind",
       "category": "Fantasy",
-      "publisher": "aaa",
-      "price": 10000,
+      "image": "C:\\fakepath\\NameOfTheWind.jfif",
+      "publisher": "DAW Books",
+      "price": 100,
       "active": "yes",
-      "content": "aaaa",
+      "content": "The Name of the Wind, also referred to as The Kingkiller Chronicle: Day One, is a heroic fantasy novel written by American author Patrick Rothfuss. It is the first book in the ongoing fantasy trilogy The Kingkiller Chronicle, followed by The Wise Man's Fear.",
       "id": 5
     },
     {
-      "title": "aaa",
+      "title": "A Wizard Of Earthsea",
       "category": "Fantasy",
-      "publisher": "aaa",
-      "price": 1,
+      "image": "C:\\fakepath\\WizardOfEarthSea.jfif",
+      "publisher": "Parnassus Press",
+      "price": 200,
       "active": "yes",
-      "content": "aaaa",
+      "content": "A Wizard of Earthsea is a fantasy novel written by American author Ursula K. Le Guin and first published by the small press Parnassus in 1968. It is regarded as a classic of children's literature and of fantasy, within which it is widely influential.",
       "id": 7
     },
     {
-      "title": "aaa",
+      "title": "Where The Mountain Meets The Moon",
       "category": "Fantasy",
-      "publisher": "aaa",
-      "price": 1,
+      "image": "C:\\fakepath\\WizardOfEarthSea.jfif",
+      "publisher": "Little, Brown and Company",
+      "price": 110,
       "active": "yes",
-      "content": "aaaa",
+      "content": "Where the Mountain Meets the Moon is a fantasy-adventure children's novel inspired by Chinese folklore",
       "id": 8
     },
     {
-      "title": "aaa",
-      "category": "Fantasy",
-      "publisher": "aaa",
-      "price": 1,
+      "title": "The Complete Grimm’s Fairy Tales",
+      "category": "Fiction",
+      "image": "C:\\fakepath\\GrimmFairyTale.jfif",
+      "publisher": "Simon & Schuster",
+      "price": 120,
       "active": "yes",
-      "content": "aaaa",
+      "content": "Cinderella, Rapunzel, Snow-White, Hänsel and Gretel, Little Red-Cap (Little Red Riding Hood), and Briar-Rose (Sleeping Beauty) are only a few of the more than two hundred enchanting characters included in this volume",
       "id": 9
     },
     {
-      "title": "aaa",
-      "category": "Fantasy",
-      "publisher": "aaa",
-      "price": 1,
+      "title": "Pride and Prejudice",
+      "category": "Fiction",
+      "image": "C:\\fakepath\\PrideAndPrejudice.jfif",
+      "publisher": "T. Egerton, Whitehall",
+      "price": 100,
       "active": "yes",
-      "content": "aaaa",
+      "content": "Pride and Prejudice is an 1813 novel of manners by Jane Austen. The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book who learns about the repercussions of hasty judgments and comes to appreciate the difference between superficial goodness and actual goodness.",
       "id": 10
     },
     {
-      "title": "",
-      "category": "",
-      "publisher": "",
-      "price": "",
-      "active": "",
-      "content": "",
+      "title": "The Little Prince",
+      "category": "Fiction",
+      "image": "C:\\fakepath\\LittlePrince.jfif",
+      "publisher": "Reynal & Hitchcock (U.S.) Gallimard (France)",
+      "price": 130,
+      "active": "yes",
+      "content": "The story follows a young prince who visits various planets in space, including Earth, and addresses themes of loneliness, friendship, love, and loss.",
       "id": 11
     },
     {
-      "title": "Hello",
-      "category": "Fantasy",
-      "publisher": "abcd",
-      "price": 1,
+      "title": "RingWorld",
+      "category": "Science Fiction",
+      "image": "C:\\fakepath\\RingWorld.jfif",
+      "publisher": "Ballantine Books",
+      "price": 140,
       "active": "yes",
-      "content": "aaaa",
+      "content": "Ringworld is a 1970 science fiction novel by Larry Niven, set in his Known Space universe and considered a classic of science fiction literature.",
       "id": 12
     },
     {
@@ -188,6 +195,25 @@
       "active": "yes",
       "content": "aaaa",
       "id": 26
+    },
+    {
+      "title": "",
+      "category": "",
+      "publisher": "",
+      "price": "",
+      "active": "",
+      "content": "",
+      "id": 27
+    },
+    {
+      "title": "",
+      "category": "",
+      "image": "",
+      "publisher": "",
+      "price": "",
+      "active": "",
+      "content": "",
+      "id": 28
     }
   ],
   "comments": [
