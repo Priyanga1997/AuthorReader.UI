@@ -2,13 +2,14 @@
     <div class="register">
     <form [formGroup]="register">
         <h2>Create Account</h2>
-        <input type="text" placeholder="Enter username" class="input" formControlName="username">
-        <input type="password" placeholder="Enter password" class="input" formControlName="password">
+        <input type="text" placeholder="Enter username" class="input" formControlName="username" [(ngModel)]="UserDataModel.userName">
+        <input type="password" placeholder="Enter password" class="input" formControlName="password" [(ngModel)]="UserDataModel.password">
         <div class="registerbtn">
-            <button (click)="registerSubmit(register.value)" [disabled]="register.invalid">Sign Up</button>
+            <button (click)="registerSubmit()" [disabled]="register.invalid">Sign Up</button>
             <button (click)="goToLogin()">Login</button>
         </div>
     </form>
     </div>
     </div>
+    <a class="btn btn-primary" id="btnErrorMsg" style="display: none;" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
     

@@ -13,8 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreatebookComponent } from './createbook/createbook.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { AuthorComponent } from './author/author.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
@@ -38,9 +37,8 @@ import { PurchaseComponent } from './purchase/purchase.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    CreatebookComponent,
     PurchaseComponent,
-    NavigationComponent,
+    AuthorComponent,
     GridUiComponent
   ],
   imports: [

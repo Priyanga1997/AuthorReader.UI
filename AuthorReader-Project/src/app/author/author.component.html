@@ -1,9 +1,11 @@
 <mat-toolbar>
     <div class="spacer"></div>
     <mat-icon>add</mat-icon>
-    <button mat-button (click)="openDialog()">Create Book</button>
+    <button mat-button>Create Book</button>
+    <div>
     <mat-icon>search</mat-icon>
     <a mat-button routerLink="/reader">Search Books</a>
+   </div>
 </mat-toolbar>
 
 <div class="book">
@@ -29,10 +31,10 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Image</mat-label>
             <input matInput>
-            <img *ngFor='let url of urls' [src]="url">
+            <img *ngFor='let url of urls' [src]="url" (change)="uploadFileEvt($event)">
             <input
             type="file"
-            (change)="uploadFileEvt($event)" formControlName="image"
+             formControlName="image"
           />
         </mat-form-field>
 

@@ -31,22 +31,40 @@
       width:600px;
       margin-left: 20px;
   }
-  .search-icon{
+  /* .search-icon{
       position: absolute;
       z-index:10;
       right:20%;
       color:blue;
       top:20px;
-  }
-  .btn btn-primary{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  } */
+#cart{
+      position: absolute;
+      left: 87%;
+      top: 14px;
   }
 .card{
     padding:20px;
     margin:50px;
 }
+#searchBook {
+    position: relative;
+    left: 600px;
+    bottom: 30px;
+    color: #7B7B7B;
+    cursor: pointer;
+  }
+  .card img{
+    width:200px;
+    height:200px;
+    margin-bottom:15px;
+    transition:0.3s ease-in-out;
+  }
+    
+.card img:hover{
+    transition:0.3s ease-in-out;
+    transform:scale(1.1);
+    }
 /* .searchbtn{
     display: flex;
     justify-content: space-between;
@@ -57,3 +75,4 @@
     flex-direction: column;
     align-items: center;
   } */
+

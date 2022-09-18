@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       console.log('Hi You are able to login');
       // alert('Hi');
       localStorage.setItem('token',res.token);
-      this.router.navigate(['navigation']);
+      this.router.navigate(['author']);
     },res=>
     {
       console.log(res);
@@ -42,5 +42,4 @@ export class LoginComponent implements OnInit {
   goToSignup(){
     this.router.navigate(['register']);
   }
-
 }

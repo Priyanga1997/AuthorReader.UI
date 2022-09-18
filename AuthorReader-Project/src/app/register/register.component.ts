@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserData } from '../models/userdata';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   register:any=FormGroup;
-  constructor(private fb:FormBuilder,private router:Router) { }
+  UserDataModel:UserData=new UserData();
+  ErrorMessage:any='';
+  constructor(private fb:FormBuilder,private router:Router, private _service: LoginService) { }
 
   ngOnInit(): void {
     this.register=this.fb.group({
@@ -19,9 +23,18 @@ export class RegisterComponent implements OnInit {
         Validators.required])]
       })
   }
-  registerSubmit(data:any)
+  registerSubmit()
   {
-    console.log(data);
+    this._service.register(this.UserDataModel).subscribe(res=>{
+    console.log('You have successfully registered');
+      // alert('Hi');
+      localStorage.setItem('token',res.token);
+    },res=>
+    {
+      console.log(res);
+      this.ErrorMessage="Some error have occured";
+      document.getElementById('btnErrorMsg')?.click();
+    });
   }
   goToLogin(){
     this.router.navigate(['login']);

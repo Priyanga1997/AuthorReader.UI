@@ -11,4 +11,7 @@ export class LoginService {
   loginUser(login:any){
     return this.http.post<any>(this._loginUrl,login);
   }
+  register(register:any){
+    return this.http.post<any>(this._registerUrl,register);
+  }
 }

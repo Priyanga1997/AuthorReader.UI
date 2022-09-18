@@ -3,7 +3,7 @@
     {
       "title": "The Name Of The Wind",
       "category": "Fantasy",
-      "image": "C:\\fakepath\\NameOfTheWind.jfif",
+      "image": "C:\\fakepath\\NameOfTheWind.png",
       "publisher": "DAW Books",
       "price": 100,
       "active": "yes",
@@ -13,7 +13,7 @@
     {
       "title": "A Wizard Of Earthsea",
       "category": "Fantasy",
-      "image": "C:\\fakepath\\WizardOfEarthSea.jfif",
+      "image": "C:\\fakepath\\WizardOfEarthSea.png",
       "publisher": "Parnassus Press",
       "price": 200,
       "active": "yes",
@@ -23,7 +23,7 @@
     {
       "title": "Where The Mountain Meets The Moon",
       "category": "Fantasy",
-      "image": "C:\\fakepath\\WizardOfEarthSea.jfif",
+      "image": "C:\\fakepath\\WhereTheMountainMeetsTheMoon.png",
       "publisher": "Little, Brown and Company",
       "price": 110,
       "active": "yes",
@@ -33,7 +33,7 @@
     {
       "title": "The Complete Grimm’s Fairy Tales",
       "category": "Fiction",
-      "image": "C:\\fakepath\\GrimmFairyTale.jfif",
+      "image": "C:\\fakepath\\GrimmFairyTale.png",
       "publisher": "Simon & Schuster",
       "price": 120,
       "active": "yes",
@@ -43,7 +43,7 @@
     {
       "title": "Pride and Prejudice",
       "category": "Fiction",
-      "image": "C:\\fakepath\\PrideAndPrejudice.jfif",
+      "image": "C:\\fakepath\\PrideAndPrejudice.png",
       "publisher": "T. Egerton, Whitehall",
       "price": 100,
       "active": "yes",
@@ -53,7 +53,7 @@
     {
       "title": "The Little Prince",
       "category": "Fiction",
-      "image": "C:\\fakepath\\LittlePrince.jfif",
+      "image": "C:\\fakepath\\LittlePrince.png",
       "publisher": "Reynal & Hitchcock (U.S.) Gallimard (France)",
       "price": 130,
       "active": "yes",
@@ -63,7 +63,7 @@
     {
       "title": "RingWorld",
       "category": "Science Fiction",
-      "image": "C:\\fakepath\\RingWorld.jfif",
+      "image": "C:\\fakepath\\RingWorld.png",
       "publisher": "Ballantine Books",
       "price": 140,
       "active": "yes",

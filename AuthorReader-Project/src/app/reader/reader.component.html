@@ -25,14 +25,14 @@
 </div> -->
 <div>
     <h2>Search Books</h2>
-    <input type="text" class="form-control" placeholder="search books">
+    <button class="btn btn-primary" id="cart">
+        <i class="fas fa-cart-plus"></i>
+        <div style="font-size: 10px;" class="badge bg-danger"></div>
+    </button>
+    <input type="text" class="form-control" placeholder="search books"/>
 <!-- <form class="reader" [formGroup]="searchForm"> -->
     <!-- //<button type="button" class="btn btn-primary"> -->
-        <i class="fas fa-search"></i>
-        <button class="btn btn-primary">
-            <i style="font-size: 30px;" class="fas fa-cart-plus"></i>
-            <div style="font-size: 10px;" class="badge bg-danger"></div>
-        </button>
+        <i id="searchBook" class="fas fa-search"></i>
       <!-- //</button> -->
      <!-- <span class="fas fa-search search-icon"></span> -->
         <!-- <mat-form-field class="example-full-width">
@@ -72,8 +72,8 @@
 <div class="container">
     <div class="row">
         <ng-container *ngFor="let item of bookList">
-            <div class="card-col-md-3">
-                <img src="" alt="">
+            <div class="card col-md-3">
+                <img src="{{item.image}}" alt="">
                 <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
                 <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.content}}</p>
                 <p><strong>{{item.price}}</strong></p>

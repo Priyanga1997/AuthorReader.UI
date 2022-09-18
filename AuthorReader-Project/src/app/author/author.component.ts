@@ -1,22 +1,20 @@
-import { Component, EventEmitter, Inject, Injectable, Input, OnInit, Output, ViewChild,ElementRef } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CreatebookComponent } from '../createbook/createbook.component';
+import { Component,OnInit,ViewChild} from '@angular/core';
+import { MatDialog} from '@angular/material/dialog';
 import { ApiService } from '../services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatCellDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Title } from '@angular/platform-browser';
-import { Router, RouterLinkWithHref } from '@angular/router';
-import { DataSource } from '@angular/cdk/collections';
+import { Router,} from '@angular/router';
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  selector: 'app-author',
+  templateUrl: './author.component.html',
+  styleUrls: ['./author.component.css']
 })
-export class NavigationComponent implements OnInit {
+export class AuthorComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'category', 'price', 'publisher', 'active', 'content', 'action'];
   dataSource!: MatTableDataSource<any>;
   isEdit = false;
@@ -29,7 +27,7 @@ export class NavigationComponent implements OnInit {
   createForm !: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private http: HttpClient,
-    private api:ApiService,private route:Router
+    private api:ApiService,private route:Router,private nav: NavbarService
   ) {
   }
 
@@ -69,28 +67,31 @@ export class NavigationComponent implements OnInit {
       content: ['', Validators.required]
     });
     this.getAllBooks();
+    this.nav.hide();
   }
   urls: string[] = [];
+  // fileToUpload:File;
+  // handleFileInput(file:FileList){
+  //   this.fileToUpload = file.item(0);
+  //   var reader = new FileReader();
+  //   reader.onload=(event:any)=>{
+  //     this.urls = event.target.result;
+
+  //   }
+  //   reader.readAsDataURL(this.fileToUpload);
+  // }
   uploadFileEvt(e:any){
+    //const file = event.target.files[0]
    if(e.target.files){
      //for(let i=0;i<File.length;i++){
        var reader = new FileReader();
        reader.readAsDataURL(e.target.files[0]);
-       //reader.onload=(events:any)=>{
-        // this.urls.push(events.target.result);
-      // }
-    // }
-   }
+       reader.onload=(events:any)=>{
+       this.urls.push(events.target.result);
+       }
+     }
+   //}
   }
-
-
-
-  openDialog(): void {
-    this.dialog.open(CreatebookComponent, {
-      width: '35%'
-    });
-  }
- 
   getAllBooks() {
     this.http.get("http://localhost:3000/bookList").subscribe({
       next: (res: any) => {
@@ -137,7 +138,7 @@ export class NavigationComponent implements OnInit {
   }
 
   deleteBook(row: any) {
-    this.http.delete("http://localhost:3000/bookList/"+row.id).subscribe(res => this.PostSuccess(res), res => console.log(res));
+    this.http.delete("http://localhost:3000/bookList"+row.id).subscribe(res => this.PostSuccess(res), res => console.log(res));
   }
 
   applyFilter(event: Event) {

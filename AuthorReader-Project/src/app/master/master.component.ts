@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../services/navbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./master.component.css']
 })
 export class MasterComponent implements OnInit {
-  constructor() { }
-
+  constructor(public nav: NavbarService,private route:Router) { }
+  
   ngOnInit(): void {
+    this.nav.show();
   }
-
+   clickLogout(){
+      this.route.navigate(['']);
+   }
 }

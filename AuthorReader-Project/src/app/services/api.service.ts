@@ -10,21 +10,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  postBook(data: any) {
-    return this.http.post<any>("http://localhost:3000/bookList/", data);
-  }
+  // postBook(data: any) {
+  //   return this.http.post<any>("http://localhost:3000/bookList/", data);
+  // }
 
   getBook() {
     return this.http.get<any>("http://localhost:3000/bookList/").pipe(map((res:any)=>{
       return res;
     }));
   }
-
-  putBook(data:any,id:number){
-    return this.http.put("http://localhost:3000/bookList/" +id,data);
-  }
-
-   getBookDetails(value:string):Observable<any>{
-    return this.http.get("http://localhost:3000/bookList/?q=${value}");
-   }
 }
+
+//   putBook(data:any,id:number){
+//     return this.http.put("http://localhost:3000/bookList/" +id,data);
+//   }
+
+//    getBookDetails(value:string):Observable<any>{
+//     return this.http.get("http://localhost:3000/bookList/?q=${value}");
+//    }
+// }
