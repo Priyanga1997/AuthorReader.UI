@@ -2,10 +2,10 @@
     <div class="spacer"></div>
     <mat-icon>add</mat-icon>
     <button mat-button>Create Book</button>
-    <div>
+    <!-- <div>
     <mat-icon>search</mat-icon>
     <a mat-button routerLink="/reader">Search Books</a>
-   </div>
+   </div> -->
 </mat-toolbar>
 
 <div class="book">
@@ -15,6 +15,7 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Title</mat-label>
             <input matInput placeholder="Title" formControlName="title"> 
+            <mat-error>Please enter the title.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
@@ -26,6 +27,7 @@
                 <mat-option value="Science Fiction">Science Fiction</mat-option>
                 <mat-option value="Thriller">Thriller</mat-option>
             </mat-select>
+            <mat-error>Please select the category.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
@@ -41,11 +43,13 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Price</mat-label>
             <input matInput type="number" placeholder="Price" formControlName="price">
+            <mat-error>Please enter the price.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Publisher</mat-label>
             <input matInput placeholder="Publisher" formControlName="publisher">
+            <mat-error>Please enter the Publisher name.</mat-error>
         </mat-form-field>
 
         <label for="">
@@ -60,10 +64,11 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Content</mat-label>
             <textarea matInput formControlName="content"></textarea>
+            <mat-error>Please enter the content.</mat-error>
       </mat-form-field>         
 </form>
 <div mat-dialog-action [align]="'end'">
-<button mat-raised-button color="warn">Close</button>
+<button mat-raised-button color="warn" (click)="onClose()">Close</button>
 <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addBook()">{{actionBtn}}</button>
 </div>
 </div>

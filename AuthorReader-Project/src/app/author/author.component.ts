@@ -63,7 +63,7 @@ export class AuthorComponent implements OnInit {
       image:[''],
       publisher: ['', Validators.required],
       price: ['', Validators.required],
-      active: ['', Validators.required],
+      active: ['yes', Validators.required],
       content: ['', Validators.required]
     });
     this.getAllBooks();
@@ -93,7 +93,7 @@ export class AuthorComponent implements OnInit {
    //}
   }
   getAllBooks() {
-    this.http.get("http://localhost:3000/bookList").subscribe({
+    this.http.get("https://localhost:44398/api/author").subscribe({
       next: (res: any) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
@@ -111,16 +111,24 @@ export class AuthorComponent implements OnInit {
   addBook() {
     if (this.isEdit) {
        
-       this.http.put("http://localhost:3000/bookList/" +this.dataID, this.createForm.value)
-         .subscribe(res => this.PostSuccess(res), res => console.log(res));
+       this.http.put("https://localhost:44398/api/author"+'?id='+this.dataID, this.createForm.value)
+         .subscribe(res => this.PutSuccess(res), res => console.log(res));
     }
     else {
-      this.http.post("http://localhost:3000/bookList", this.createForm.value)
+      this.http.post("https://localhost:44398/api/author", this.createForm.value)
         .subscribe(res => this.PostSuccess(res), res => console.log(res));
     }
   }
   PostSuccess(input: any) {
+    alert("data got added successfully");
     this.getAllBooks();
+  }
+  PutSuccess(input: any) {
+    alert("data got updated successfully");
+    this.getAllBooks();
+  }
+  DeleteSuccess(input:any){
+    alert("data got deleted successfully");
   }
 
   editBook(row: any) {
@@ -138,7 +146,11 @@ export class AuthorComponent implements OnInit {
   }
 
   deleteBook(row: any) {
-    this.http.delete("http://localhost:3000/bookList"+row.id).subscribe(res => this.PostSuccess(res), res => console.log(res));
+    this.http.delete("https://localhost:44398/api/author/"+'?id='+row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
+  }
+
+  onClose(){
+     this.createForm.reset();
   }
 
   applyFilter(event: Event) {

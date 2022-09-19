@@ -27,13 +27,8 @@ export class RegisterComponent implements OnInit {
   {
     this._service.register(this.UserDataModel).subscribe(res=>{
     console.log('You have successfully registered');
-      // alert('Hi');
+    alert('You have registered successfully');
       localStorage.setItem('token',res.token);
-    },res=>
-    {
-      console.log(res);
-      this.ErrorMessage="Some error have occured";
-      document.getElementById('btnErrorMsg')?.click();
     });
   }
   goToLogin(){

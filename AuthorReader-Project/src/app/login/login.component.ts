@@ -25,16 +25,15 @@ export class LoginComponent implements OnInit {
     });
   }
   loginSubmit(){
-    //console.log(data);
     this._service.loginUser(this.UserDataModel).subscribe(res=>{
-      console.log('Hi You are able to login');
-      // alert('Hi');
+      console.log('You are able to login');
+      alert('You have logged in successfully');
       localStorage.setItem('token',res.token);
       this.router.navigate(['author']);
     },res=>
     {
       console.log(res);
-      this.ErrorMessage="Some error have occured";
+      this.ErrorMessage="Some error have occured!!Try entering the valid username and password";
       document.getElementById('btnErrorMsg')?.click();
     });
     

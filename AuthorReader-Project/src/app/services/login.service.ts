@@ -14,4 +14,7 @@ export class LoginService {
   register(register:any){
     return this.http.post<any>(this._registerUrl,register);
   }
+  getToken(){
+    return localStorage.getItem('token');
+  }
 }
