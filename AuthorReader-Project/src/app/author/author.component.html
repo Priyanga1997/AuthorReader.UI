@@ -33,11 +33,14 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Image</mat-label>
             <input matInput>
-            <img *ngFor='let url of urls' [src]="url" (change)="uploadFileEvt($event)">
-            <input
+            <input type="file" #file (change)="uploadFile(file.files)" style="display: none;" formControlName="image"/>
+            <button  (click)="file.click()" >Upload</button>
+            <img *ngFor="let book of images" src="https://localhost:44398/{{book.imageUrl}}">
+            <!-- <img *ngFor='let url of urls' [src]="url" (change)="uploadFileEvt($event)"> -->
+            <!-- <input
             type="file"
              formControlName="image"
-          />
+          /> -->
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">

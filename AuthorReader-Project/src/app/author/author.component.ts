@@ -69,7 +69,7 @@ export class AuthorComponent implements OnInit {
     this.getAllBooks();
     this.nav.hide();
   }
-  urls: string[] = [];
+  images:any;
   // fileToUpload:File;
   // handleFileInput(file:FileList){
   //   this.fileToUpload = file.item(0);
@@ -80,17 +80,29 @@ export class AuthorComponent implements OnInit {
   //   }
   //   reader.readAsDataURL(this.fileToUpload);
   // }
-  uploadFileEvt(e:any){
-    //const file = event.target.files[0]
-   if(e.target.files){
-     //for(let i=0;i<File.length;i++){
-       var reader = new FileReader();
-       reader.readAsDataURL(e.target.files[0]);
-       reader.onload=(events:any)=>{
-       this.urls.push(events.target.result);
-       }
-     }
-   //}
+  // uploadFileEvt(e:any){
+  //   //const file = event.target.files[0]
+  //  if(e.target.files){
+  //    //for(let i=0;i<File.length;i++){
+  //      var reader = new FileReader();
+  //      reader.readAsDataURL(e.target.files[0]);
+  //      reader.onload=(events:any)=>{
+  //      this.urls.push(events.target.result);
+  //      }
+  //    }
+  //  //}
+  // }
+  uploadFile(files:any){
+    if(files.length==0){
+      return ;
+    }
+    let fileToUpload=<File>files[0];
+    const formData=new FormData();
+    formData.append('file',fileToUpload,fileToUpload.name)
+    this.http.post('https://localhost:44398/api/home/',formData).subscribe(res=>console.log(res),res=>console.log(res));
+  }
+  SuccessGet(input:any){
+    this.images=input;
   }
   getAllBooks() {
     this.http.get("https://localhost:44398/api/author").subscribe({
@@ -103,9 +115,6 @@ export class AuthorComponent implements OnInit {
         alert("Error while fetching records!");
       }
     })
-  }
-  Success(input: any) {
-    this.createForm = input;
   }
 
   addBook() {

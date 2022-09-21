@@ -1,5 +1,5 @@
 <p>purchase works!</p>
-<ng-container *ngIf="true">
+<ng-container *ngIf="books.length !=0">
    <div class="container">
     <div class="card-table">
         <div class="cart-product">
@@ -17,33 +17,36 @@
                   </tr>
               </thead>
               <tbody>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <tr *ngFor="let item of books;let i= index">
+                  <td>{{i+1}}</td>
+                  <td>{{item.title}}</td>
+                  <td><img src="{{item.image}}" alt=""></td>
+                  <td>{{item.content}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.quantity}}</td>
+                  <td>{{item.total}}</td>
                   <td>
-                      <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                      <button class="btn btn-danger" (click)="removeItem(item)"><i class="fas fa-trash-alt"></i></button>
                   </td>
+                  <td>
+                    <button class="btn btn-primary">Buy now</button>
+                </td>
+                </tr>
               </tbody>
           </table>
         </div>
     </div>
    </div>
 </ng-container>
-<ng-container *ngIf="false">
+<ng-container *ngIf="books.length ==0">
 <div class="container">
     <div class="card">
-        <h5 class="card-title>">My Cart</h5>
-    </div>
     <div class="center">
         <img src="" alt="">
         <h4>Your cart is empty!</h4>
-        <h6>Add item to cart</h6>
-        <button class="btn btn-primary">Shop Now</button>
+        <h5>Add item to cart</h5>
+        <button class="btn btn-primary" (click)="navigateToReader()">Shop Now</button>
     </div>
+</div>
 </div>
 </ng-container>

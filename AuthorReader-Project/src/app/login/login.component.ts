@@ -13,6 +13,13 @@ export class LoginComponent implements OnInit {
  login:any=FormGroup;
  UserDataModel:UserData=new UserData();
  ErrorMessage:any='';
+ userType:any='';
+ optionSelected: any;
+
+onOptionsSelected(event:any){
+  this.userType = event.target.value;
+ console.log(this.userType); //option value will be sent as event
+}
   constructor(private fb:FormBuilder,private router:Router, private _service:LoginService) { }
 
   ngOnInit(): void {
@@ -20,7 +27,8 @@ export class LoginComponent implements OnInit {
       username:['',Validators.required],
       password:['', Validators.compose([
         Validators.minLength(5),
-        Validators.required])]
+        Validators.required])],
+      usertype:['',Validators.required]
         //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')])]
     });
   }
@@ -29,7 +37,14 @@ export class LoginComponent implements OnInit {
       console.log('You are able to login');
       alert('You have logged in successfully');
       localStorage.setItem('token',res.token);
-      this.router.navigate(['author']);
+      if(this.userType=="Author")
+      {
+         this.router.navigate(['author']);
+      }
+      if(this.userType=="Reader")
+      {
+        this.router.navigate(['reader']);
+      }
     },res=>
     {
       console.log(res);

@@ -3,12 +3,16 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    /* margin-left:450px;
+    margin-top: 20px;  
+    background-color: powderblue;
+    margin-left:450px;
     margin-right: 400px;
     margin-bottom: 20px;
-    height:70vh; */
+    height:50vh;
 } 
+h2{
+    text-align: center;
+}
 .mat-form-field{
     width:200px;
 }
@@ -60,7 +64,9 @@
     margin-bottom:15px;
     transition:0.3s ease-in-out;
   }
-    
+.btn{
+    background-color:palevioletred;
+}
 .card img:hover{
     transition:0.3s ease-in-out;
     transform:scale(1.1);

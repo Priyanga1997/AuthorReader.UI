@@ -15,7 +15,7 @@ export class ApiService {
   // }
 
   getBook() {
-    return this.http.get<any>("http://localhost:3000/bookList/").pipe(map((res:any)=>{
+    return this.http.get<any>("https://localhost:44398/api/author/").pipe(map((res:any)=>{
       return res;
     }));
   }

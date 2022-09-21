@@ -3,7 +3,12 @@
 <form [formGroup]="login">
     <h2>Login</h2>
     <input type="text" placeholder="Username" class="input" formControlName="username" [(ngModel)]="UserDataModel.userName">
-    <input type="password" placeholder="Password" class="input" formControlName="password" [(ngModel)]="UserDataModel.password">
+    <input type="password" placeholder="Password" class="input" formControlName="password" [(ngModel)]="UserDataModel.password"> 
+    <select formControlName="usertype" class="dropdown" (click)="onOptionsSelected($event)">   
+        <option value="" disabled selected>Select User Type</option>  
+        <option value="Author">Author</option>  
+        <option value="Reader">Reader</option>  
+    </select>
     <div class="loginbtn">
         <button (click)="loginSubmit()" [disabled]="login.invalid">Login</button>
         <button (click)="goToSignup()">Sign Up</button>

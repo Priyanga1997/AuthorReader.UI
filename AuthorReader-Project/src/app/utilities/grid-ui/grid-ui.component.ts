@@ -1,4 +1,6 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { PurchaseService } from 'src/app/services/purchase.service';
 
 @Component({
   selector: 'app-grid-ui',
@@ -6,14 +8,23 @@ import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
   styleUrls: ['./grid-ui.component.css']
 })
 export class GridUiComponent implements OnInit {
-
-  constructor() { }
+  public bookList:any=[];
+  public totalItem :number=0;
+  constructor(private purchase:PurchaseService,private api:ApiService) { }
 //getting column names
 gridColumns: Array<any> = new Array<any>();
 
 //getting column data
 gridData: Array<any> = new Array<any>();
   ngOnInit(): void {
+    this.api.getBook().subscribe(res=>{this.bookList=res;
+      this.bookList.forEach((a:any)=>{
+        Object.assign(a,{quantity:1,total:a.price});
+      });  
+      this.purchase.getBooks().subscribe(res=>{
+        this.totalItem = res.length;  
+      })  
+  })
   }
   @Input("grid-columns")
   set SetGridColumns(_gridColumn:Array<any>){
@@ -31,4 +42,15 @@ gridData: Array<any> = new Array<any>();
     debugger;
     this.emitemitter.emit(_selected);
   }
+
+  @Output("grid-deleted")
+  emitemitterd:EventEmitter<any>=new EventEmitter<any>();
+
+  deleteGrid(_dselected:any){
+    this.emitemitter.emit(_dselected);
+  }
+  addToCart(item:any){
+    this.purchase.addToCart(item);
+   }
+
 }

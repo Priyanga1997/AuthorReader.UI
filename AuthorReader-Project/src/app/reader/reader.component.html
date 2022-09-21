@@ -1,58 +1,50 @@
-<!-- <div class="reader">
-    <h2>Search Books</h2>
-<table>
-  <tr>
-  <td>Title</td>
-  <td><input type="text" placeholder="Enter title"/></td>
-  </tr>
-  <tr>
-  <td>Author</td>
-  <td><input type="text" placeholder="Enter author name"/></td>
-  </tr>
-  <tr>
-  <td>Publisher</td>
-  <td><input type="text" placeholder="Enter publisher"/></td>
-  </tr>
-  <tr>
-  <td>Released Date</td>
-  <td><input type="text" placeholder="Enter released date"/></td>
-  </tr>
-</table>
-<div class="searchbtn">
- <button (click)="backClick()">Go Back</button>
- <button (click)="searchClick()">Search</button>
-</div>
-</div> -->
 <div>
     <h2>Search Books</h2>
-    <button class="btn btn-primary" id="cart">
-        <i class="fas fa-cart-plus"></i>
-        <div style="font-size: 10px;" class="badge bg-danger"></div>
-    </button>
-    <input type="text" class="form-control" placeholder="search books"/>
-<!-- <form class="reader" [formGroup]="searchForm"> -->
+    <!-- <input type="text" class="form-control" placeholder="search books" (click)="Search()"/> -->
+<form class="reader" [formGroup]="searchForm">
     <!-- //<button type="button" class="btn btn-primary"> -->
-        <i id="searchBook" class="fas fa-search"></i>
+        <!-- <i id="searchBook" class="fas fa-search"></i> -->
+        <button class="btn" id="cart" (click)="navigateToPurchase()">
+            <i class="fas fa-cart-plus"></i>
+            <div style="font-size: 10px;" class="badge bg-danger">{{totalItem}}</div>
+        </button>
+
+Title<input [(ngModel)]="ReaderModel.Title" formControlName="title" type="text" />
+Category <input [(ngModel)]="ReaderModel.Category" formControlName="category" type="text" />
+Price <input [(ngModel)]="ReaderModel.Price" formControlName="price" type="number" />
+Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher" type="text" />
+<br/>
+<input type="button" value="Search" (click)="searchAllBooks()"/>
       <!-- //</button> -->
      <!-- <span class="fas fa-search search-icon"></span> -->
-        <!-- <mat-form-field class="example-full-width">
+       <!-- <mat-form-field class="example-full-width">
         <span matPrefix> </span>
         <input type="tel" matInput placeholder="Search" name= "search">
         <button matSuffix mat-button><mat-icon >search</mat-icon></button>
         </mat-form-field> -->
 <!-- <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
-    <input matInput placeholder="Title" formControlName="title">
-  </mat-form-field> -->
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Author</mat-label>
-    <input matInput placeholder="Author" formControlName="author">
+    <input matInput placeholder="Title"  formControlName="title" name="title">
+  </mat-form-field>
+  <mat-form-field appearance="fill"> 
+    <mat-label>Category</mat-label>
+    <mat-select placeholder="Category"   formControlName="category" name="category">
+        <mat-option value="Fantasy">Fantasy</mat-option>
+        <mat-option value="Spirituality">Spirituality</mat-option>
+        <mat-option value="Fiction">Fiction</mat-option>
+        <mat-option value="Science Fiction">Science Fiction</mat-option>
+        <mat-option value="Thriller">Thriller</mat-option>
+    </mat-select>
+</mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input matInput placeholder="Price" formControlName="price" name="price">
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Publisher</mat-label>
-    <input matInput placeholder="Publisher" formControlName="publisher">
-  </mat-form-field> -->
-  <!-- <mat-form-field appearance="fill">
+    <input matInput placeholder="Publisher"  formControlName="publisher" name="publisher">
+  </mat-form-field>
+   <-- <mat-form-field appearance="fill">
     <mat-label>Enter a date range</mat-label>
     <mat-date-range-input [rangePicker]="picker">
       <input matStartDate placeholder="Start date">
@@ -61,24 +53,38 @@
     <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
-  </mat-form-field> -->
-<!-- </form> -->
-</div>
+  </mat-form-field>  -->
+  <!-- <div mat-dialog-action [align]="'center'">
+    <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="searchAllBooks()">Search</button>
+ </div>  -->
+ </form>
+ 
 <!-- <span class="fas fa-search search-icon"></span> -->
 
  <!-- <div class="example-button-row"> 
     <button mat-raised-button color="primary" (click)="searchBook($event)">Search</button> 
 </div> -->
-<div class="container">
+<div class="example-button-row">
+<ng-container>
+<app-grid-ui  [grid-columns]="[{'colName':'image'},{'colName':'title'},{'colName':'category'},{'colName':'price'},{'colName':'publisher'},{'colName':'content'}]"
+[grid-data]="ReaderModels" (grid-selected)="EditSearch($event)"
+></app-grid-ui>
+</ng-container>
+<!-- [read]="['Title: ','Category: ','Price ','Publisher: ',''Content:']" -->
+<!-- <div class="container">
     <div class="row">
-        <ng-container *ngFor="let item of bookList">
+        <ng-container *ngFor="let item of ReaderModels">
             <div class="card col-md-3">
                 <img src="{{item.image}}" alt="">
-                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.title}}</h5>
-                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.content}}</p>
-                <p><strong>{{item.price}}</strong></p>
-                <button class="btn btn-primary">Add to cart</button>
+                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.Title}}</h5>
+                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.Publisher}}</p>
+                <p><strong>{{item.Price}}</strong></p>
+                <div>
+                <button class="btn" (click)="addToCart(item)">Add to cart</button>&nbsp;
+                <button class="btn">Buy now</button>
+               </div>
             </div>
         </ng-container>
-    </div>
+    </div> -->
+</div>
 </div>

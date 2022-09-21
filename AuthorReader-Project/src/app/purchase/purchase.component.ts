@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { PurchaseService } from '../services/purchase.service';
 
 @Component({
   selector: 'app-purchase',
@@ -6,10 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
-
-  constructor() { }
+  public books:any=[];
+  public grandTotal !:number;
+  constructor(private purchase:PurchaseService, private router: Router) { }
 
   ngOnInit(): void {
+    this.purchase.getBooks().subscribe(res=>{
+      this.books=res;     
+      this.grandTotal = this.purchase.getTotalPrice();     
+      })      
+      }
+
+      removeItem(item:any){
+        this.purchase.removeCartItem(item);
+      }
+      navigateToReader(){
+        this.router.navigate(['reader']);
+      }
+
   }
 
-}
+
