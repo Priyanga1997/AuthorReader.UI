@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
  optionSelected: any;
 
 onOptionsSelected(event:any){
-  this.userType = event.target.value;
- console.log(this.userType); //option value will be sent as event
+  this.UserDataModel.userType = event.target.value;
+ console.log(this.UserDataModel.userType); //option value will be sent as event
 }
   constructor(private fb:FormBuilder,private router:Router, private _service:LoginService) { }
 
@@ -34,14 +34,16 @@ onOptionsSelected(event:any){
   }
   loginSubmit(){
     this._service.loginUser(this.UserDataModel).subscribe(res=>{
+      localStorage.setItem('authorId',res.userData.id)
+      console.log(res);
       console.log('You are able to login');
       alert('You have logged in successfully');
       localStorage.setItem('token',res.token);
-      if(this.userType=="Author")
+      if(res.userData.userType=="Author")
       {
          this.router.navigate(['author']);
       }
-      if(this.userType=="Reader")
+      if(res.userData.userType=="Reader")
       {
         this.router.navigate(['reader']);
       }

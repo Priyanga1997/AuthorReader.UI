@@ -18,6 +18,10 @@ form{
     justify-content: space-between;
     width: 70%;
 }
+.dropdown{
+    padding: 10px 60px 10px 25px;
+    margin: 10px;
+}
 h2{
     font-family:sans-serif;
     font-weight: bold;

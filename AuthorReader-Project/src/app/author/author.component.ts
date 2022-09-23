@@ -1,12 +1,12 @@
-import { Component,OnInit,ViewChild} from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from '../services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router,} from '@angular/router';
+import { Router, } from '@angular/router';
 import { NavbarService } from '../services/navbar.service';
 
 @Component({
@@ -19,19 +19,27 @@ export class AuthorComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   isEdit = false;
   actionBtn: string = "Save";
-  public dataID:number=0;
-  
+  public dataID: number = 0;
+  public authorId ="";
+  public authorJson = localStorage.getItem('authorId');
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   activeList = ["yes", "No"];
   createForm !: FormGroup;
-
+  public title: string = '';
+  public category: string = '';
+  public price: number = 0;
+  public publisher: string = '';
+  public active: string = '';
+  public content: string = '';
+  public selectedFile!: File;
+  public image: string = '';
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private http: HttpClient,
-    private api:ApiService,private route:Router,private nav: NavbarService
+    private api: ApiService, private route: Router, private nav: NavbarService
   ) {
   }
 
-  selectedFile=null;
+
   // @ViewChild('fileInput') fileInput!: ElementRef;
   // fileAttr = 'Choose File';
   // uploadFileEvt(imgFile: any) {
@@ -60,16 +68,19 @@ export class AuthorComponent implements OnInit {
     this.createForm = this.formBuilder.group({
       title: ['', Validators.required],
       category: ['', Validators.required],
-      image:[''],
+      image: [''],
       publisher: ['', Validators.required],
       price: ['', Validators.required],
       active: ['yes', Validators.required],
       content: ['', Validators.required]
     });
+    this.authorId = this.authorJson !== null ? JSON.parse(this.authorJson) : " ";
     this.getAllBooks();
     this.nav.hide();
+    // this.http.get("https://localhost:44398/api/home/get-images").subscribe(res => this.SuccessGet(res), res => console.log(res));
+
   }
-  images:any;
+  images: any;
   // fileToUpload:File;
   // handleFileInput(file:FileList){
   //   this.fileToUpload = file.item(0);
@@ -92,58 +103,94 @@ export class AuthorComponent implements OnInit {
   //    }
   //  //}
   // }
-  uploadFile(files:any){
-    if(files.length==0){
-      return ;
-    }
-    let fileToUpload=<File>files[0];
-    const formData=new FormData();
-    formData.append('file',fileToUpload,fileToUpload.name)
-    this.http.post('https://localhost:44398/api/home/',formData).subscribe(res=>console.log(res),res=>console.log(res));
+  uploadFile(event: any) {
+    // if(files.length==0){
+    //   return ;
+    // }
+    // let fileToUpload=<File>files[0];
+    //this.selectedFile = event.target.files[0];
   }
-  SuccessGet(input:any){
-    this.images=input;
+  SuccessGet(input: any) {
+    this.images = input;
   }
   getAllBooks() {
-    this.http.get("https://localhost:44398/api/author").subscribe({
+     this.api.getBooks(this.authorId).subscribe({
+     // this.http.get("https://localhost:44398/api/author").subscribe({
       next: (res: any) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        console.log(res);
       },
       error: (err) => {
         alert("Error while fetching records!");
       }
     })
-  }
-
+    //  this.api.getBooksOfAllAuthors(this.authorId).subscribe({
+    //    next: (res: any) => {
+    //      this.dataSource = new MatTableDataSource(res);
+    //      this.dataSource.paginator = this.paginator;
+    //      this.dataSource.sort = this.sort;
+    //    },
+    //    error: (err) => {
+    //      alert("Error while fetching records!");
+    //    }
+    //  })
+   }
+  
+ 
   addBook() {
+    // this.title = this.createForm.get('title')?.value;
+    // this.category = this.createForm.get('category')?.value;
+    // this.price = this.createForm.get('price')?.value;
+    // this.publisher = this.createForm.get('publisher')?.value;
+    // this.active = this.createForm.get('active')?.value;
+    // this.content = this.createForm.get('content')?.value;
+    // const formData = new FormData();
+    // formData.append('image', this.selectedFile, this.selectedFile.name);
+    // formData.append('Title', this.title);
+    // formData.append('Price', (this.price).toString());
+    // formData.append('Category', this.category);
+    // formData.append('Active', this.active);
+    // formData.append('Content', this.content);
+    // formData.append('Publisher', this.publisher);
+    //this.http.post('https://localhost:44398/api/home/',formData).subscribe(res=>console.log(res),res=>console.log(res));
     if (this.isEdit) {
-       
-       this.http.put("https://localhost:44398/api/author"+'?id='+this.dataID, this.createForm.value)
-         .subscribe(res => this.PutSuccess(res), res => console.log(res));
+
+      this.http.put("https://localhost:44398/api/author" + '?id=' + this.dataID, this.createForm.value)
+        .subscribe(res => this.PutSuccess(res), res => console.log(res));
     }
     else {
-      this.http.post("https://localhost:44398/api/author", this.createForm.value)
+      var data={
+        Title: this.createForm.get('title')?.value,
+        Category : this.createForm.get('category')?.value,
+        Image :this.createForm.get('image')?.value,
+        Price : this.createForm.get('price')?.value,
+        Publisher : this.createForm.get('publisher')?.value,
+        Active : this.createForm.get('active')?.value,
+        Content : this.createForm.get('content')?.value,
+        AuthorId : this.authorId
+      };
+      this.http.post("https://localhost:44398/api/author", data)
         .subscribe(res => this.PostSuccess(res), res => console.log(res));
     }
   }
   PostSuccess(input: any) {
-    alert("data got added successfully");
+    alert("Data got added successfully");
     this.getAllBooks();
   }
   PutSuccess(input: any) {
-    alert("data got updated successfully");
+    alert("Data got updated successfully");
     this.getAllBooks();
   }
-  DeleteSuccess(input:any){
-    alert("data got deleted successfully");
+  DeleteSuccess(input: any) {
+    alert("Data got deleted successfully");
   }
 
   editBook(row: any) {
     debugger;
     console.log(row);
-    this.dataID=row.id;
+    this.dataID = row.id;
     this.isEdit = true;
     this.actionBtn = "Update";
     this.createForm.controls['title'].setValue(row.title);
@@ -155,11 +202,11 @@ export class AuthorComponent implements OnInit {
   }
 
   deleteBook(row: any) {
-    this.http.delete("https://localhost:44398/api/author/"+'?id='+row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
+    this.http.delete("https://localhost:44398/api/author/" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
   }
 
-  onClose(){
-     this.createForm.reset();
+  onClose() {
+    this.createForm.reset();
   }
 
   applyFilter(event: Event) {

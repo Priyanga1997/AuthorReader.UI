@@ -4,6 +4,11 @@
         <h2>Create Account</h2>
         <input type="text" placeholder="Enter username" class="input" formControlName="username" [(ngModel)]="UserDataModel.userName">
         <input type="password" placeholder="Enter password" class="input" formControlName="password" [(ngModel)]="UserDataModel.password">
+        <select formControlName="usertype" class="dropdown" (click)="onOptionsSelected($event)" [(ngModel)]="UserDataModel.userType">   
+            <option value="" disabled selected>Select User Type</option>  
+            <option value="Author">Author</option>  
+            <option value="Reader">Reader</option>  
+        </select>
         <div class="registerbtn">
             <button (click)="registerSubmit()" [disabled]="register.invalid">Sign Up</button>
             <button (click)="goToLogin()">Login</button>
@@ -11,18 +16,5 @@
     </form>
     </div>
     </div>
-    <div class="modal fade" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" style="color: red;" id="exampleModalToggleLabel">Error </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-             {{ErrorMessage}}
-            </div>
-          </div>
-        </div>
-      </div>
-    <a class="btn btn-primary" id="btnErrorMsg" style="display: none;" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
+
     

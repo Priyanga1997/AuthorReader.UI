@@ -14,7 +14,7 @@ Category <input [(ngModel)]="ReaderModel.Category" formControlName="category" ty
 Price <input [(ngModel)]="ReaderModel.Price" formControlName="price" type="number" />
 Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher" type="text" />
 <br/>
-<input type="button" value="Search" (click)="searchAllBooks()"/>
+<input type="button" value="Search" (click)="searchAllBooks()" [disabled]="searchForm.invalid"/>
       <!-- //</button> -->
      <!-- <span class="fas fa-search search-icon"></span> -->
        <!-- <mat-form-field class="example-full-width">

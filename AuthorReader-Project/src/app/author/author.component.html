@@ -14,13 +14,13 @@
     <form class="example-form" [formGroup]="createForm">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Title</mat-label>
-            <input matInput placeholder="Title" formControlName="title"> 
+            <input matInput placeholder="Title" formControlName="title" [(ngModel)]="title"> 
             <mat-error>Please enter the title.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Category</mat-label>
-            <mat-select placeholder="Category" formControlName="category">
+            <mat-select placeholder="Category" formControlName="category" [(ngModel)]="category">
                 <mat-option value="Fantasy">Fantasy</mat-option>
                 <mat-option value="Spirituality">Spirituality</mat-option>
                 <mat-option value="Fiction">Fiction</mat-option>
@@ -33,9 +33,8 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Image</mat-label>
             <input matInput>
-            <input type="file" #file (change)="uploadFile(file.files)" style="display: none;" formControlName="image"/>
-            <button  (click)="file.click()" >Upload</button>
-            <img *ngFor="let book of images" src="https://localhost:44398/{{book.imageUrl}}">
+            <input type="file" formControlName="image" [(ngModel)]="image" (change)="uploadFile($event)"/>
+            <!-- <img *ngFor="let book of images" src="https://localhost:44398/{{book.image}}"> -->
             <!-- <img *ngFor='let url of urls' [src]="url" (change)="uploadFileEvt($event)"> -->
             <!-- <input
             type="file"
@@ -45,20 +44,20 @@
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Price</mat-label>
-            <input matInput type="number" placeholder="Price" formControlName="price">
+            <input matInput type="number" placeholder="Price" formControlName="price" [(ngModel)]="price">
             <mat-error>Please enter the price.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Publisher</mat-label>
-            <input matInput placeholder="Publisher" formControlName="publisher">
+            <input matInput placeholder="Publisher" formControlName="publisher" [(ngModel)]="publisher">
             <mat-error>Please enter the Publisher name.</mat-error>
         </mat-form-field>
 
         <label for="">
             <h4>&NonBreakingSpace;&NonBreakingSpace;Active&NonBreakingSpace;&NonBreakingSpace;</h4>
         </label>
-        <mat-radio-group formControlName="active">
+        <mat-radio-group formControlName="active" [(ngModel)]="active">
             <mat-radio-button *ngFor="let active of activeList" [value]="active">
                 {{active}}
             </mat-radio-button>
@@ -66,7 +65,7 @@
 
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Content</mat-label>
-            <textarea matInput formControlName="content"></textarea>
+            <textarea matInput formControlName="content" [(ngModel)]="content"></textarea>
             <mat-error>Please enter the content.</mat-error>
       </mat-form-field>         
 </form>

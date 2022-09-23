@@ -7,6 +7,7 @@ import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from '../services/api.service';
+import { NavbarService } from '../services/navbar.service';
 import { PurchaseService } from '../services/purchase.service';
 import {Reader} from './reader.model';
 
@@ -19,16 +20,16 @@ export class ReaderComponent implements OnInit {
   public bookList:any=[];
   isEdit = false;
   public totalItem :number=0;
-  searchForm !: FormGroup;
-  public title:string='';
-  public category:string='';
-  public price:number=0;
-  public publisher:string='';
+  searchForm:any=FormGroup;
+  public title:any='';
+  public category:any='';
+  public price:any=0;
+  public publisher:any='';
   images:any;
   ReaderModel:Reader=new Reader();
   ReaderModels:Array<Reader>=new Array<Reader>();
   constructor(private router:Router,private formBuilder: FormBuilder,private http: HttpClient,private api:ApiService,
-    private purchase:PurchaseService) { }
+    private purchase:PurchaseService, private nav:NavbarService) { }
  
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
@@ -37,6 +38,7 @@ export class ReaderComponent implements OnInit {
       publisher: [''],
       price: ['' ]
     });
+    this.nav.hide();
     this.searchAllBooks();
     this.api.getBook().subscribe(res=>{this.bookList=res;
       this.bookList.forEach((a:any)=>{
@@ -59,9 +61,12 @@ export class ReaderComponent implements OnInit {
   navigateToPurchase(){
     this.router.navigate(['purchase']);
   }
+  isEmpty:boolean=false;
   searchAllBooks(){
-    this.http.get("https://localhost:44398/api/reader/"+'?title='+this.ReaderModel.Title+'&category='+this.ReaderModel.Category+'&price='+this.ReaderModel.Price+'&publisher='+this.ReaderModel.Publisher)
-          .subscribe(res => this.Success(res), res => console.log(res));
+  
+      this.http.get("https://localhost:44398/api/reader/"+'?title='+this.ReaderModel.Title+'&category='+this.ReaderModel.Category+'&price='+this.ReaderModel.Price+'&publisher='+this.ReaderModel.Publisher)
+      .subscribe(res => this.Success(res), res => console.log(res));
+ 
   }
   Success(input:any){
     this.ReaderModels = input;
@@ -72,4 +77,13 @@ export class ReaderComponent implements OnInit {
     this.isEdit=true;
     this.ReaderModel = input;
   }
+   alert(){
+    this.title=this.ReaderModel.Title;
+    this.category=this.ReaderModel.Category;
+    this.price=this.ReaderModel.Price;
+    this.publisher=this.ReaderModel.Publisher;
+    if(this.title&&this.category&&this.price==0&&this.publisher==null){
+         alert('Please enter any of the input field to get the search results');
+     }
+   }
 }

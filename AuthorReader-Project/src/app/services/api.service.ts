@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import{map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +15,22 @@ export class ApiService {
   // }
 
   getBook() {
-    return this.http.get<any>("https://localhost:44398/api/author/").pipe(map((res:any)=>{
+    return this.http.get<any>("https://localhost:44398/api/author/").pipe(map((res: any) => {
       return res;
     }));
   }
+
+
+  getBooks(id: any) {
+    debugger;
+    return this.http.get<any>("https://localhost:44398/api/author?id=" + id);
+  }
+  getBooksOfAllAuthors(id: any) {
+    debugger;
+    return this.http.get<any>("https://localhost:44398/api/author/GetBooksOfAllAuthors?id=" + id);
+  }
+
+  //   putBook(data:any,id:number){
+  //     return this.http.put("http://localhost:3000/bookList/" +id,data);
+  //   }
 }
-
-//   putBook(data:any,id:number){
-//     return this.http.put("http://localhost:3000/bookList/" +id,data);
-//   }
-
-//    getBookDetails(value:string):Observable<any>{
-//     return this.http.get("http://localhost:3000/bookList/?q=${value}");
-//    }
-// }

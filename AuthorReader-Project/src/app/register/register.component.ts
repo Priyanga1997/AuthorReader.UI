@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,7 +14,8 @@ export class RegisterComponent implements OnInit {
   register:any=FormGroup;
   UserDataModel:UserData=new UserData();
   ErrorMessage:any='';
-  constructor(private fb:FormBuilder,private router:Router, private _service: LoginService) { }
+  userType:any='';
+  constructor(private fb:FormBuilder,private router:Router, private _service: LoginService, private http:HttpClient) { }
 
   ngOnInit(): void {
     this.register=this.fb.group({
@@ -23,12 +25,20 @@ export class RegisterComponent implements OnInit {
         Validators.required])]
       })
   }
+  onOptionsSelected(event:any){
+    this.UserDataModel.userType = event.target.value;
+   console.log(this.UserDataModel.userType); //option value will be sent as event
+  }
   registerSubmit()
   {
-    this._service.register(this.UserDataModel).subscribe(res=>{
+    var userdata = {
+      userName:this.UserDataModel.userName,
+      password:this.UserDataModel.password,
+      userType:this.UserDataModel.userType
+    };
+    this.http.post("https://localhost:44398/api/login/register-user",userdata).subscribe(res=>{
     console.log('You have successfully registered');
     alert('You have registered successfully');
-      localStorage.setItem('token',res.token);
     });
   }
   goToLogin(){

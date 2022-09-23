@@ -17,14 +17,6 @@ gridColumns: Array<any> = new Array<any>();
 //getting column data
 gridData: Array<any> = new Array<any>();
   ngOnInit(): void {
-    this.api.getBook().subscribe(res=>{this.bookList=res;
-      this.bookList.forEach((a:any)=>{
-        Object.assign(a,{quantity:1,total:a.price});
-      });  
-      this.purchase.getBooks().subscribe(res=>{
-        this.totalItem = res.length;  
-      })  
-  })
   }
   @Input("grid-columns")
   set SetGridColumns(_gridColumn:Array<any>){
