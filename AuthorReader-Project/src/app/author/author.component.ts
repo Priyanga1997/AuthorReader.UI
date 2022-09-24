@@ -108,7 +108,9 @@ export class AuthorComponent implements OnInit {
     //   return ;
     // }
     // let fileToUpload=<File>files[0];
-    //this.selectedFile = event.target.files[0];
+    debugger;
+    console.log('Image uploaded');
+    this.selectedFile = event.target.files[0];
   }
   SuccessGet(input: any) {
     this.images = input;
@@ -137,42 +139,42 @@ export class AuthorComponent implements OnInit {
     //    }
     //  })
    }
-  
- 
+
   addBook() {
-    // this.title = this.createForm.get('title')?.value;
-    // this.category = this.createForm.get('category')?.value;
-    // this.price = this.createForm.get('price')?.value;
-    // this.publisher = this.createForm.get('publisher')?.value;
-    // this.active = this.createForm.get('active')?.value;
-    // this.content = this.createForm.get('content')?.value;
-    // const formData = new FormData();
-    // formData.append('image', this.selectedFile, this.selectedFile.name);
-    // formData.append('Title', this.title);
-    // formData.append('Price', (this.price).toString());
-    // formData.append('Category', this.category);
-    // formData.append('Active', this.active);
-    // formData.append('Content', this.content);
-    // formData.append('Publisher', this.publisher);
-    //this.http.post('https://localhost:44398/api/home/',formData).subscribe(res=>console.log(res),res=>console.log(res));
+    //var data ={
+     // Title :this.createForm.get('title')?.value,
+     // Category : this.createForm.get('category')?.value,
+     // Price : this.createForm.get('price')?.value,
+     // Publisher : this.createForm.get('publisher')?.value,
+     // Active : this.createForm.get('active')?.value,
+     // Content : this.createForm.get('content')?.value
+     // }
+    
+     this.title = this.createForm.get('title')?.value;
+     this.category = this.createForm.get('category')?.value;
+     this.price = this.createForm.get('price')?.value;
+     this.publisher = this.createForm.get('publisher')?.value;
+     this.active = this.createForm.get('active')?.value;
+     this.content = this.createForm.get('content')?.value;
+     const formData = new FormData();
+     formData.append('image', this.selectedFile, this.selectedFile.name);
+     formData.append('Title', this.title);
+     formData.append('Price', (this.price).toString());
+     formData.append('Category', this.category);
+     formData.append('Active', this.active);
+     formData.append('Content', this.content);
+     formData.append('Publisher', this.publisher);
+     formData.append('AuthorId', this.authorId);
+     console.log(this.authorId);
     if (this.isEdit) {
 
       this.http.put("https://localhost:44398/api/author" + '?id=' + this.dataID, this.createForm.value)
         .subscribe(res => this.PutSuccess(res), res => console.log(res));
     }
     else {
-      var data={
-        Title: this.createForm.get('title')?.value,
-        Category : this.createForm.get('category')?.value,
-        Image :this.createForm.get('image')?.value,
-        Price : this.createForm.get('price')?.value,
-        Publisher : this.createForm.get('publisher')?.value,
-        Active : this.createForm.get('active')?.value,
-        Content : this.createForm.get('content')?.value,
-        AuthorId : this.authorId
-      };
-      this.http.post("https://localhost:44398/api/author", data)
-        .subscribe(res => this.PostSuccess(res), res => console.log(res));
+     // this.http.post("https://localhost:44398/api/author", data)
+       // .subscribe(res => this.PostSuccess(res), res => console.log(res));
+        this.http.post('https://localhost:44398/api/home/',formData).subscribe(res=>console.log(res),res=>console.log(res));
     }
   }
   PostSuccess(input: any) {

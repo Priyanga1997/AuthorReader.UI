@@ -26,6 +26,9 @@ export class ReaderComponent implements OnInit {
   public price:any=0;
   public publisher:any='';
   images:any;
+  public id:string='';
+  public idForDelete:string='';
+  showTable: boolean = false;
   ReaderModel:Reader=new Reader();
   ReaderModels:Array<Reader>=new Array<Reader>();
   constructor(private router:Router,private formBuilder: FormBuilder,private http: HttpClient,private api:ApiService,
@@ -40,7 +43,7 @@ export class ReaderComponent implements OnInit {
     });
     this.nav.hide();
     this.searchAllBooks();
-    this.api.getBook().subscribe(res=>{this.bookList=res;
+    this.purchase.getBooks().subscribe(res=>{this.bookList=res;
       this.bookList.forEach((a:any)=>{
         Object.assign(a,{quantity:1,total:a.price});
       });  
@@ -49,6 +52,11 @@ export class ReaderComponent implements OnInit {
       })  
   })
   }
+    getUrl()
+{
+  return "url('../assets/SearchBookImage.jpg')";
+}
+  
   SuccessGet(input:any){
     this.images=input;
   }
@@ -66,6 +74,7 @@ export class ReaderComponent implements OnInit {
   
       this.http.get("https://localhost:44398/api/reader/"+'?title='+this.ReaderModel.Title+'&category='+this.ReaderModel.Category+'&price='+this.ReaderModel.Price+'&publisher='+this.ReaderModel.Publisher)
       .subscribe(res => this.Success(res), res => console.log(res));
+      this.showTable = !this.showTable;
  
   }
   Success(input:any){
@@ -76,7 +85,13 @@ export class ReaderComponent implements OnInit {
     debugger;
     this.isEdit=true;
     this.ReaderModel = input;
+    this.id = input.id;
+    //this.http.put("https://localhost:44398/api/reader?id="+input.id).subscribe(res=>this.Success(res),res=>console.log(res));
   }
+  DeleteSearch(input:any){
+    this.http.delete("https://localhost:44398/api/reader?id="+input.id).subscribe(res=>this.Success(res),res=>console.log(res));
+  }
+ 
    alert(){
     this.title=this.ReaderModel.Title;
     this.category=this.ReaderModel.Category;

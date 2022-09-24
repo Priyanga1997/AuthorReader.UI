@@ -7,6 +7,7 @@ import { MasterComponent } from './master/master.component';
 import {AuthorComponent} from './author/author.component';
 import { ReaderComponent } from './reader/reader.component';
 import { RegisterComponent } from './register/register.component';
+import { ReaderLoginComponent } from './reader-login/reader-login.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'author',component:AuthorComponent},
-  {path:'purchase',component:PurchaseComponent}
+  {path:'purchase',component:PurchaseComponent},
+  {path:'readerLogin',component:ReaderLoginComponent}
 ];
 
 @NgModule({

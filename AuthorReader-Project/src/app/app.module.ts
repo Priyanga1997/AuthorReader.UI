@@ -28,6 +28,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import { PurchaseComponent } from './purchase/purchase.component';
+import { ReaderLoginComponent } from './reader-login/reader-login.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PurchaseComponent } from './purchase/purchase.component';
     RegisterComponent,
     PurchaseComponent,
     AuthorComponent,
-    GridUiComponent
+    GridUiComponent,
+    ReaderLoginComponent
   ],
   imports: [
     BrowserModule,

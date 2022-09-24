@@ -1,4 +1,5 @@
 import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { PurchaseService } from 'src/app/services/purchase.service';
 
@@ -10,7 +11,8 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 export class GridUiComponent implements OnInit {
   public bookList:any=[];
   public totalItem :number=0;
-  constructor(private purchase:PurchaseService,private api:ApiService) { }
+  public imageURL="https://localhost:44398/";
+  constructor(private purchase:PurchaseService,private api:ApiService,private router: Router) { }
 //getting column names
 gridColumns: Array<any> = new Array<any>();
 
@@ -44,5 +46,9 @@ gridData: Array<any> = new Array<any>();
   addToCart(item:any){
     this.purchase.addToCart(item);
    }
+
+  buyNow(){
+    this.router.navigate(['readerLogin'])
+  }
 
 }

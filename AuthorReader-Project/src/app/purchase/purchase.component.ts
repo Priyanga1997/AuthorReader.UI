@@ -11,6 +11,7 @@ import { PurchaseService } from '../services/purchase.service';
 export class PurchaseComponent implements OnInit {
   public books:any=[];
   public grandTotal !:number;
+  public imageURL="https://localhost:44398/";
   constructor(private purchase:PurchaseService, private router: Router) { }
 
   ngOnInit(): void {
@@ -24,6 +25,9 @@ export class PurchaseComponent implements OnInit {
         this.purchase.removeCartItem(item);
       }
       navigateToReader(){
+        this.router.navigate(['reader']);
+      }
+      GoBack(){
         this.router.navigate(['reader']);
       }
 
