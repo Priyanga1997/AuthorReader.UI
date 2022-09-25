@@ -96,19 +96,19 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
       <input type="text" placeholder="Username" class="input" formControlName="username">
       <input type="email" placeholder="Email" class="input" formControlName="email"> 
       <div class="readerLoginbtn">
-          <button (click)="orderDetails()">Place your Order</button>
+          <button (click)="orderDetails($event)">Place your Order</button>
       </div>
   </form>
   </div>
   </div>
-  <div class="orderDetails" *ngIf="hideOrder">
+  <div class="orderDetails" *ngIf="showOrder">
     <div class="order">
     <form class="orderForm">
       <h2>Payment details</h2>
-      Book Title<input [(ngModel)]="ReaderModel.Title" formControlName="title" type="text" />
-      Price<input [(ngModel)]="OrderModel.Price" formControlName="price" type="number" />
-      Quantity <input [(ngModel)]="OrderModel.Quantity" formControlName="quantity" type="number" />
-      Total <input [(ngModel)]="OrderModel.Total" formControlName="total" type="number" />
+      Book Title<input [(ngModel)]="ReaderModel.Title" formControlName="title" type="text" [value]="selectedTitle"/>
+      Price<input [(ngModel)]="OrderModel.Price" formControlName="price" type="number" [value]="selectedPrice"/>
+      Quantity <input [(ngModel)]="OrderModel.Quantity" formControlName="quantity" type="number" (keyup)="updateTotal($event)"/>
+      Total <input [(ngModel)]="OrderModel.Total" formControlName="total" type="number" [value]="selectedTotal" />
       Payment type<select formControlName="paymentType" class="dropdown"  [(ngModel)]="OrderModel.PaymentType">   
         <option value="" disabled selected>Select Payment Type</option>  
         <option value="Debit Card">Debit Card</option>  

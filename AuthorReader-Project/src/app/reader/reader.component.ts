@@ -26,22 +26,27 @@ export class ReaderComponent implements OnInit {
   public totalItem: number = 0;
   searchForm: any = FormGroup;
   readerLoginForm: any = FormGroup;
+  orderForm: any = FormGroup;
   public title: any = '';
   public category: any = '';
   public price: any = 0;
   public publisher: any = '';
+  public userName: any = '';
+  public emailId: any = '';
   images: any;
   public id: string = '';
   public idForDelete: string = '';
+  public selectedTitle:string='';
+  public selectedPrice:number=0;
+  public selectedTotal:number=0;
+  public total:number=0;
   showTable: boolean = false;
   readerLogin = false;
-  hideOrder = false;
+  showOrder = false;
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   ReaderModel: Reader = new Reader();
   ReaderModels: Array<Reader> = new Array<Reader>();
-  public authorId ="";
-  public authorJson = localStorage.getItem('Id');
   
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private api: ApiService,
@@ -54,7 +59,6 @@ export class ReaderComponent implements OnInit {
       publisher: [''],
       price: ['']
     });
-    this.authorId = this.authorJson !== null ? JSON.parse(this.authorJson) : " ";
     this.readerLoginForm = this.formBuilder.group({
       username: [''],
       email: ['']
@@ -103,10 +107,22 @@ export class ReaderComponent implements OnInit {
     this.readerLogin = true;
     this.dialog.open(this.callAPIDialog);
     this.id = input.id;  
+    this.title = input.title;
+    this.price = input.price;
   }
-  orderDetails() {
+  orderDetails(event:any) {
     debugger;
-    this.hideOrder = true;
+    this.showOrder = true;
+    this.selectedTitle = this.title;
+    this.selectedPrice = this.price;
+    this.userName = event.target.value;
+    this.emailId = event.target.value;
+  }
+  updateTotal(event:any){
+    this.total = this.selectedPrice * event.target.value;
+    this.selectedTotal = this.total;
+  }
+  submit(){
     var data = {
       Username: this.ReaderLoginModel.userName,
       Email:this.ReaderLoginModel.EmailId,
@@ -118,10 +134,7 @@ export class ReaderComponent implements OnInit {
       PaymentType:this.OrderModel.PaymentType
     }
     console.log(data.BookId);
-    this.http.post('https://localhost:44398/api/reader/', data).subscribe(res => console.log(res), res => console.log(res));
-  }
-  submit(){
-
+    //this.http.post('https://localhost:44398/api/reader/', data).subscribe(res => console.log(res), res => console.log(res));
   }
   // username:any;
   // email:any
