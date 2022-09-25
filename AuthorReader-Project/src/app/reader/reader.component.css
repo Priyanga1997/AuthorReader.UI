@@ -71,6 +71,65 @@ h2{
     transition:0.3s ease-in-out;
     transform:scale(1.1);
     }
+    .readerLogin{
+      justify-content: center;
+      align-items: center;
+  }
+  .readerLoginForm{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width:80%;
+  }
+  .input{
+      padding: 10px 25px;
+      margin: 10px;
+  }
+  .dropdown{
+      padding: 3px 6px;
+  }
+  .readerLoginbtn{
+      display: flex;
+  }
+  .wrapper{
+      background-color: aliceblue;
+      margin-left:320px;
+      margin-right: 400px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding-left:200px;
+      padding-right: 200px;
+      display: flex;
+      justify-content: center;
+      height: 70vh;
+      align-items: center;
+  } 
+  .orderForm{
+    justify-content: center;
+    align-items: center;
+}
+.orderDetails{
+  background-color: aliceblue;
+  margin-left:320px;
+  margin-right: 400px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left:200px;
+  padding-right: 200px;
+  display: flex;
+  justify-content: center;
+  height: 70vh;
+  align-items: center;
+} 
+.order{
+  justify-content: center;
+  align-items: center;
+}
+.submitBtn{
+  padding-top: 20px;
+  padding-left: 30px;
+}
 /* .searchbtn{
     display: flex;
     justify-content: space-between;

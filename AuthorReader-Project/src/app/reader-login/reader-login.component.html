@@ -1,10 +1,10 @@
 <div class="wrapper">
-    <div class="login">
+    <div class="readerLogin">
     <form>
         <input type="text" placeholder="Username" class="input" formControlName="username">
-        <input type="password" placeholder="Password" class="input" formControlName="password"> 
-        <div class="loginbtn">
-            <button>Proceed</button>
+        <input type="email" placeholder="Email" class="input" formControlName="email"> 
+        <div class="readerLoginbtn">
+            <button (click)="readerNavigate()">Proceed</button>
         </div>
     </form>
     </div>

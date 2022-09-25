@@ -13,22 +13,6 @@
     <td>{{colObj.publisher}}</td>
     <td>{{colObj.content}}</td>
     <td><button class="btn" (click)="addToCart(colObj)">Add to cart</button><br/><br/>
-    <button class="btn" (click)="buyNow()">Buy now</button></td>
+    <button class="btn" (click)="buyNow(colObj)">Buy now</button></td>
   </tr>
 </table>
-<div class="modal fade" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1"
-  aria-hidden="true" style="display: none;">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" style="color: red;" id="exampleModalToggleLabel">Error </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-      </div>
-    </div>
-  </div>
-</div>
-<a class="btn btn-primary" id="btnErrorMsg" style="display: none;" data-bs-toggle="modal" href="#exampleModalToggle"
-  role="button">Open first modal</a>

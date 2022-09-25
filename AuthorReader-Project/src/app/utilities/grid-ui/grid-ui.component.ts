@@ -47,8 +47,12 @@ gridData: Array<any> = new Array<any>();
     this.purchase.addToCart(item);
    }
 
-  buyNow(){
-    this.router.navigate(['readerLogin'])
+  @Output("grid-buyBook")
+  emitemitterbuyBook:EventEmitter<any>=new EventEmitter<any>();
+
+  buyNow(_buyBook:any){
+    debugger;
+    this.emitemitterbuyBook.emit(_buyBook);
   }
 
 }

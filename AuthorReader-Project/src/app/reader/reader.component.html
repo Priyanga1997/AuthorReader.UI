@@ -67,7 +67,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 <div class="example-button-row">
 <ng-container>
 <app-grid-ui [grid-columns]="[{'colName':'id'},{'colName':'image'},{'colName':'title'},{'colName':'category'},{'colName':'price'},{'colName':'publisher'},{'colName':'content'},{'colName':'Action'}]"
-[grid-data]="ReaderModels" (grid-selected)="EditSearch($event)" (grid-deleted)="DeleteSearch($event)"
+[grid-data]="ReaderModels" (grid-selected)="EditSearch($event)" (grid-deleted)="DeleteSearch($event)" (grid-buyBook)="BuyBook($event)"
 ></app-grid-ui>
 </ng-container>
 <!-- [read]="['Title: ','Category: ','Price ','Publisher: ',''Content:']" -->
@@ -88,3 +88,39 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
     </div> -->
 </div>
 </div>
+<ng-template #callAPIDialog>
+<mat-dialog-content>
+<div class="wrapper" *ngIf="readerLogin">
+  <div class="readerLogin">
+  <form class="readerLoginForm" [formGroup]="readerLoginForm">
+      <input type="text" placeholder="Username" class="input" formControlName="username">
+      <input type="email" placeholder="Email" class="input" formControlName="email"> 
+      <div class="readerLoginbtn">
+          <button (click)="orderDetails()">Place your Order</button>
+      </div>
+  </form>
+  </div>
+  </div>
+  <div class="orderDetails" *ngIf="hideOrder">
+    <div class="order">
+    <form class="orderForm">
+      <h2>Payment details</h2>
+      Book Title<input [(ngModel)]="ReaderModel.Title" formControlName="title" type="text" />
+      Price<input [(ngModel)]="OrderModel.Price" formControlName="price" type="number" />
+      Quantity <input [(ngModel)]="OrderModel.Quantity" formControlName="quantity" type="number" />
+      Total <input [(ngModel)]="OrderModel.Total" formControlName="total" type="number" />
+      Payment type<select formControlName="paymentType" class="dropdown"  [(ngModel)]="OrderModel.PaymentType">   
+        <option value="" disabled selected>Select Payment Type</option>  
+        <option value="Debit Card">Debit Card</option>  
+        <option value="Credit Card">Credit Card</option>  
+    </select>
+        <div class="submitBtn">
+            <button (click)="submit()">Submit</button>
+        </div>
+    </form>
+    </div>
+    </div>
+  </mat-dialog-content>
+</ng-template>
+
+ 
