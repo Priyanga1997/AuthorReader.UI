@@ -92,35 +92,49 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 <mat-dialog-content>
 <div class="wrapper" *ngIf="readerLogin">
   <div class="readerLogin">
-  <form class="readerLoginForm" [formGroup]="readerLoginForm">
-      <input type="text" placeholder="Username" class="input" formControlName="username">
-      <input type="email" placeholder="Email" class="input" formControlName="email"> 
+  <form class="readerLogin" [formGroup]="readerLoginForm">
+      <input type="text" placeholder="Username" class="input" [(ngModel)]="ReaderLoginModel.userName" formControlName="username">
+      <span class="text-danger" *ngIf="readerLoginForm.controls['username'].dirty && readerLoginForm.hasError('required','username')">*Username is required</span>
+      <input type="email" placeholder="Email" class="input" [(ngModel)]="ReaderLoginModel.emailId" formControlName="emailId"> 
+      <span class="text-danger" *ngIf="readerLoginForm.controls['emailId'].dirty && readerLoginForm.hasError('required','emailId')">*Email Address is required</span>
       <div class="readerLoginbtn">
-          <button (click)="orderDetails($event)">Place your Order</button>
+          <button (click)="orderDetails($event)" [disabled]="readerLoginForm.invalid">Place your Order</button>
       </div>
   </form>
   </div>
   </div>
   <div class="orderDetails" *ngIf="showOrder">
     <div class="order">
-    <form class="orderForm">
+    <form class="orderForm" [formGroup]="orderForm">
       <h2>Payment details</h2>
       Book Title<input [(ngModel)]="ReaderModel.Title" formControlName="title" type="text" [value]="selectedTitle"/>
-      Price<input [(ngModel)]="OrderModel.Price" formControlName="price" type="number" [value]="selectedPrice"/>
-      Quantity <input [(ngModel)]="OrderModel.Quantity" formControlName="quantity" type="number" (keyup)="updateTotal($event)"/>
-      Total <input [(ngModel)]="OrderModel.Total" formControlName="total" type="number" [value]="selectedTotal" />
-      Payment type<select formControlName="paymentType" class="dropdown"  [(ngModel)]="OrderModel.PaymentType">   
+      Price<input [(ngModel)]="ReaderModel.Price" formControlName="price" type="number" [value]="selectedPrice"/>
+      Quantity<input [(ngModel)]="OrderModel.quantity" formControlName="quantity" type="number" (keyup)="updateTotal($event)"/>
+      <span class="text-danger" *ngIf="orderForm.controls['quantity'].dirty && orderForm.hasError('required','quantity')">*Please enter the Quantity</span>
+      Total<input [(ngModel)]="OrderModel.total" formControlName="total" type="number" [value]="selectedTotal"/>
+      Payment type<select  [(ngModel)]="OrderModel.paymentType" formControlName="paymentType" class="dropdown" (click)="onOptionsSelected($event)">   
         <option value="" disabled selected>Select Payment Type</option>  
         <option value="Debit Card">Debit Card</option>  
         <option value="Credit Card">Credit Card</option>  
     </select>
         <div class="submitBtn">
-            <button (click)="submit()">Submit</button>
+            <button (click)="submit()" [disabled]="orderForm.invalid">Submit</button>
+            <button (click)="close()">Close</button>
         </div>
     </form>
     </div>
     </div>
   </mat-dialog-content>
 </ng-template>
+<div *ngIf="showViewOrder" class="viewOrdersBtn">
+  <button (click)="viewOrders()">View Orders</button>
+ </div>
+ <div class="example-button-row" *ngIf="showOrders">
+  <ng-container>
+  <app-reader-grid-ui [grid-columns]="[{'colName':'bookId'},{'colName':'image'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentType'}]"
+  [grid-data]="OrderModels"
+  ></app-reader-grid-ui>
+  </ng-container>
+</div>
 
  

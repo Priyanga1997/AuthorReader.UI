@@ -3,12 +3,15 @@
 <form [formGroup]="login">
     <h2>Login</h2>
     <input type="text" placeholder="Username" class="input" formControlName="username" [(ngModel)]="UserDataModel.userName">
+    <span class="text-danger" *ngIf="login.controls['username'].dirty && login.hasError('required','username')">*Username is required</span>
     <input type="password" placeholder="Password" class="input" formControlName="password" [(ngModel)]="UserDataModel.password"> 
+    <span class="text-danger" *ngIf="login.controls['password'].dirty && login.hasError('required','password')">*Password is required</span>
     <select formControlName="usertype" class="dropdown" (click)="onOptionsSelected($event)" [(ngModel)]="UserDataModel.userType">   
         <option value="" disabled selected>Select User Type</option>  
         <option value="Author">Author</option>  
         <option value="Reader">Reader</option>  
     </select>
+     <!-- <span class="text-danger" [class.d-none]="usertype.valid||usertype.untouched">*Please select the user type.</span> -->
     <div class="loginbtn">
         <button (click)="loginSubmit()" [disabled]="login.invalid">Login</button>
         <button (click)="goToSignup()">Sign Up</button>

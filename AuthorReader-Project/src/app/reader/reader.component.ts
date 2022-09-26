@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ApiService } from '../services/api.service';
 import { NavbarService } from '../services/navbar.service';
 import { PurchaseService } from '../services/purchase.service';
-import { Reader } from './reader.model';
+import { Reader } from '../models/reader.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ReaderLoginComponent } from '../reader-login/reader-login.component';
 import { Order } from '../models/OrderModel';
@@ -40,17 +40,22 @@ export class ReaderComponent implements OnInit {
   public selectedPrice:number=0;
   public selectedTotal:number=0;
   public total:number=0;
+  public quantity:number=0;
   showTable: boolean = false;
   readerLogin = false;
   showOrder = false;
+  showViewOrder = false;
+  showOrders = false;
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
+  OrderModels: Array<Order> = new Array<Order>();
   ReaderModel: Reader = new Reader();
   ReaderModels: Array<Reader> = new Array<Reader>();
   
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private api: ApiService,
-    private purchase: PurchaseService, private nav: NavbarService, public dialog: MatDialog) { }
+    private purchase: PurchaseService, private nav: NavbarService, public dialog: MatDialog,
+    ) { }
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
@@ -60,8 +65,11 @@ export class ReaderComponent implements OnInit {
       price: ['']
     });
     this.readerLoginForm = this.formBuilder.group({
-      username: [''],
-      email: ['']
+      username: ['',Validators.required],
+      emailId: ['',Validators.required]
+    });
+    this.orderForm = this.formBuilder.group({
+      quantity: ['',Validators.required]
     });
     this.nav.hide();
     this.searchAllBooks();
@@ -106,6 +114,7 @@ export class ReaderComponent implements OnInit {
   BuyBook(input:any) {
     this.readerLogin = true;
     this.dialog.open(this.callAPIDialog);
+    alert('Enter your username and password to place an order');
     this.id = input.id;  
     this.title = input.title;
     this.price = input.price;
@@ -115,26 +124,45 @@ export class ReaderComponent implements OnInit {
     this.showOrder = true;
     this.selectedTitle = this.title;
     this.selectedPrice = this.price;
-    this.userName = event.target.value;
-    this.emailId = event.target.value;
+    this.ReaderModel.Title = this.selectedTitle;
   }
   updateTotal(event:any){
-    this.total = this.selectedPrice * event.target.value;
+    this.quantity = parseInt(event.target.value);
+    this.total = this.selectedPrice * this.quantity;
     this.selectedTotal = this.total;
+    this.OrderModel.total = this.selectedTotal;
+    this.OrderModel.quantity = this.quantity;
+  }
+  onOptionsSelected(event:any){
+    this.OrderModel.paymentType = event.target.value;
+   console.log(this.OrderModel.paymentType); //option value will be sent as event
   }
   submit(){
-    var data = {
+    debugger;
+    this.showViewOrder = true;
+    var postOrderData = {
       Username: this.ReaderLoginModel.userName,
-      Email:this.ReaderLoginModel.EmailId,
+      EmailId:this.ReaderLoginModel.emailId,
       BookId:this.id,
       Title:this.ReaderModel.Title,
-      Price:this.OrderModel.Price,
-      Quantity:this.OrderModel.Quantity,
-      Total:this.OrderModel.Total,
-      PaymentType:this.OrderModel.PaymentType
-    }
-    console.log(data.BookId);
-    //this.http.post('https://localhost:44398/api/reader/', data).subscribe(res => console.log(res), res => console.log(res));
+      Price:this.ReaderModel.Price,
+      Quantity:this.OrderModel.quantity,
+      Total:this.OrderModel.total,
+      PaymentMethod:this.OrderModel.paymentType
+    };
+    console.log(postOrderData);
+    this.http.post('https://localhost:44398/api/Order/postOrder', postOrderData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
+  }
+  PostSuccess(input: any) {
+    this.OrderModels = input;
+    this.ReaderLoginModel = input;
+    alert('Your order has been placed successfully');
+  }
+  viewOrders(){
+    this.showOrders= true;
+  }
+  close(){
+  this.dialog.closeAll();
   }
   // username:any;
   // email:any

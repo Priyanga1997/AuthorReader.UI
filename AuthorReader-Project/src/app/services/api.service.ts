@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-
+ _postOrders = "https://localhost:44398/api/reader/";
   constructor(private http: HttpClient) { }
 
   // postBook(data: any) {
@@ -25,12 +25,11 @@ export class ApiService {
     debugger;
     return this.http.get<any>("https://localhost:44398/api/author?id=" + id);
   }
-  getBooksOfAllAuthors(id: any) {
-    debugger;
-    return this.http.get<any>("https://localhost:44398/api/author/GetBooksOfAllAuthors?id=" + id);
+
+  postOrders(postOrders:any) {
+    return this.http.post(this._postOrders,postOrders).pipe(map((res: any) => {
+      return res;
+    }));
   }
 
-  //   putBook(data:any,id:number){
-  //     return this.http.put("http://localhost:3000/bookList/" +id,data);
-  //   }
 }

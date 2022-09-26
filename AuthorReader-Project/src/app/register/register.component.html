@@ -3,7 +3,9 @@
     <form [formGroup]="register">
         <h2>Create Account</h2>
         <input type="text" placeholder="Enter username" class="input" formControlName="username" [(ngModel)]="UserDataModel.userName">
+        <span class="text-danger" *ngIf="register.controls['username'].dirty && register.hasError('required','username')">*Username is required</span>
         <input type="password" placeholder="Enter password" class="input" formControlName="password" [(ngModel)]="UserDataModel.password">
+        <span class="text-danger" *ngIf="register.controls['password'].dirty && register.hasError('required','password')">*Password is required</span>
         <select formControlName="usertype" class="dropdown" (click)="onOptionsSelected($event)" [(ngModel)]="UserDataModel.userType">   
             <option value="" disabled selected>Select User Type</option>  
             <option value="Author">Author</option>  

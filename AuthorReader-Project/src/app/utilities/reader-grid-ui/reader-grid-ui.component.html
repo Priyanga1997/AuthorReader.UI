@@ -1,0 +1,17 @@
+<table align-text="center">
+    <tr>
+      <th *ngFor="let col of gridColumns">
+        {{col.colName}}
+      </th>
+    </tr>
+    <tr *ngFor="let colObj of gridData">
+      <td>{{colObj.id}}</td>
+      <td><img src="{{imageURL}}{{colObj.image}}" style="width:100px;height:130px;"></td>
+      <td>{{colObj.title}}</td>
+      <td>{{colObj.category}}</td>
+      <td>{{colObj.price}}</td>
+      <td>{{colObj.publisher}}</td>
+      <td>{{colObj.content}}</td>
+    </tr>
+  </table>
+  

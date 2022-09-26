@@ -91,6 +91,7 @@ h2{
   }
   .readerLoginbtn{
       display: flex;
+      padding-left: 40px;
   }
   .wrapper{
       background-color: aliceblue;
@@ -127,6 +128,13 @@ h2{
   align-items: center;
 }
 .submitBtn{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+.viewOrdersBtn{
   padding-top: 20px;
   padding-left: 30px;
 }

@@ -38,32 +38,6 @@ export class AuthorComponent implements OnInit {
     private api: ApiService, private route: Router, private nav: NavbarService
   ) {
   }
-
-
-  // @ViewChild('fileInput') fileInput!: ElementRef;
-  // fileAttr = 'Choose File';
-  // uploadFileEvt(imgFile: any) {
-  //   if (imgFile.target.files && imgFile.target.files[0]) {
-  //     this.fileAttr = '';
-  //     Array.from(imgFile.target.files).forEach((file: any) => {
-  //       this.fileAttr += file.name + ' - ';
-  //     });
-  //     // HTML5 FileReader API
-  //     let reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       let image = new Image();
-  //       image.src = e.target.result;
-  //       image.onload = (rs) => {
-  //         let imgBase64Path = e.target.result;
-  //       };
-  //     };
-  //     reader.readAsDataURL(imgFile.target.files[0]);
-  //     // Reset if duplicate image uploaded again
-  //     this.fileInput.nativeElement.value = '';
-  //   } else {
-  //     this.fileAttr = 'Choose File';
-  //   }
-  // }
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -81,35 +55,9 @@ export class AuthorComponent implements OnInit {
 
   }
   images: any;
-  // fileToUpload:File;
-  // handleFileInput(file:FileList){
-  //   this.fileToUpload = file.item(0);
-  //   var reader = new FileReader();
-  //   reader.onload=(event:any)=>{
-  //     this.urls = event.target.result;
-
-  //   }
-  //   reader.readAsDataURL(this.fileToUpload);
-  // }
-  // uploadFileEvt(e:any){
-  //   //const file = event.target.files[0]
-  //  if(e.target.files){
-  //    //for(let i=0;i<File.length;i++){
-  //      var reader = new FileReader();
-  //      reader.readAsDataURL(e.target.files[0]);
-  //      reader.onload=(events:any)=>{
-  //      this.urls.push(events.target.result);
-  //      }
-  //    }
-  //  //}
-  // }
   uploadFile(event: any) {
-    // if(files.length==0){
-    //   return ;
-    // }
-    // let fileToUpload=<File>files[0];
     debugger;
-    console.log('Image uploaded');
+    alert('Image uploaded');
     this.selectedFile = event.target.files[0];
   }
   SuccessGet(input: any) {
@@ -168,7 +116,7 @@ export class AuthorComponent implements OnInit {
      console.log(this.authorId);
     if (this.isEdit) {
 
-      this.http.put("https://localhost:44398/api/author" + '?id=' + this.dataID, this.createForm.value)
+      this.http.put("https://localhost:44398/api/home" + '?id=' + this.dataID, formData)
         .subscribe(res => this.PutSuccess(res), res => console.log(res));
     }
     else {
