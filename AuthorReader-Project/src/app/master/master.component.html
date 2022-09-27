@@ -1,5 +1,26 @@
-<mat-toolbar color="primary">
- <span><mat-icon>book</mat-icon>Digital Books</span>
+ <mat-toolbar color="primary">
+ <!-- <button mat-icon-button *ngIf="!nav.visible">
+     <mat-icon>
+       menu
+     </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+       close
+      </mat-icon> -->
+<!-- </button> -->
+<!-- <div *ngIf="!nav.visible">
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="reader">
+      <span>View Orders</span>
+    </button>
+    <button mat-menu-item disabled>
+      <span>Invoice</span>
+    </button>
+  </mat-menu> 
+</div> -->
+<span><mat-icon>book</mat-icon>Digital Books</span>
  <div class="spacer"></div>
  <a mat-raised-button color="accent"  routerLink="login" *ngIf="nav.visible">Sign In</a>
  <a mat-raised-button color="accent"  (click)="clickLogout()" *ngIf="!nav.visible">Logout</a>

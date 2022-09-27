@@ -8,7 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { ReaderComponent } from './reader/reader.component';
+import { ReaderComponent } from './reader/reader/reader.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -27,9 +27,12 @@ import { GridUiComponent } from './utilities/grid-ui/grid-ui.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
-import { PurchaseComponent } from './purchase/purchase.component';
+import { PurchaseComponent } from './reader/purchase/purchase.component';
 import { ReaderLoginComponent } from './reader-login/reader-login.component';
 import { ReaderGridUiComponent } from './utilities/reader-grid-ui/reader-grid-ui.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
+import { OrderComponent } from './reader/order/order.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { ReaderGridUiComponent } from './utilities/reader-grid-ui/reader-grid-ui
     AuthorComponent,
     GridUiComponent,
     ReaderLoginComponent,
-    ReaderGridUiComponent
+    ReaderGridUiComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,9 @@ import { ReaderGridUiComponent } from './utilities/reader-grid-ui/reader-grid-ui
     NgbModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    MatSidenavModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [MasterComponent]

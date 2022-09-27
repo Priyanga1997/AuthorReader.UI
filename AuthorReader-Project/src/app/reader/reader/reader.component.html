@@ -1,4 +1,35 @@
+<!-- <div>
+  <mat-sidenav-container>
+     <mat-sidenav mode="side" opened>
+       <button mat-button class="menu-button">
+         <span>Search Books</span>
+       </button>
+       <button mat-button class="menu-button">
+         <span>View Orders</span>
+       </button>
+     </mat-sidenav>
+     <mat-sidenav-content>
+       <div class="content">
+         Search Books
+       </div>
+     </mat-sidenav-content>
+   </mat-sidenav-container>  
+ </div> -->
 <div [ngStyle]="{'background-image': getUrl()}">
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" style="background-color:cadetblue;">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="showViewOrder()">
+          <span>View Orders</span>
+        </button>
+        <button mat-menu-item disabled>
+          <span>Invoice</span>
+        </button>
+      </mat-menu> 
+    </div>
+    <div *ngIf="showSearchDetails">
     <h2>Search Books</h2>
     <!-- <input type="text" class="form-control" placeholder="search books" (click)="Search()"/> -->
 <form class="reader" [formGroup]="searchForm">
@@ -88,6 +119,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
     </div> -->
 </div>
 </div>
+</div>
 <ng-template #callAPIDialog>
 <mat-dialog-content>
 <div class="wrapper" *ngIf="readerLogin">
@@ -126,14 +158,14 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
     </div>
   </mat-dialog-content>
 </ng-template>
-<div *ngIf="showViewOrder" class="viewOrdersBtn">
+<!-- <div *ngIf="showViewOrder" class="viewOrdersBtn">
   <button (click)="viewOrders()">View Orders</button>
- </div>
- <div class="example-button-row" *ngIf="showOrders">
+ </div> -->
+ <div class="example-button-row" *ngIf="showOrderDetails">
   <ng-container>
-  <app-reader-grid-ui [grid-columns]="[{'colName':'bookId'},{'colName':'image'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentType'}]"
-  [grid-data]="OrderModels"
-  ></app-reader-grid-ui>
+  <app-order [order-columns]="[{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'}]"
+  [order-data]="OrderModels"
+  ></app-order>
   </ng-container>
 </div>
 

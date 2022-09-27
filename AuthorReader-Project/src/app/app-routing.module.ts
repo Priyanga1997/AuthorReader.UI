@@ -1,13 +1,14 @@
 import { Host, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {PurchaseComponent} from './purchase/purchase.component';
+import { PurchaseComponent } from './reader/purchase/purchase.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { MasterComponent } from './master/master.component';
 import {AuthorComponent} from './author/author.component';
-import { ReaderComponent } from './reader/reader.component';
+import { ReaderComponent } from './reader/reader/reader.component';
 import { RegisterComponent } from './register/register.component';
 import { ReaderLoginComponent } from './reader-login/reader-login.component';
+import { OrderComponent } from './reader/order/order.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'author',component:AuthorComponent},
   {path:'purchase',component:PurchaseComponent},
-  {path:'readerLogin',component:ReaderLoginComponent}
+  {path:'readerLogin',component:ReaderLoginComponent},
+  {path:'order',component:OrderComponent}
 ];
 
 @NgModule({

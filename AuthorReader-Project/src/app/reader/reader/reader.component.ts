@@ -6,14 +6,17 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { ApiService } from '../services/api.service';
-import { NavbarService } from '../services/navbar.service';
-import { PurchaseService } from '../services/purchase.service';
-import { Reader } from '../models/reader.model';
+import { ApiService } from 'src/app/services/api.service';
+import { NavbarService } from 'src/app/services/navbar.service';
+import { PurchaseService } from 'src/app/services/purchase.service';
+import { Reader } from 'src/app/models/reader.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ReaderLoginComponent } from '../reader-login/reader-login.component';
-import { Order } from '../models/OrderModel';
-import { ReaderLogin } from '../models/ReaderLoginModel';
+import { Order } from 'src/app/models/OrderModel';
+import { ReaderLogin } from 'src/app/models/ReaderLoginModel';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { OrderService } from 'src/app/services/order.service';
+import { getMatIconFailedToSanitizeUrlError } from '@angular/material/icon';
 
 @Component({
   selector: 'app-reader',
@@ -44,20 +47,24 @@ export class ReaderComponent implements OnInit {
   showTable: boolean = false;
   readerLogin = false;
   showOrder = false;
-  showViewOrder = false;
+  showOrderDetails = false;
+  showSearchDetails = true;
   showOrders = false;
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   OrderModels: Array<Order> = new Array<Order>();
   ReaderModel: Reader = new Reader();
   ReaderModels: Array<Reader> = new Array<Reader>();
-  
+  opened=false;
+  sidenav!:MatSidenav;
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private api: ApiService,
     private purchase: PurchaseService, private nav: NavbarService, public dialog: MatDialog,
+    private orderService:OrderService
     ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.nav.show(); 
     this.searchForm = this.formBuilder.group({
       title: [''],
       category: [''],
@@ -139,7 +146,6 @@ export class ReaderComponent implements OnInit {
   }
   submit(){
     debugger;
-    this.showViewOrder = true;
     var postOrderData = {
       Username: this.ReaderLoginModel.userName,
       EmailId:this.ReaderLoginModel.emailId,
@@ -158,8 +164,16 @@ export class ReaderComponent implements OnInit {
     this.ReaderLoginModel = input;
     alert('Your order has been placed successfully');
   }
-  viewOrders(){
-    this.showOrders= true;
+  showViewOrder(){
+    debugger;
+    this.showOrderDetails= true;
+    this.showSearchDetails= false;
+    this.orderService.viewOrders('priyanga.t@gmail.com').subscribe(res=>this.GetSuccess(res),res=>console.log(res));
+  }
+  GetSuccess(input:any)
+  {
+    this.OrderModels = input;
+
   }
   close(){
   this.dialog.closeAll();

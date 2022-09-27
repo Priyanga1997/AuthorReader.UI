@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { PurchaseService } from '../services/purchase.service';
+import { PurchaseService } from 'src/app/services/purchase.service';
 
 @Component({
   selector: 'app-purchase',

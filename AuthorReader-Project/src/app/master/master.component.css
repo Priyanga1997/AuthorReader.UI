@@ -1,5 +1,30 @@
 .spacer {
  flex:1 1 auto;
 }
+mat-sidenav-container{
+    height:100vh;
+  }
+  mat-sidenav,mat-sidenav-content{
+    padding:16px;
+  }
+  mat-sidenav{
+    background-color:lightcoral;
+    width:200px;
+    margin:16px;
+    text-align:center;
+    padding:16px;
+    border-radius:10px;
+  }
+  .content{
+    height: 100px;;
+    margin:16px;
+    margin-left:32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:2rem;
+    color:lightgrey;
+    border-radius:10px;
+  }
 
 

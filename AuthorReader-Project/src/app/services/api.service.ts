@@ -19,17 +19,8 @@ export class ApiService {
       return res;
     }));
   }
-
-
   getBooks(id: any) {
     debugger;
     return this.http.get<any>("https://localhost:44398/api/author?id=" + id);
   }
-
-  postOrders(postOrders:any) {
-    return this.http.post(this._postOrders,postOrders).pipe(map((res: any) => {
-      return res;
-    }));
-  }
-
 }
