@@ -138,6 +138,17 @@ h2{
   padding-top: 20px;
   padding-left: 30px;
 }
+table, th , td {
+  border: 1px solid grey;
+  padding: 10px 30px 10px 10px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
 
 /* .searchbtn{
     display: flex;

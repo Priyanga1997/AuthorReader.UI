@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, TemplateRef, ViewChild, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,6 +17,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { OrderService } from 'src/app/services/order.service';
 import { getMatIconFailedToSanitizeUrlError } from '@angular/material/icon';
+import { outputAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-reader',
@@ -35,36 +36,41 @@ export class ReaderComponent implements OnInit {
   public price: any = 0;
   public publisher: any = '';
   public userName: any = '';
-  public emailId: any = '';
+  //public emailId: any = '';
   images: any;
   public id: string = '';
   public idForDelete: string = '';
-  public selectedTitle:string='';
-  public selectedPrice:number=0;
-  public selectedTotal:number=0;
-  public total:number=0;
-  public quantity:number=0;
+  public selectedTitle: string = '';
+  public selectedPrice: number = 0;
+  public selectedTotal: number = 0;
+  public total: number = 0;
+  public quantity: number = 0;
   showTable: boolean = false;
   readerLogin = false;
   showOrder = false;
   showOrderDetails = false;
   showSearchDetails = true;
   showOrders = false;
+  showPurchasedBookDetails = false;
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   OrderModels: Array<Order> = new Array<Order>();
   ReaderModel: Reader = new Reader();
   ReaderModels: Array<Reader> = new Array<Reader>();
-  opened=false;
-  sidenav!:MatSidenav;
+  opened = false;
+  sidenav!: MatSidenav;
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
+  //public userEmailId="";
+  //public emailId="";
+  //public userEmailId = "";
+  //public userEmailIdJson = localStorage.getItem('userEmailId');
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private api: ApiService,
     private purchase: PurchaseService, private nav: NavbarService, public dialog: MatDialog,
-    private orderService:OrderService
-    ) { }
+    private orderService: OrderService
+  ) { }
 
-  ngOnInit(): void { 
-    this.nav.show(); 
+  ngOnInit(): void {
+    this.nav.hide();
     this.searchForm = this.formBuilder.group({
       title: [''],
       category: [''],
@@ -72,14 +78,13 @@ export class ReaderComponent implements OnInit {
       price: ['']
     });
     this.readerLoginForm = this.formBuilder.group({
-      username: ['',Validators.required],
-      emailId: ['',Validators.required]
+      username: ['', Validators.required],
+      emailId: ['', Validators.required]
     });
     this.orderForm = this.formBuilder.group({
-      quantity: ['',Validators.required]
+      quantity: ['', Validators.required]
     });
-    this.nav.hide();
-    this.searchAllBooks();
+    //this.searchAllBooks();
     this.purchase.getBooks().subscribe(res => {
       this.bookList = res;
       this.bookList.forEach((a: any) => {
@@ -89,6 +94,8 @@ export class ReaderComponent implements OnInit {
         this.totalItem = res.length;
       })
     })
+    // this.userEmailId = localStorage.getItem('userEmailId');
+     //this.userEmailId = this.userEmailIdJson !== null ? JSON.parse(this.userEmailIdJson) : " ";
   }
   getUrl() {
     return "url('../assets/SearchBookImage.jpg')";
@@ -107,86 +114,98 @@ export class ReaderComponent implements OnInit {
     this.router.navigate(['purchase']);
   }
   isEmpty: boolean = false;
+  public ErrorMessage: any;
   searchAllBooks() {
-
     this.http.get("https://localhost:44398/api/reader/" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher)
-      .subscribe(res => this.Success(res), res => console.log(res));
-    this.showTable = !this.showTable;
-
+      .subscribe((res: any) => {
+        this.Success(res);
+        if (res.length <= 0) {
+          this.ErrorMessage = "No Book Found. Search by entering valid details!!";
+          document.getElementById('btnErrorMsg')?.click();
+          console.log(this.ErrorMessage);
+        };
+      },
+        (err: any) => {
+          console.log(err);
+        });
   }
+
   Success(input: any) {
     this.ReaderModels = input;
     console.log(this.ReaderModels);
   }
-  BuyBook(input:any) {
+  BuyBook(input: any) {
     this.readerLogin = true;
     this.dialog.open(this.callAPIDialog);
     alert('Enter your username and password to place an order');
-    this.id = input.id;  
+    this.id = input.id;
     this.title = input.title;
     this.price = input.price;
   }
-  orderDetails(event:any) {
+  orderDetails(event: any) {
     debugger;
     this.showOrder = true;
     this.selectedTitle = this.title;
     this.selectedPrice = this.price;
     this.ReaderModel.Title = this.selectedTitle;
   }
-  updateTotal(event:any){
+  updateTotal(event: any) {
     this.quantity = parseInt(event.target.value);
     this.total = this.selectedPrice * this.quantity;
     this.selectedTotal = this.total;
     this.OrderModel.total = this.selectedTotal;
     this.OrderModel.quantity = this.quantity;
   }
-  onOptionsSelected(event:any){
+  onOptionsSelected(event: any) {
     this.OrderModel.paymentType = event.target.value;
-   console.log(this.OrderModel.paymentType); //option value will be sent as event
+    console.log(this.OrderModel.paymentType); //option value will be sent as event
   }
-  submit(){
+  submit() {
     debugger;
     var postOrderData = {
       Username: this.ReaderLoginModel.userName,
-      EmailId:this.ReaderLoginModel.emailId,
-      BookId:this.id,
-      Title:this.ReaderModel.Title,
-      Price:this.ReaderModel.Price,
-      Quantity:this.OrderModel.quantity,
-      Total:this.OrderModel.total,
-      PaymentMethod:this.OrderModel.paymentType
+      EmailId: this.ReaderLoginModel.emailId,
+      BookId: this.id,
+      Title: this.ReaderModel.Title,
+      Price: this.ReaderModel.Price,
+      Quantity: this.OrderModel.quantity,
+      Total: this.OrderModel.total,
+      PaymentMethod: this.OrderModel.paymentType
     };
     console.log(postOrderData);
-    this.http.post('https://localhost:44398/api/Order/postOrder', postOrderData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
+    this.http.post('https://localhost:44398/api/Order/postOrder', postOrderData)
+      .subscribe(res => this.PostSuccess(res), res => console.log(res));
+    //this.showViewOrder(postOrderData.EmailId);
   }
   PostSuccess(input: any) {
     this.OrderModels = input;
     this.ReaderLoginModel = input;
     alert('Your order has been placed successfully');
   }
-  showViewOrder(){
+  showViewOrder() {
     debugger;
-    this.showOrderDetails= true;
-    this.showSearchDetails= false;
-    this.orderService.viewOrders('priyanga.t@gmail.com').subscribe(res=>this.GetSuccess(res),res=>console.log(res));
+    this.showOrderDetails = true;
+    this.showSearchDetails = false;
+    this.showPurchasedBookDetails = false;
+    this.orderService.viewOrders('priyanga.t@gmail.com').subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
-  GetSuccess(input:any)
-  {
+  GetSuccess(input: any) {
     this.OrderModels = input;
-
   }
-  close(){
-  this.dialog.closeAll();
+  close() {
+    this.dialog.closeAll();
   }
-  // username:any;
-  // email:any
-  //   openDialog(): void {
-  //     const dialogRef = this.dialog.open(ReaderComponent, {
-  //       width: '250px',
-  //       data: {name: this.username, animal: this.email},
-  //     });
-
-  // }
+  showPurchasedBooks(){
+    debugger;
+    this.showOrderDetails = false;
+    this.showSearchDetails = false;
+    this.showPurchasedBookDetails = true;
+  }
+  cancelOrder(cancelorder:any){
+    debugger;
+    this.orderService.cancelOrder(cancelorder.orderId).subscribe(res=>this.showPurchasedBooks(),res=>console.log(res));
+    this.showPurchasedBooks();
+  }
   EditSearch(input: any) {
     debugger;
     this.isEdit = true;
@@ -196,15 +215,5 @@ export class ReaderComponent implements OnInit {
   }
   DeleteSearch(input: any) {
     this.http.delete("https://localhost:44398/api/reader?id=" + input.id).subscribe(res => this.Success(res), res => console.log(res));
-  }
-
-  alert() {
-    this.title = this.ReaderModel.Title;
-    this.category = this.ReaderModel.Category;
-    this.price = this.ReaderModel.Price;
-    this.publisher = this.ReaderModel.Publisher;
-    if (this.title && this.category && this.price == 0 && this.publisher == null) {
-      alert('Please enter any of the input field to get the search results');
-    }
   }
 }

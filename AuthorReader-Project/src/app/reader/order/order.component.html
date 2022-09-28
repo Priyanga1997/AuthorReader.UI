@@ -5,12 +5,14 @@
            <table class="table table-responsive">
                <thead>
                    <tr>
+                      <th>Order Id</th>
                       <th>Book Id</th>
                       <th>Book Title</th>
                       <th>Price</th>
                       <th>Quantity</th>
                       <th>Total</th>
                       <th>Payment Type</th>
+                      <th>Action</th>
                       <!-- <th *ngFor="let col of gridColumns">
                         {{col.colName}}
                       </th> -->
@@ -18,15 +20,16 @@
                </thead>
                <tbody>
                    <tr *ngFor="let item of orderData;">
+                   <td>{{item.orderId}}</td>
                    <td>{{item.bookId}}</td>
                    <td>{{item.title}}</td>
                    <td>{{item.price}}</td>
                    <td>{{item.quantity}}</td>
                    <td>{{item.total}}</td>
                    <td>{{item.paymentMethod}}</td>
-                  <!-- <td>
-                     <button class="btn btn-primary">Buy now</button>
-                 </td> -->
+                  <td>
+                     <button class="btn btn-danger" (click)="cancelOrder(item)">Cancel Order</button>
+                 </td>
                  </tr>
                </tbody>
            </table>

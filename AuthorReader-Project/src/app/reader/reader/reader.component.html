@@ -24,6 +24,9 @@
         <button mat-menu-item (click)="showViewOrder()">
           <span>View Orders</span>
         </button>
+        <button mat-menu-item (click)="showPurchasedBooks()">
+          <span>Read Book</span>
+        </button>
         <button mat-menu-item disabled>
           <span>Invoice</span>
         </button>
@@ -46,6 +49,20 @@ Price <input [(ngModel)]="ReaderModel.Price" formControlName="price" type="numbe
 Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher" type="text" />
 <br/>
 <input type="button" value="Search" (click)="searchAllBooks()"/>
+<div class="modal fade" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: red;" id="exampleModalToggleLabel">Error </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       {{ErrorMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnErrorMsg" style="display: none;" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
       <!-- //</button> -->
      <!-- <span class="fas fa-search search-icon"></span> -->
        <!-- <mat-form-field class="example-full-width">
@@ -120,6 +137,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 </div>
 </div>
 </div>
+
 <ng-template #callAPIDialog>
 <mat-dialog-content>
 <div class="wrapper" *ngIf="readerLogin">
@@ -127,7 +145,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
   <form class="readerLogin" [formGroup]="readerLoginForm">
       <input type="text" placeholder="Username" class="input" [(ngModel)]="ReaderLoginModel.userName" formControlName="username">
       <span class="text-danger" *ngIf="readerLoginForm.controls['username'].dirty && readerLoginForm.hasError('required','username')">*Username is required</span>
-      <input type="email" placeholder="Email" class="input" [(ngModel)]="ReaderLoginModel.emailId" formControlName="emailId"> 
+      <input type="text" placeholder="Email" class="input" [(ngModel)]="ReaderLoginModel.emailId" formControlName="emailId"> 
       <span class="text-danger" *ngIf="readerLoginForm.controls['emailId'].dirty && readerLoginForm.hasError('required','emailId')">*Email Address is required</span>
       <div class="readerLoginbtn">
           <button (click)="orderDetails($event)" [disabled]="readerLoginForm.invalid">Place your Order</button>
@@ -163,10 +181,43 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
  </div> -->
  <div class="example-button-row" *ngIf="showOrderDetails">
   <ng-container>
-  <app-order [order-columns]="[{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'}]"
-  [order-data]="OrderModels"
+  <app-order [order-columns]="[{'colName':'orderId'},{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'}]"
+  [order-data]="OrderModels" (cancel-order)="cancelOrder($event)"
   ></app-order>
   </ng-container>
 </div>
+
+<ng-container *ngIf="showPurchasedBookDetails">
+  <div class="container">
+   <div class="card-table">
+       <div class="cart-product">
+         <table class="table table-responsive">
+             <thead>
+                 <tr>
+                    <th>Order Id</th>
+                    <th>Book Id</th>
+                    <th>Book Title</th>
+                    <th>Action</th>
+                    <!-- <th *ngFor="let col of gridColumns">
+                      {{col.colName}}
+                    </th> -->
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr *ngFor="let item of OrderModels;">
+                 <td>{{item.orderId}}</td>
+                 <td>{{item.bookId}}</td>
+                 <td>{{item.title}}</td>
+                 <td><button class="btn btn-primary">Read Book</button></td>
+                <!-- <td>
+                   <button class="btn btn-primary">Buy now</button>
+               </td> -->
+               </tr>
+             </tbody>
+         </table>
+       </div>
+   </div>
+  </div>
+
 
  

@@ -155,6 +155,17 @@ export class AuthorComponent implements OnInit {
     this.http.delete("https://localhost:44398/api/author/" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
   }
 
+  blockBook(row:any){
+    this.authorId=row.id;  
+    this.api.blockBook(this.authorId);
+      this.getAllBooks();
+  }
+
+  unblockBook(row:any){
+    this.authorId=row.id;  
+    this.api.unblockBook(this.authorId);
+      this.getAllBooks();    
+  }
   onClose() {
     this.createForm.reset();
   }

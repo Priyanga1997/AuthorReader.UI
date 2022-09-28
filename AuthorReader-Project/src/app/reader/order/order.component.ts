@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/models/OrderModel';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -12,7 +13,7 @@ export class OrderComponent implements OnInit {
   public emailId:string='';
   OrderModel: Order = new Order();
   public imageURL="https://localhost:44398/";
-  constructor(private orderService:OrderService) { }
+  constructor(private orderService:OrderService, public router:Router) { }
 
   ngOnInit(): void {
       
@@ -31,5 +32,14 @@ export class OrderComponent implements OnInit {
   set SetGridData(_orderData:Array<any>){
     this.orderData=_orderData;
   }
+
+  @Output("cancel-order")
+  emitemittercancelorder:EventEmitter<any>=new EventEmitter<any>();
+  cancelOrder(_cancelOrder:any){
+    debugger;
+    this.emitemittercancelorder.emit(_cancelOrder);
   }
+  }
+
+  
 

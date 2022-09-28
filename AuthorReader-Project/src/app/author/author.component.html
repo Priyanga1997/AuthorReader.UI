@@ -133,6 +133,12 @@
             <button mat-icon-button color="warn" (click)="deleteBook(row)">
                 <mat-icon>delete</mat-icon>
             </button>
+            <button mat-icon-button color="warn" (click)="blockBook(row)">
+              <span>Block</span>
+          </button>
+          <button mat-icon-button color="primary" (click)="unblockBook(row)">
+            <span>UnBlock</span>
+        </button>
         </td>
       </ng-container>
 

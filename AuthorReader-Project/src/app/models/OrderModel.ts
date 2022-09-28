@@ -8,4 +8,5 @@ export class Order{
     userName:string='';
     title:string='';
     image:string='';
+    orderId:number=0;
 }
