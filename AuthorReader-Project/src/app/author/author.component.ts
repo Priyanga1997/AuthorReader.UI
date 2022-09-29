@@ -34,6 +34,10 @@ export class AuthorComponent implements OnInit {
   public content: string = '';
   public selectedFile!: File;
   public image: string = '';
+  AddSuccessMessage ='';
+  UpdateSuccessMessage='';
+  DeleteSuccessMessage='';
+  ImageUploadSuccessMessage='';
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private http: HttpClient,
     private api: ApiService, private route: Router, private nav: NavbarService
   ) {
@@ -57,7 +61,8 @@ export class AuthorComponent implements OnInit {
   images: any;
   uploadFile(event: any) {
     debugger;
-    alert('Image uploaded');
+    this.ImageUploadSuccessMessage ="Image uploaded.";
+    document.getElementById('btnImageUploadSuccessMsg')?.click();
     this.selectedFile = event.target.files[0];
   }
   SuccessGet(input: any) {
@@ -126,15 +131,18 @@ export class AuthorComponent implements OnInit {
     }
   }
   PostSuccess(input: any) {
-    alert("Data got added successfully");
+    this.AddSuccessMessage ="Data got added successfully.";
+    document.getElementById('btnAddSuccessMsg')?.click();
     this.getAllBooks();
   }
   PutSuccess(input: any) {
-    alert("Data got updated successfully");
+    this.UpdateSuccessMessage ="Data got updated successfully.";
+    document.getElementById('btnUpdateSuccessMsg')?.click();
     this.getAllBooks();
   }
   DeleteSuccess(input: any) {
-    alert("Data got deleted successfully");
+    this.DeleteSuccessMessage ="Data got deleted successfully.";
+    document.getElementById('btnDeleteSuccessMsg')?.click();
   }
 
   editBook(row: any) {

@@ -18,5 +18,20 @@
     </form>
     </div>
     </div>
+    <a class="btn btn-primary" id="btnDeleteSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#modelDeleteSuccess" role="button">Open first modal</a>
+<div class="modal fade" id="registerSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;" id="exampleModalToggleLabel">Success!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: indigo;">
+       {{SuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#registerSuccess" role="button">Open first modal</a>
 
     

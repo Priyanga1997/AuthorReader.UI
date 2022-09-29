@@ -51,7 +51,7 @@ export class ReaderComponent implements OnInit {
   showOrderDetails = false;
   showSearchDetails = true;
   showOrders = false;
-  showPurchasedBookDetails = false;
+  showReadBookDetails = false;
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   OrderModels: Array<Order> = new Array<Order>();
@@ -170,23 +170,26 @@ export class ReaderComponent implements OnInit {
       Price: this.ReaderModel.Price,
       Quantity: this.OrderModel.quantity,
       Total: this.OrderModel.total,
-      PaymentMethod: this.OrderModel.paymentType
+      PaymentMethod: this.OrderModel.paymentType,
+      Active: this.OrderModel.active
     };
     console.log(postOrderData);
     this.http.post('https://localhost:44398/api/Order/postOrder', postOrderData)
       .subscribe(res => this.PostSuccess(res), res => console.log(res));
-    //this.showViewOrder(postOrderData.EmailId);
   }
+  SuccessMessage='';
   PostSuccess(input: any) {
     this.OrderModels = input;
     this.ReaderLoginModel = input;
-    alert('Your order has been placed successfully');
+    alert('Your Order has been placed successfully.');
+    // this.SuccessMessage ="Your Order has been placed successfully.";
+    // document.getElementById('btnSuccessMsg')?.click();
   }
   showViewOrder() {
     debugger;
     this.showOrderDetails = true;
     this.showSearchDetails = false;
-    this.showPurchasedBookDetails = false;
+    this.showReadBookDetails = false;
     this.orderService.viewOrders('priyanga.t@gmail.com').subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
   GetSuccess(input: any) {
@@ -195,16 +198,20 @@ export class ReaderComponent implements OnInit {
   close() {
     this.dialog.closeAll();
   }
-  showPurchasedBooks(){
+  showReadBooks(){
     debugger;
     this.showOrderDetails = false;
     this.showSearchDetails = false;
-    this.showPurchasedBookDetails = true;
+    this.showReadBookDetails = true;
+    this.orderService.viewOrders('priyanga.t@gmail.com').subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
   cancelOrder(cancelorder:any){
     debugger;
-    this.orderService.cancelOrder(cancelorder.orderId).subscribe(res=>this.showPurchasedBooks(),res=>console.log(res));
-    this.showPurchasedBooks();
+    this.orderService.cancelOrder(cancelorder.orderId).subscribe(res=>this.CancelSuccess(res),res=>console.log(res));
+  }
+  CancelSuccess(input:any){
+    this.SuccessMessage ="You can get your refund within 24hrs of payment.";
+    document.getElementById('btnSuccessMsg')?.click();
   }
   EditSearch(input: any) {
     debugger;

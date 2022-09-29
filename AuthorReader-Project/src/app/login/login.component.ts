@@ -34,11 +34,9 @@ onOptionsSelected(event:any){
   }
   loginSubmit(){
     this._service.loginUser(this.UserDataModel).subscribe(res=>{
-      localStorage.setItem('authorId',res.userData.id)
-      console.log(res);
-      console.log('You are able to login');
-      alert('You have logged in successfully');
+      localStorage.setItem('authorId',res.userData.id);
       localStorage.setItem('token',res.token);
+      document.getElementById('btnSuccessMessage')?.click();
       if(res.userData.userType=="Author")
       {
          this.router.navigate(['author']);

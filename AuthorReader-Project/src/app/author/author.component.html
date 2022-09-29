@@ -80,7 +80,6 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
   </mat-form-field>
   
-
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="id">
@@ -155,3 +154,59 @@
 
 </div>
 </div>
+<div class="modal fade" id="modelAddSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;" id="exampleModalToggleLabel">Success!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: indigo;">
+       {{AddSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnAddSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#modelAddSuccess" role="button">Open first modal</a>
+<div class="modal fade" id="modelUpdateSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;" id="exampleModalToggleLabel">Success!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: indigo;">
+       {{UpdateSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnUpdateSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#modelUpdateSuccess" role="button">Open first modal</a>
+<div class="modal fade" id="modelDeleteSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;" id="exampleModalToggleLabel">Success!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: indigo;">
+       {{DeleteSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnDeleteSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#modelDeleteSuccess" role="button">Open first modal</a>
+<div class="modal fade" id="modelImageUploadSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;" id="exampleModalToggleLabel">Success!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: indigo;">
+       {{ImageUploadSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnImageUploadSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#modelImageUploadSuccess" role="button">Open first modal</a>

@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   UserDataModel:UserData=new UserData();
   ErrorMessage:any='';
   userType:any='';
+  SuccessMessage='';
   constructor(private fb:FormBuilder,private router:Router, private _service: LoginService, private http:HttpClient) { }
 
   ngOnInit(): void {
@@ -38,7 +39,8 @@ export class RegisterComponent implements OnInit {
     };
     this.http.post("https://localhost:44398/api/login/register-user",userdata).subscribe(res=>{
     console.log('You have successfully registered');
-    alert('You have registered successfully');
+    this.SuccessMessage ="You have successfully registered.";
+    document.getElementById('btnSuccessMsg')?.click();
     });
   }
   goToLogin(){

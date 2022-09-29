@@ -22,6 +22,12 @@ h2{
     display: flex;
     justify-content: center;
   }
+  .ReadBook{
+      display: table-cell;
+      padding-top:20px;
+      display: flex;
+      justify-content: center;
+    }
   .example-card {
     max-width: 400px;
   }

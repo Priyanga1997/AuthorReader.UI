@@ -9,4 +9,5 @@ export class Order{
     title:string='';
     image:string='';
     orderId:number=0;
+    active:string="yes";
 }

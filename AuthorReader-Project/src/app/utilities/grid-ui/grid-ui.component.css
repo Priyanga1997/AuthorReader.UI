@@ -12,3 +12,6 @@ table, th , td {
   .btn{
     background-color:palevioletred;
 }
+.modal.show{
+  display:block;
+}

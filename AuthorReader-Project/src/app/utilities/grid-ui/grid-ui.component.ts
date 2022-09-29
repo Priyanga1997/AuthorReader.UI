@@ -12,6 +12,7 @@ export class GridUiComponent implements OnInit {
   public bookList:any=[];
   public totalItem :number=0;
   public imageURL="https://localhost:44398/";
+  SuccessMessage='';
   constructor(private purchase:PurchaseService,private api:ApiService,private router: Router) { }
 //getting column names
 gridColumns: Array<any> = new Array<any>();

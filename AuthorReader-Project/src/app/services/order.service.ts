@@ -15,7 +15,7 @@ export class OrderService {
     }));
   }
   cancelOrder(orderId:any) {
-    return this.http.get(this._cancelorderUrl+'?OrderId='+ orderId).pipe(map((res: any) => {
+    return this.http.put(this._cancelorderUrl+'?OrderId='+ orderId,'').pipe(map((res: any) => {
       return res;
     }));
   }

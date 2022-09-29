@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppModule } from 'src/app/app.module';
 import { LoginService } from 'src/app/services/login.service';
 import { OrderService } from 'src/app/services/order.service';
-import { waitForAsync } from '@angular/core/testing';
+import { OrderComponent } from '../order/order.component';
 import { ReaderComponent } from './reader.component';
 
 describe('ReaderComponent', () => {
@@ -15,7 +15,7 @@ describe('ReaderComponent', () => {
     let order: OrderService;
     let readerLogin:LoginService;
     await TestBed.configureTestingModule({
-      declarations: [ReaderComponent],
+      declarations: [ReaderComponent,OrderComponent],
       imports: [HttpClientModule, AppModule]
     })
       .compileComponents();
@@ -25,6 +25,10 @@ describe('ReaderComponent', () => {
     fixture = TestBed.createComponent(ReaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  it('should create', ()=>{
+    expect(component).toBeTruthy();
   });
 
   // it('search books', async(() => {
@@ -41,6 +45,5 @@ describe('ReaderComponent', () => {
   //   let result = component.submit();
   //   console.log('reader ordering books', result);
   //   expect(result).toEqual(undefined);
-
   // }));
 });

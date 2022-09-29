@@ -24,7 +24,7 @@
         <button mat-menu-item (click)="showViewOrder()">
           <span>View Orders</span>
         </button>
-        <button mat-menu-item (click)="showPurchasedBooks()">
+        <button mat-menu-item (click)="showReadBooks()">
           <span>Read Book</span>
         </button>
         <button mat-menu-item disabled>
@@ -174,7 +174,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
     </form>
     </div>
     </div>
-  </mat-dialog-content>
+    </mat-dialog-content>    
 </ng-template>
 <!-- <div *ngIf="showViewOrder" class="viewOrdersBtn">
   <button (click)="viewOrders()">View Orders</button>
@@ -186,8 +186,23 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
   ></app-order>
   </ng-container>
 </div>
+<div class="modal fade" id="cancelOrderSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green" id="exampleModalToggleLabel">Cancelled Order!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: purple;">
+       {{SuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#cancelOrderSuccess" role="button">Open first modal</a>
 
-<ng-container *ngIf="showPurchasedBookDetails">
+<div class="ReadBook">
+<ng-container *ngIf="showReadBookDetails">
   <div class="container">
    <div class="card-table">
        <div class="cart-product">
@@ -218,6 +233,8 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
        </div>
    </div>
   </div>
+</ng-container>
+</div>
 
 
  
