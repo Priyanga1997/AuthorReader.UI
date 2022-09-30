@@ -38,6 +38,8 @@ export class AuthorComponent implements OnInit {
   UpdateSuccessMessage='';
   DeleteSuccessMessage='';
   ImageUploadSuccessMessage='';
+  BlockBookSuccessMessage='';
+  UnblockBookSuccessMessage='';
   constructor(private formBuilder: FormBuilder, private dialog: MatDialog, private http: HttpClient,
     private api: ApiService, private route: Router, private nav: NavbarService
   ) {
@@ -166,13 +168,17 @@ export class AuthorComponent implements OnInit {
   blockBook(row:any){
     this.authorId=row.id;  
     this.api.blockBook(this.authorId);
-      this.getAllBooks();
+    this.getAllBooks();
+    this.BlockBookSuccessMessage ="Book has been blocked.";
+    document.getElementById('btnBlockBookSuccessMsg')?.click();
   }
 
   unblockBook(row:any){
     this.authorId=row.id;  
     this.api.unblockBook(this.authorId);
       this.getAllBooks();    
+      this.UnblockBookSuccessMessage ="Book has been unblocked.";
+    document.getElementById('btnUnblockBookSuccessMsg')?.click();
   }
   onClose() {
     this.createForm.reset();

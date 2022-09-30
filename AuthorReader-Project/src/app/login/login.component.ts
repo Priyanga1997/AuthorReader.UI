@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
  ErrorMessage:any='';
  userType:any='';
  optionSelected: any;
-
 onOptionsSelected(event:any){
   this.UserDataModel.userType = event.target.value;
  console.log(this.UserDataModel.userType); //option value will be sent as event
@@ -36,6 +35,7 @@ onOptionsSelected(event:any){
     this._service.loginUser(this.UserDataModel).subscribe(res=>{
       localStorage.setItem('authorId',res.userData.id);
       localStorage.setItem('token',res.token);
+      localStorage.setItem('emailId',res.userData.userName);
       document.getElementById('btnSuccessMessage')?.click();
       if(res.userData.userType=="Author")
       {
@@ -56,4 +56,8 @@ onOptionsSelected(event:any){
   goToSignup(){
     this.router.navigate(['register']);
   }
+  getUrl() {
+    return "url('../assets/LoginImage.jpg')";
+  }
+
 }

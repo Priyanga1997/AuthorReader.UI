@@ -1,9 +1,10 @@
+<div [ngStyle]="{'background-image': getUrl()}" style="height:100%">
 <div class="wrapper">
 <div class="login">
 <form [formGroup]="login">
     <h2>Login</h2>
-    <input type="text" placeholder="Username" class="input" formControlName="username" [(ngModel)]="UserDataModel.userName">
-    <span class="text-danger" *ngIf="login.controls['username'].dirty && login.hasError('required','username')">*Username is required</span>
+    <input type="email" placeholder="Email address" class="input" formControlName="username" [(ngModel)]="UserDataModel.userName">
+    <span class="text-danger" *ngIf="login.controls['username'].dirty && login.hasError('required','username')">*Email Id is required</span>
     <input type="password" placeholder="Password" class="input" formControlName="password" [(ngModel)]="UserDataModel.password"> 
     <span class="text-danger" *ngIf="login.controls['password'].dirty && login.hasError('required','password')">*Password is required</span>
     <select formControlName="usertype" class="dropdown" (click)="onOptionsSelected($event)" [(ngModel)]="UserDataModel.userType">   
@@ -48,3 +49,4 @@
   </div>
 </div>
 <a class="btn btn-primary" id="btnSuccessMessage" style="display: none;" data-bs-toggle="modal" href="#loginSuccess" role="button">Open first modal</a>
+</div>

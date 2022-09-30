@@ -31,19 +31,19 @@ describe('ReaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('search books', async(() => {
-  //   fixture = TestBed.createComponent(ReaderComponent);
-  //   component = fixture.debugElement.componentInstance;
-  //   let result = component.searchAllBooks();
-  //   console.log('search books', result);
-  //   expect(result).toEqual(undefined);
-  // }));
+  it('search books', (() => {
+    fixture = TestBed.createComponent(ReaderComponent);
+    component = fixture.debugElement.componentInstance;
+    let result = component.searchAllBooks();
+    console.log('search books', result);
+    expect(result).toEqual(undefined);
+  }));
 
-  // it('reader purchasing books', async(() => {
-  //   fixture = TestBed.createComponent(ReaderComponent);
-  //   component = fixture.debugElement.componentInstance;
-  //   let result = component.submit();
-  //   console.log('reader ordering books', result);
-  //   expect(result).toEqual(undefined);
-  // }));
+  it('reader purchasing books', (() => {
+    fixture = TestBed.createComponent(ReaderComponent);
+    component = fixture.debugElement.componentInstance;
+    let result = component.submit();
+    console.log('reader ordering books', result);
+    expect(result).toEqual(undefined);
+  }));
 });

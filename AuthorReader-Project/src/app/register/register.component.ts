@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
       username:['',Validators.required],
       password:['', Validators.compose([
         Validators.minLength(5),
-        Validators.required])]
+        Validators.required])],
+        usertype:['',Validators.required]
       })
   }
   onOptionsSelected(event:any){
@@ -46,4 +47,8 @@ export class RegisterComponent implements OnInit {
   goToLogin(){
     this.router.navigate(['login']);
   }
+  getUrl() {
+    return "url('../assets/RegisterImage.jpg')";
+  }
+
 }

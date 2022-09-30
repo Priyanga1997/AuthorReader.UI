@@ -4,7 +4,7 @@ export class Order{
     bookId:number=0;
     paymentType:string='';
     price:number=0;
-    emailId:string='';
+    emailId:any='';
     userName:string='';
     title:string='';
     image:string='';

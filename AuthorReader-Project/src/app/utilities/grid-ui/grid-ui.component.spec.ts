@@ -1,3 +1,4 @@
+import {HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GridUiComponent } from './grid-ui.component';
@@ -8,7 +9,8 @@ describe('GridUiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GridUiComponent ]
+      declarations: [ GridUiComponent ],
+      imports:[HttpClientModule]
     })
     .compileComponents();
 

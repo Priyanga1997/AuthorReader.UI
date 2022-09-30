@@ -140,7 +140,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 
 <ng-template #callAPIDialog>
 <mat-dialog-content>
-<div class="wrapper" *ngIf="readerLogin">
+<!-- <div class="wrapper" *ngIf="readerLogin">
   <div class="readerLogin">
   <form class="readerLogin" [formGroup]="readerLoginForm">
       <input type="text" placeholder="Username" class="input" [(ngModel)]="ReaderLoginModel.userName" formControlName="username">
@@ -152,8 +152,9 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
       </div>
   </form>
   </div>
-  </div>
-  <div class="orderDetails" *ngIf="showOrder">
+  </div> -->
+  <!-- <div class="orderDetails" *ngIf="showOrder"> -->
+    <div class="orderDetails">
     <div class="order">
     <form class="orderForm" [formGroup]="orderForm">
       <h2>Payment details</h2>
@@ -179,7 +180,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 <!-- <div *ngIf="showViewOrder" class="viewOrdersBtn">
   <button (click)="viewOrders()">View Orders</button>
  </div> -->
- <div class="example-button-row" *ngIf="showOrderDetails">
+ <div class="example-button-row" *ngIf="showOrderDetails"  [ngStyle]="{'background-image': getViewOrdersUrl()}" style="height:100%">
   <ng-container>
   <app-order [order-columns]="[{'colName':'orderId'},{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'}]"
   [order-data]="OrderModels" (cancel-order)="cancelOrder($event)"
@@ -201,8 +202,8 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 </div>
 <a class="btn btn-primary" id="btnSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#cancelOrderSuccess" role="button">Open first modal</a>
 
-<div class="ReadBook">
-<ng-container *ngIf="showReadBookDetails">
+<div class="ReadBook" [ngStyle]="{'background-image': getReadBookUrl()}" style="height: 100%;background:no-repeat;" *ngIf="showReadBookDetails">
+<ng-container>
   <div class="container">
    <div class="card-table">
        <div class="cart-product">

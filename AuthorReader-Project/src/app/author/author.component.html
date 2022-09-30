@@ -1,13 +1,3 @@
-<mat-toolbar>
-    <div class="spacer"></div>
-    <mat-icon>add</mat-icon>
-    <button mat-button>Create Book</button>
-    <!-- <div>
-    <mat-icon>search</mat-icon>
-    <a mat-button routerLink="/reader">Search Books</a>
-   </div> -->
-</mat-toolbar>
-
 <div class="book">
 <h1>Create Books</h1>
 <div>
@@ -34,12 +24,6 @@
             <mat-label>Image</mat-label>
             <input matInput>
             <input type="file" formControlName="image" [(ngModel)]="image" (change)="uploadFile($event)"/>
-            <!-- <img *ngFor="let book of images" src="https://localhost:44398/{{book.image}}"> -->
-            <!-- <img *ngFor='let url of urls' [src]="url" (change)="uploadFileEvt($event)"> -->
-            <!-- <input
-            type="file"
-             formControlName="image"
-          /> -->
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
@@ -210,3 +194,31 @@
   </div>
 </div>
 <a class="btn btn-primary" id="btnImageUploadSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#modelImageUploadSuccess" role="button">Open first modal</a>
+<div class="modal fade" id="BlockBookSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;" id="exampleModalToggleLabel">Success!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: indigo;">
+       {{BlockBookSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnBlockBookSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#BlockBookSuccess" role="button">Open first modal</a>
+<div class="modal fade" id="UnblockBookSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;" id="exampleModalToggleLabel">Success!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: indigo;">
+       {{UnblockBookSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnUnblockBookSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#UnblockBookSuccess" role="button">Open first modal</a>

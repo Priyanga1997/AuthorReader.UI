@@ -18,6 +18,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { OrderService } from 'src/app/services/order.service';
 import { getMatIconFailedToSanitizeUrlError } from '@angular/material/icon';
 import { outputAst } from '@angular/compiler';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-reader',
@@ -52,6 +53,8 @@ export class ReaderComponent implements OnInit {
   showSearchDetails = true;
   showOrders = false;
   showReadBookDetails = false;
+  public emailId ="";
+  public emailIdJson = localStorage.getItem('emailId');
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   OrderModels: Array<Order> = new Array<Order>();
@@ -64,9 +67,10 @@ export class ReaderComponent implements OnInit {
   //public emailId="";
   //public userEmailId = "";
   //public userEmailIdJson = localStorage.getItem('userEmailId');
+  
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private api: ApiService,
     private purchase: PurchaseService, private nav: NavbarService, public dialog: MatDialog,
-    private orderService: OrderService
+    private orderService: OrderService,private login:LoginService
   ) { }
 
   ngOnInit(): void {
@@ -94,8 +98,7 @@ export class ReaderComponent implements OnInit {
         this.totalItem = res.length;
       })
     })
-    // this.userEmailId = localStorage.getItem('userEmailId');
-     //this.userEmailId = this.userEmailIdJson !== null ? JSON.parse(this.userEmailIdJson) : " ";
+    this.emailId = this.emailIdJson !== null ? JSON.parse(this.emailIdJson) : " ";
   }
   getUrl() {
     return "url('../assets/SearchBookImage.jpg')";
@@ -137,17 +140,20 @@ export class ReaderComponent implements OnInit {
   BuyBook(input: any) {
     this.readerLogin = true;
     this.dialog.open(this.callAPIDialog);
-    alert('Enter your username and password to place an order');
+    alert('Enter your payment details to place an order');
     this.id = input.id;
     this.title = input.title;
     this.price = input.price;
+    this.selectedTitle = this.title;
+    this.selectedPrice = this.price;
+    this.ReaderModel.Title = this.selectedTitle;
   }
   orderDetails(event: any) {
     debugger;
     this.showOrder = true;
-    this.selectedTitle = this.title;
-    this.selectedPrice = this.price;
-    this.ReaderModel.Title = this.selectedTitle;
+    // this.selectedTitle = this.title;
+    // this.selectedPrice = this.price;
+    // this.ReaderModel.Title = this.selectedTitle;
   }
   updateTotal(event: any) {
     this.quantity = parseInt(event.target.value);
@@ -162,9 +168,10 @@ export class ReaderComponent implements OnInit {
   }
   submit() {
     debugger;
+    this.OrderModel.emailId = localStorage.getItem('emailId');
     var postOrderData = {
-      Username: this.ReaderLoginModel.userName,
-      EmailId: this.ReaderLoginModel.emailId,
+      // Username: this.ReaderLoginModel.userName,
+      EmailId:this.OrderModel.emailId,
       BookId: this.id,
       Title: this.ReaderModel.Title,
       Price: this.ReaderModel.Price,
@@ -190,7 +197,8 @@ export class ReaderComponent implements OnInit {
     this.showOrderDetails = true;
     this.showSearchDetails = false;
     this.showReadBookDetails = false;
-    this.orderService.viewOrders('priyanga.t@gmail.com').subscribe(res => this.GetSuccess(res), res => console.log(res));
+    this.OrderModel.emailId = localStorage.getItem('emailId');
+    this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
   GetSuccess(input: any) {
     this.OrderModels = input;
@@ -203,7 +211,8 @@ export class ReaderComponent implements OnInit {
     this.showOrderDetails = false;
     this.showSearchDetails = false;
     this.showReadBookDetails = true;
-    this.orderService.viewOrders('priyanga.t@gmail.com').subscribe(res => this.GetSuccess(res), res => console.log(res));
+    this.OrderModel.emailId = localStorage.getItem('emailId');
+    this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
   cancelOrder(cancelorder:any){
     debugger;
@@ -212,6 +221,12 @@ export class ReaderComponent implements OnInit {
   CancelSuccess(input:any){
     this.SuccessMessage ="You can get your refund within 24hrs of payment.";
     document.getElementById('btnSuccessMsg')?.click();
+  }
+  getReadBookUrl() {
+    return "url('../assets/ReadBookImage.jpg')";
+  }
+  getViewOrdersUrl() {
+    return "url('../assets/ViewOrdersImage.jpg')";
   }
   EditSearch(input: any) {
     debugger;
