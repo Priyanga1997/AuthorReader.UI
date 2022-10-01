@@ -155,6 +155,9 @@ table tr:nth-child(odd) {
 table tr:nth-child(even) {
   background-color: #ffffff;
 }
+.card{
+  background-color: mediumaquamarine;
+}
 
 /* .searchbtn{
     display: flex;

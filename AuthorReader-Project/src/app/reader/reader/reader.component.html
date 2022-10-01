@@ -27,7 +27,7 @@
         <button mat-menu-item (click)="showReadBooks()">
           <span>Read Book</span>
         </button>
-        <button mat-menu-item disabled>
+        <button mat-menu-item (click)="showInvoiceDetails()">
           <span>Invoice</span>
         </button>
       </mat-menu> 
@@ -202,6 +202,23 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 </div>
 <a class="btn btn-primary" id="btnSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#cancelOrderSuccess" role="button">Open first modal</a>
 
+<div class="modal fade" id="readBookSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;"  *ngFor="let item of OrderModels;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green;font-size: 20px;font-family:cursive" id="exampleModalToggleLabel">{{item.title}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: purple;">
+        <span>Book Id: {{item.bookId}}</span><br/>
+        <span style="padding-left: 190px;">Content</span><br/>
+        <span>{{item.content}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnReadBookMsg" style="display: none;" data-bs-toggle="modal" href="#readBookSuccess" role="button">Open first modal</a>
+
 <div class="ReadBook" [ngStyle]="{'background-image': getReadBookUrl()}" style="height: 100%;background:no-repeat;" *ngIf="showReadBookDetails">
 <ng-container>
   <div class="container">
@@ -214,9 +231,6 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
                     <th>Book Id</th>
                     <th>Book Title</th>
                     <th>Action</th>
-                    <!-- <th *ngFor="let col of gridColumns">
-                      {{col.colName}}
-                    </th> -->
                  </tr>
              </thead>
              <tbody>
@@ -224,10 +238,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
                  <td>{{item.orderId}}</td>
                  <td>{{item.bookId}}</td>
                  <td>{{item.title}}</td>
-                 <td><button class="btn btn-primary">Read Book</button></td>
-                <!-- <td>
-                   <button class="btn btn-primary">Buy now</button>
-               </td> -->
+                 <td><button class="btn btn-primary" (click)="ReadBook(item)">Read Book</button></td>
                </tr>
              </tbody>
          </table>
@@ -237,5 +248,46 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 </ng-container>
 </div>
 
+<div *ngIf="showInvoice">
+<div class="container mt-3">
+  <button class="btn btn-primary" (click)="downloadAsPDF()">Export To PDF</button>
+</div>
+<div class="container mt-5 mb-3" id="pdfTable" #pdfTable>
+  <div class="row d-flex justify-content-center">
+      <div class="col-md-8">
+          <div class="card">
+              <div>
+                  <div class="invoice"><span class="font-weight-bold" style="font-size: 20px;font-family:cursive">Invoice</span></div>                  
+              </div>            
+              <hr>
+              <table class="table table-responsive">
+                <thead>
+                    <tr>
+                       <th>Order Id</th>
+                       <th>Book Id</th>
+                       <th>Book Title</th>
+                       <th>Price</th>
+                       <th>Quantity</th>
+                       <th>Total</th>
+                       <th>Payment Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of OrderModels;">
+                    <td>{{item.orderId}}</td>
+                    <td>{{item.bookId}}</td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.total}}</td>
+                    <td>{{item.paymentType}}</td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
 
  

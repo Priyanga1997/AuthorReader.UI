@@ -10,4 +10,5 @@ export class Order{
     image:string='';
     orderId:number=0;
     active:string="yes";
+    content:string='';
 }

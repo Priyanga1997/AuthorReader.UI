@@ -16,9 +16,12 @@ import { ReaderLogin } from 'src/app/models/ReaderLoginModel';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { OrderService } from 'src/app/services/order.service';
-import { getMatIconFailedToSanitizeUrlError } from '@angular/material/icon';
-import { outputAst } from '@angular/compiler';
 import { LoginService } from 'src/app/services/login.service';
+import jsPDF from 'jspdf';
+import * as pdfMake from 'pdfmake/build/pdfmake.js';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import * as htmlToPdfmake from 'html-to-pdfmake';
 
 @Component({
   selector: 'app-reader',
@@ -37,6 +40,7 @@ export class ReaderComponent implements OnInit {
   public price: any = 0;
   public publisher: any = '';
   public userName: any = '';
+  public content:any='';
   //public emailId: any = '';
   images: any;
   public id: string = '';
@@ -44,6 +48,7 @@ export class ReaderComponent implements OnInit {
   public selectedTitle: string = '';
   public selectedPrice: number = 0;
   public selectedTotal: number = 0;
+  public selectedContent: string ='';
   public total: number = 0;
   public quantity: number = 0;
   showTable: boolean = false;
@@ -53,6 +58,7 @@ export class ReaderComponent implements OnInit {
   showSearchDetails = true;
   showOrders = false;
   showReadBookDetails = false;
+  showInvoice=false;
   public emailId ="";
   public emailIdJson = localStorage.getItem('emailId');
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
@@ -63,6 +69,8 @@ export class ReaderComponent implements OnInit {
   opened = false;
   sidenav!: MatSidenav;
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
+  @ViewChild('pdfTable') pdfTable!: ElementRef;
+  public readBookContent:string='';
   //public userEmailId="";
   //public emailId="";
   //public userEmailId = "";
@@ -197,6 +205,7 @@ export class ReaderComponent implements OnInit {
     this.showOrderDetails = true;
     this.showSearchDetails = false;
     this.showReadBookDetails = false;
+    this.showInvoice = false;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
@@ -211,6 +220,7 @@ export class ReaderComponent implements OnInit {
     this.showOrderDetails = false;
     this.showSearchDetails = false;
     this.showReadBookDetails = true;
+    this.showInvoice = false;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
@@ -228,6 +238,21 @@ export class ReaderComponent implements OnInit {
   getViewOrdersUrl() {
     return "url('../assets/ViewOrdersImage.jpg')";
   }
+  getInvoiceUrl() {
+    return "url('../assets/InvoiceImage.jpg')";
+  }
+  showInvoiceDetails()
+  {
+    this.showInvoice = true;
+    this.showOrderDetails = false;
+    this.showReadBookDetails = false;
+    this.showSearchDetails = false;
+    this.OrderModel.emailId = localStorage.getItem('emailId');
+    this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
+  }
+  ReadBook(item:any){
+    document.getElementById('btnReadBookMsg')?.click();
+  }
   EditSearch(input: any) {
     debugger;
     this.isEdit = true;
@@ -238,4 +263,22 @@ export class ReaderComponent implements OnInit {
   DeleteSearch(input: any) {
     this.http.delete("https://localhost:44398/api/reader?id=" + input.id).subscribe(res => this.Success(res), res => console.log(res));
   }
+  
+  //PDF genrate button click function
+  public downloadAsPDF() {
+    const doc = new jsPDF();
+    //get table html
+    const pdfTable = this.pdfTable.nativeElement;
+    //html to pdf format
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+   
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).open();
+    
+  
+  }
+  
+  
+  
 }
+
