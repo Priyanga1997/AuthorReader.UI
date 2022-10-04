@@ -5,7 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { PurchaseService } from 'src/app/services/purchase.service';
@@ -61,6 +60,12 @@ export class ReaderComponent implements OnInit {
   showInvoice=false;
   public emailId ="";
   public emailIdJson = localStorage.getItem('emailId');
+  public bookContent ="";
+  public bookId ="";
+  public bookTitle ="";
+  public buyBookSuccessMessage ="";
+  public orderPlacedSuccessMessage ="";
+  // public contentJson = localStorage.getItem('content');
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   OrderModels: Array<Order> = new Array<Order>();
@@ -70,7 +75,6 @@ export class ReaderComponent implements OnInit {
   sidenav!: MatSidenav;
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
   @ViewChild('pdfTable') pdfTable!: ElementRef;
-  public readBookContent:string='';
   //public userEmailId="";
   //public emailId="";
   //public userEmailId = "";
@@ -107,6 +111,8 @@ export class ReaderComponent implements OnInit {
       })
     })
     this.emailId = this.emailIdJson !== null ? JSON.parse(this.emailIdJson) : " ";
+    //this.bookContent = this.contentJson !== null ? JSON.parse(this.contentJson) : " ";
+    //this.bookContent=JSON.parse(localStorage.getItem('content')!);
   }
   getUrl() {
     return "url('../assets/SearchBookImage.jpg')";
@@ -127,7 +133,7 @@ export class ReaderComponent implements OnInit {
   isEmpty: boolean = false;
   public ErrorMessage: any;
   searchAllBooks() {
-    this.http.get("https://localhost:44398/api/reader/" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher)
+    this.http.get("https://localhost:44333/api/reader/" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher)
       .subscribe((res: any) => {
         this.Success(res);
         if (res.length <= 0) {
@@ -148,13 +154,16 @@ export class ReaderComponent implements OnInit {
   BuyBook(input: any) {
     this.readerLogin = true;
     this.dialog.open(this.callAPIDialog);
-    alert('Enter your payment details to place an order');
+    this.buyBookSuccessMessage ="Enter your payment details to place an order.";
+    document.getElementById('btnBuyBookSuccessMsg')?.click();
+    // alert('Enter your payment details to place an order');
     this.id = input.id;
     this.title = input.title;
     this.price = input.price;
     this.selectedTitle = this.title;
     this.selectedPrice = this.price;
     this.ReaderModel.Title = this.selectedTitle;
+    this.OrderModel.content = input.content;
   }
   orderDetails(event: any) {
     debugger;
@@ -178,7 +187,6 @@ export class ReaderComponent implements OnInit {
     debugger;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     var postOrderData = {
-      // Username: this.ReaderLoginModel.userName,
       EmailId:this.OrderModel.emailId,
       BookId: this.id,
       Title: this.ReaderModel.Title,
@@ -186,19 +194,20 @@ export class ReaderComponent implements OnInit {
       Quantity: this.OrderModel.quantity,
       Total: this.OrderModel.total,
       PaymentMethod: this.OrderModel.paymentType,
-      Active: this.OrderModel.active
+      Active: this.OrderModel.active,
+      Content:this.OrderModel.content
     };
     console.log(postOrderData);
-    this.http.post('https://localhost:44398/api/Order/postOrder', postOrderData)
+    this.http.post('https://localhost:44333/api/order/postOrder', postOrderData)
       .subscribe(res => this.PostSuccess(res), res => console.log(res));
   }
   SuccessMessage='';
   PostSuccess(input: any) {
     this.OrderModels = input;
     this.ReaderLoginModel = input;
-    alert('Your Order has been placed successfully.');
-    // this.SuccessMessage ="Your Order has been placed successfully.";
-    // document.getElementById('btnSuccessMsg')?.click();
+    //alert('Your Order has been placed successfully.');
+     this.orderPlacedSuccessMessage ="Your Order has been placed successfully.";
+     document.getElementById('btnOrderPlacedSuccessMsg')?.click();
   }
   showViewOrder() {
     debugger;
@@ -251,7 +260,17 @@ export class ReaderComponent implements OnInit {
     this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
   ReadBook(item:any){
+    debugger;
+    this.bookTitle = item.title;
+    this.bookId = item.bookId;
+    this.bookContent = item.content;
     document.getElementById('btnReadBookMsg')?.click();
+  }
+  GoBack(){
+    this.showInvoice = false;
+    this.showOrderDetails = false;
+    this.showReadBookDetails = false;
+    this.showSearchDetails = true;
   }
   EditSearch(input: any) {
     debugger;
@@ -261,7 +280,7 @@ export class ReaderComponent implements OnInit {
     //this.http.put("https://localhost:44398/api/reader?id="+input.id).subscribe(res=>this.Success(res),res=>console.log(res));
   }
   DeleteSearch(input: any) {
-    this.http.delete("https://localhost:44398/api/reader?id=" + input.id).subscribe(res => this.Success(res), res => console.log(res));
+    this.http.delete("https://localhost:44333/api/reader?id=" + input.id).subscribe(res => this.Success(res), res => console.log(res));
   }
   
   //PDF genrate button click function

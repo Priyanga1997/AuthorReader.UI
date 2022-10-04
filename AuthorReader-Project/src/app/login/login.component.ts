@@ -32,25 +32,49 @@ onOptionsSelected(event:any){
     });
   }
   loginSubmit(){
-    this._service.loginUser(this.UserDataModel).subscribe(res=>{
-      localStorage.setItem('authorId',res.userData.id);
+    var userdata = {
+      userName:this.UserDataModel.userName,
+      password:this.UserDataModel.password,
+      userType:this.UserDataModel.userType
+    };
+    // if(res.userData.userType=="Author")
+    // {
+    //    this.router.navigate(['author']);
+    // }
+    // if(res.userData.userType=="Reader")
+    // {
+    //   this.router.navigate(['reader']);
+    // }
+    if(userdata.userType == 'Author')
+    {
+      debugger;
+      this._service.authorLogin(userdata).subscribe(res=>{
+      //localStorage.setItem('authorId',res.userData.id);
       localStorage.setItem('token',res.token);
-      localStorage.setItem('emailId',res.userData.userName);
+      localStorage.setItem('emailId',this.UserDataModel.userName);
       document.getElementById('btnSuccessMessage')?.click();
-      if(res.userData.userType=="Author")
-      {
-         this.router.navigate(['author']);
-      }
-      if(res.userData.userType=="Reader")
-      {
-        this.router.navigate(['reader']);
-      }
+      this.router.navigate(['author']);
     },res=>
     {
       console.log(res);
       this.ErrorMessage="Some error have occured!!Try entering the valid username and password";
       document.getElementById('btnErrorMsg')?.click();
     });
+  }
+  else{
+    this._service.readerLogin(userdata).subscribe(res=>{
+      //localStorage.setItem('authorId',res.userData.id);
+      localStorage.setItem('token',res.token);
+      localStorage.setItem('emailId',this.UserDataModel.userName);
+      document.getElementById('btnSuccessMessage')?.click();
+     this.router.navigate(['reader']);
+    },res=>
+    {
+      console.log(res);
+      this.ErrorMessage="Some error have occured!!Try entering the valid username and password";
+      document.getElementById('btnErrorMsg')?.click();
+    });
+  }
     
   }
   goToSignup(){

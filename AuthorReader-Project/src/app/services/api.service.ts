@@ -7,21 +7,20 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
- public _postOrders = "https://localhost:44398/api/reader/";
- public _blockURL ="https://localhost:44398/api/home/blockBook";
- public _unblockURL="https://localhost:44398/api/home/unblockBook";;
+ public _postOrders = "https://localhost:44333/api/order/";
+ public _blockURL ="https://localhost:44393/api/author/blockBook";
+ public _unblockURL="https://localhost:44393/api/author/unblockBook";;
  
   constructor(private http: HttpClient) { }
-  getBook() {
-    return this.http.get<any>("https://localhost:44398/api/author/").pipe(map((res: any) => {
+  getAllBooks() {
+    return this.http.get<any>("https://localhost:44393/api/author/getAllBooks").pipe(map((res: any) => {
       return res;
     }));
   }
 
-
-  getBooks(id: any) {
+  getBooks(emailId: any) {
     debugger;
-    return this.http.get<any>("https://localhost:44398/api/author?id=" + id);
+    return this.http.get<any>("https://localhost:44393/api/author/getBooksByAuthorId?emailId=" + emailId);
   }
 
   postOrders(postOrders:any) {

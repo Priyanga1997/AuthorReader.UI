@@ -38,11 +38,21 @@ export class RegisterComponent implements OnInit {
       password:this.UserDataModel.password,
       userType:this.UserDataModel.userType
     };
-    this.http.post("https://localhost:44398/api/login/register-user",userdata).subscribe(res=>{
+    if(this.userType == 'Author')
+    {
+    this.http.post("https://localhost:44393/api/login/register-user",userdata).subscribe(res=>{
     console.log('You have successfully registered');
     this.SuccessMessage ="You have successfully registered.";
     document.getElementById('btnSuccessMsg')?.click();
     });
+  }
+    else{
+      this.http.post("https://localhost:44333/api/login/register-user",userdata).subscribe(res=>{
+        console.log('You have successfully registered');
+        this.SuccessMessage ="You have successfully registered.";
+        document.getElementById('btnSuccessMsg')?.click();
+        });
+    }
   }
   goToLogin(){
     this.router.navigate(['login']);

@@ -13,7 +13,9 @@
                       <th>Quantity</th>
                       <th>Total</th>
                       <th>Payment Type</th>
+                      <th [style.display]="'none'">Content</th>
                       <th>Action</th>
+                      <!-- <th style="visibility: hidden;">Content</th> -->
                       <!-- <th *ngFor="let col of gridColumns">
                         {{col.colName}}
                       </th> -->
@@ -28,6 +30,7 @@
                    <td>{{item.quantity}}</td>
                    <td>{{item.total}}</td>
                    <td>{{item.paymentMethod}}</td>
+                   <td [style.display]="'none'">{{item.content}}</td>
                   <td>
                      <button class="btn btn-danger" (click)="cancelOrder(item)">Cancel Order</button>
                  </td>

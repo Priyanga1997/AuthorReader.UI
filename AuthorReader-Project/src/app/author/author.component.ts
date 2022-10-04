@@ -20,8 +20,11 @@ export class AuthorComponent implements OnInit {
   isEdit = false;
   actionBtn: string = "Save";
   public dataID: number = 0;
+  public emailId :any;
+  public emailJson = localStorage.getItem('emailId');
+  // public authorJson = localStorage.getItem('authorId');
   public authorId ="";
-  public authorJson = localStorage.getItem('authorId');
+  //public authorJson = localStorage.getItem('authorId')
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   activeList = ["yes", "No"];
@@ -54,7 +57,8 @@ export class AuthorComponent implements OnInit {
       active: ['yes', Validators.required],
       content: ['', Validators.required]
     });
-    this.authorId = this.authorJson !== null ? JSON.parse(this.authorJson) : " ";
+    this.emailId = this.emailJson;
+    //this.authorId = this.authorJson !== null ? JSON.parse(this.authorJson) : " ";
     this.getAllBooks();
     this.nav.hide();
     // this.http.get("https://localhost:44398/api/home/get-images").subscribe(res => this.SuccessGet(res), res => console.log(res));
@@ -71,7 +75,7 @@ export class AuthorComponent implements OnInit {
     this.images = input;
   }
   getAllBooks() {
-     this.api.getBooks(this.authorId).subscribe({
+     this.api.getBooks(this.emailId).subscribe({
      // this.http.get("https://localhost:44398/api/author").subscribe({
       next: (res: any) => {
         this.dataSource = new MatTableDataSource(res);
@@ -119,17 +123,18 @@ export class AuthorComponent implements OnInit {
      formData.append('Active', this.active);
      formData.append('Content', this.content);
      formData.append('Publisher', this.publisher);
-     formData.append('AuthorId', this.authorId);
-     console.log(this.authorId);
+     formData.append('EmailId', this.emailId);
+     formData.append('Id', (this.dataID).toString());
+     //console.log(this.authorId);
     if (this.isEdit) {
 
-      this.http.put("https://localhost:44398/api/home" + '?id=' + this.dataID, formData)
+      this.http.put("https://localhost:44393/api/author" + '?id=' + this.dataID, formData)
         .subscribe(res => this.PutSuccess(res), res => console.log(res));
     }
     else {
      // this.http.post("https://localhost:44398/api/author", data)
        // .subscribe(res => this.PostSuccess(res), res => console.log(res));
-        this.http.post('https://localhost:44398/api/home/',formData).subscribe(res=>console.log(res),res=>console.log(res));
+        this.http.post('https://localhost:44393/api/author/',formData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
     }
   }
   PostSuccess(input: any) {
@@ -162,7 +167,7 @@ export class AuthorComponent implements OnInit {
   }
 
   deleteBook(row: any) {
-    this.http.delete("https://localhost:44398/api/author/" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
+    this.http.delete("https://localhost:44393/api/author/" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
   }
 
   blockBook(row:any){

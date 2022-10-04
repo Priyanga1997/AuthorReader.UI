@@ -11,7 +11,7 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 export class PurchaseComponent implements OnInit {
   public books:any=[];
   public grandTotal !:number;
-  public imageURL="https://localhost:44398/";
+  public imageURL="https://localhost:44393/";
   constructor(private purchase:PurchaseService, private router: Router) { }
 
   ngOnInit(): void {

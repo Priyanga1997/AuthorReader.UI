@@ -12,7 +12,7 @@ export class OrderComponent implements OnInit {
   public orders:any=[];
   public emailId:string='';
   OrderModel: Order = new Order();
-  public imageURL="https://localhost:44398/";
+  public imageURL="https://localhost:44393/";
   constructor(private orderService:OrderService, public router:Router) { }
 
   ngOnInit(): void {

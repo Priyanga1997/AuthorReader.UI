@@ -1,2 +1,30 @@
-<!-- <p>home works!</p> -->
-<img [src]="imageURL" />
+<!-- <img [src]="imageURL" /> -->
+<div>
+    <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+</div>
+<div class="main">
+<div class="container">
+    <div>
+        <ng-container *ngFor="let item of bookList">
+            <div *ngIf="searchText==='' || item.title.toLowerCase().includes(searchText)">
+                <!-- <img src={{bookImageURL}}{{item.image}}>
+                <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 50ch;">{{item.title}}</h4>
+                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 50ch;">{{item.content}}</p>
+                <p>{{item.publisher}}</p>
+                <p><strong>{{item.price}}</strong></p> -->
+                <mat-card class="example-card">
+                    <mat-card-title-group>
+                      <mat-card-title style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 60ch;">{{item.title}}</mat-card-title>
+                    </mat-card-title-group>
+                    <mat-card-content>
+                        <img mat-card-lg-image src={{bookImageURL}}{{item.image}} style="margin-left: 30px;">
+                        <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 60ch;">{{item.content}}</p>
+                        <p>{{item.publisher}}</p>
+                        <p><strong>{{item.price}}</strong></p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </ng-container>
+    </div>
+</div>
+</div>

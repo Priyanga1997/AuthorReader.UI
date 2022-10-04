@@ -33,6 +33,7 @@ import { ReaderGridUiComponent } from './utilities/reader-grid-ui/reader-grid-ui
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 import { OrderComponent } from './reader/order/order.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { OrderComponent } from './reader/order/order.component';
     GridUiComponent,
     ReaderLoginComponent,
     ReaderGridUiComponent,
-    OrderComponent
+    OrderComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

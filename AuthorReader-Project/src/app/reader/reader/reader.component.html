@@ -182,7 +182,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
  </div> -->
  <div class="example-button-row" *ngIf="showOrderDetails"  [ngStyle]="{'background-image': getViewOrdersUrl()}" style="height:100%">
   <ng-container>
-  <app-order [order-columns]="[{'colName':'orderId'},{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'}]"
+  <app-order [order-columns]="[{'colName':'orderId'},{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'},{'colName':'content'}]"
   [order-data]="OrderModels" (cancel-order)="cancelOrder($event)"
   ></app-order>
   </ng-container>
@@ -202,22 +202,51 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 </div>
 <a class="btn btn-primary" id="btnSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#cancelOrderSuccess" role="button">Open first modal</a>
 
-<div class="modal fade" id="readBookSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;"  *ngFor="let item of OrderModels;">
+<div class="modal fade" id="readBookSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" style="color:green;font-size: 20px;font-family:cursive" id="exampleModalToggleLabel">{{item.title}}</h5>
+        <h5 class="modal-title" style="color:green;font-size: 20px;font-family:cursive" id="exampleModalToggleLabel">{{bookTitle}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="color: purple;">
-        <span>Book Id: {{item.bookId}}</span><br/>
+        <span>Book Id: {{bookId}}</span><br/>
         <span style="padding-left: 190px;">Content</span><br/>
-        <span>{{item.content}}</span>
+        <span>{{bookContent}}</span>
       </div>
     </div>
   </div>
 </div>
 <a class="btn btn-primary" id="btnReadBookMsg" style="display: none;" data-bs-toggle="modal" href="#readBookSuccess" role="button">Open first modal</a>
+<div class="modal fade" id="buyBookSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green" id="exampleModalToggleLabel">Buy Book!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: purple;">
+       {{buyBookSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnBuyBookSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#buyBookSuccess" role="button">Open first modal</a>
+
+<div class="modal fade" id="orderPlacedSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:green" id="exampleModalToggleLabel">Order Placed!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: purple;">
+       {{orderPlacedSuccessMessage}}
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnOrderPlacedSuccessMsg" style="display: none;" data-bs-toggle="modal" href="#orderPlacedSuccess" role="button">Open first modal</a>
 
 <div class="ReadBook" [ngStyle]="{'background-image': getReadBookUrl()}" style="height: 100%;background:no-repeat;" *ngIf="showReadBookDetails">
 <ng-container>
@@ -230,6 +259,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
                     <th>Order Id</th>
                     <th>Book Id</th>
                     <th>Book Title</th>
+                    <th [style.display]="'none'">Content</th>
                     <th>Action</th>
                  </tr>
              </thead>
@@ -238,10 +268,14 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
                  <td>{{item.orderId}}</td>
                  <td>{{item.bookId}}</td>
                  <td>{{item.title}}</td>
+                 <td [style.display]="'none'">{{item.content}}</td>
                  <td><button class="btn btn-primary" (click)="ReadBook(item)">Read Book</button></td>
                </tr>
              </tbody>
          </table>
+         <div>
+          <button class="btn btn-primary" (click)="GoBack()">Go Back</button>
+         </div>
        </div>
    </div>
   </div>
@@ -257,7 +291,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
       <div class="col-md-8">
           <div class="card">
               <div>
-                  <div class="invoice"><span class="font-weight-bold" style="font-size: 20px;font-family:cursive">Invoice</span></div>                  
+                  <div class="invoice"><span class="font-weight-bold" style="font-size: 20px;">Invoice</span></div>                  
               </div>            
               <hr>
               <table class="table table-responsive">
@@ -287,6 +321,9 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
           </div>
       </div>
   </div>
+</div>
+<div>
+  <button class="btn btn-primary" (click)="GoBack()" style="margin-left: 70px;">Go Back</button>
 </div>
 </div>
 
