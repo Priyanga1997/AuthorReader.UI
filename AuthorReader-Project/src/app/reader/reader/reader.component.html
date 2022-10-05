@@ -163,7 +163,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
       Quantity<input [(ngModel)]="OrderModel.quantity" formControlName="quantity" type="number" (keyup)="updateTotal($event)"/>
       <span class="text-danger" *ngIf="orderForm.controls['quantity'].dirty && orderForm.hasError('required','quantity')">*Please enter the Quantity</span>
       Total<input [(ngModel)]="OrderModel.total" formControlName="total" type="number" [value]="selectedTotal"/>
-      Payment type<select  [(ngModel)]="OrderModel.paymentType" formControlName="paymentType" class="dropdown" (click)="onOptionsSelected($event)">   
+      Payment type<select  [(ngModel)]="OrderModel.paymentMethod" formControlName="paymentMethod" class="dropdown" (click)="onOptionsSelected($event)">   
         <option value="" disabled selected>Select Payment Type</option>  
         <option value="Debit Card">Debit Card</option>  
         <option value="Credit Card">Credit Card</option>  
@@ -218,6 +218,37 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
   </div>
 </div>
 <a class="btn btn-primary" id="btnReadBookMsg" style="display: none;" data-bs-toggle="modal" href="#readBookSuccess" role="button">Open first modal</a>
+
+<div class="modal fade" id="refundGreaterThan24" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:red;font-size: 20px;font-family:cursive" id="exampleModalToggleLabel">Cannot Get Refund!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: purple;">
+        <span>{{RefundGreaterThan24HrMessage}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnRefundErrorMsg" style="display: none;" data-bs-toggle="modal" href="#refundGreaterThan24" role="button">Open first modal</a>
+
+<div class="modal fade" id="readBookActiveNo" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color:red;font-size: 20px;font-family:cursive" id="exampleModalToggleLabel">Cannot Read the Book!!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="color: purple;">
+        <span>{{ReadBookErrorMessage}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="btn btn-primary" id="btnReadBookActiveNoMsg" style="display: none;" data-bs-toggle="modal" href="#readBookActiveNo" role="button">Open first modal</a>
+
 <div class="modal fade" id="buyBookSuccess" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -242,6 +273,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
       </div>
       <div class="modal-body" style="color: purple;">
        {{orderPlacedSuccessMessage}}
+       <p>Payment Id: {{paymentId}}</p>
       </div>
     </div>
   </div>
@@ -288,7 +320,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 </div>
 <div class="container mt-5 mb-3" id="pdfTable" #pdfTable>
   <div class="row d-flex justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-10">
           <div class="card">
               <div>
                   <div class="invoice"><span class="font-weight-bold" style="font-size: 20px;">Invoice</span></div>                  
@@ -304,6 +336,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
                        <th>Quantity</th>
                        <th>Total</th>
                        <th>Payment Method</th>
+                       <th>Payment Id</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -314,7 +347,8 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
                     <td>{{item.price}}</td>
                     <td>{{item.quantity}}</td>
                     <td>{{item.total}}</td>
-                    <td>{{item.paymentType}}</td>
+                    <td>{{item.paymentMethod}}</td>
+                    <td>{{item.paymentId}}</td>
                   </tr>
                 </tbody>
             </table>

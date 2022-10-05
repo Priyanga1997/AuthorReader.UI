@@ -13,7 +13,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Order } from 'src/app/models/OrderModel';
 import { ReaderLogin } from 'src/app/models/ReaderLoginModel';
 import { MatSidenav } from '@angular/material/sidenav';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import {v4 as uuidv4} from 'uuid';
 import { OrderService } from 'src/app/services/order.service';
 import { LoginService } from 'src/app/services/login.service';
 import jsPDF from 'jspdf';
@@ -40,7 +40,6 @@ export class ReaderComponent implements OnInit {
   public publisher: any = '';
   public userName: any = '';
   public content:any='';
-  //public emailId: any = '';
   images: any;
   public id: string = '';
   public idForDelete: string = '';
@@ -65,7 +64,10 @@ export class ReaderComponent implements OnInit {
   public bookTitle ="";
   public buyBookSuccessMessage ="";
   public orderPlacedSuccessMessage ="";
-  // public contentJson = localStorage.getItem('content');
+  public ReadBookErrorMessage ="";
+  public paymentId="";
+  public orderPlacedTime:number=0;
+  public RefundGreaterThan24HrMessage = "";
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   OrderModels: Array<Order> = new Array<Order>();
@@ -75,10 +77,6 @@ export class ReaderComponent implements OnInit {
   sidenav!: MatSidenav;
   @ViewChild('callAPIDialog') callAPIDialog!: TemplateRef<any>;
   @ViewChild('pdfTable') pdfTable!: ElementRef;
-  //public userEmailId="";
-  //public emailId="";
-  //public userEmailId = "";
-  //public userEmailIdJson = localStorage.getItem('userEmailId');
   
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpClient, private api: ApiService,
     private purchase: PurchaseService, private nav: NavbarService, public dialog: MatDialog,
@@ -100,7 +98,6 @@ export class ReaderComponent implements OnInit {
     this.orderForm = this.formBuilder.group({
       quantity: ['', Validators.required]
     });
-    //this.searchAllBooks();
     this.purchase.getBooks().subscribe(res => {
       this.bookList = res;
       this.bookList.forEach((a: any) => {
@@ -180,12 +177,15 @@ export class ReaderComponent implements OnInit {
     this.OrderModel.quantity = this.quantity;
   }
   onOptionsSelected(event: any) {
-    this.OrderModel.paymentType = event.target.value;
-    console.log(this.OrderModel.paymentType); //option value will be sent as event
+    this.OrderModel.paymentMethod = event.target.value;
+    console.log(this.OrderModel.paymentMethod); //option value will be sent as event
   }
   submit() {
     debugger;
     this.OrderModel.emailId = localStorage.getItem('emailId');
+    this.paymentId = uuidv4();
+    var OneDay = new Date().getHours();
+    this.orderPlacedTime = OneDay;
     var postOrderData = {
       EmailId:this.OrderModel.emailId,
       BookId: this.id,
@@ -193,9 +193,11 @@ export class ReaderComponent implements OnInit {
       Price: this.ReaderModel.Price,
       Quantity: this.OrderModel.quantity,
       Total: this.OrderModel.total,
-      PaymentMethod: this.OrderModel.paymentType,
+      PaymentMethod: this.OrderModel.paymentMethod,
       Active: this.OrderModel.active,
-      Content:this.OrderModel.content
+      Content:this.OrderModel.content,
+      PaymentId:this.paymentId,
+      OrderPlacedTime:this.orderPlacedTime
     };
     console.log(postOrderData);
     this.http.post('https://localhost:44333/api/order/postOrder', postOrderData)
@@ -205,8 +207,8 @@ export class ReaderComponent implements OnInit {
   PostSuccess(input: any) {
     this.OrderModels = input;
     this.ReaderLoginModel = input;
-    //alert('Your Order has been placed successfully.');
      this.orderPlacedSuccessMessage ="Your Order has been placed successfully.";
+     this.paymentId = this.paymentId;
      document.getElementById('btnOrderPlacedSuccessMsg')?.click();
   }
   showViewOrder() {
@@ -238,8 +240,16 @@ export class ReaderComponent implements OnInit {
     this.orderService.cancelOrder(cancelorder.orderId).subscribe(res=>this.CancelSuccess(res),res=>console.log(res));
   }
   CancelSuccess(input:any){
+    console.log(this.orderPlacedTime);
+    if(this.orderPlacedTime < 24)
+    {
     this.SuccessMessage ="You can get your refund within 24hrs of payment.";
     document.getElementById('btnSuccessMsg')?.click();
+    }
+    else{
+      this.RefundGreaterThan24HrMessage ="Sorry, you cannot get your refund as the time got expired.";
+      document.getElementById('btnRefundErrorMsg')?.click();
+    }
   }
   getReadBookUrl() {
     return "url('../assets/ReadBookImage.jpg')";
@@ -261,10 +271,16 @@ export class ReaderComponent implements OnInit {
   }
   ReadBook(item:any){
     debugger;
-    this.bookTitle = item.title;
-    this.bookId = item.bookId;
-    this.bookContent = item.content;
-    document.getElementById('btnReadBookMsg')?.click();
+    if(item.active == "yes"){
+      this.bookTitle = item.title;
+      this.bookId = item.bookId;
+      this.bookContent = item.content;
+      document.getElementById('btnReadBookMsg')?.click();
+    }
+    else{
+      this.ReadBookErrorMessage = "Sorry, You cannot read this book as you have cancelled your order."
+      document.getElementById('btnReadBookActiveNoMsg')?.click();
+    }
   }
   GoBack(){
     this.showInvoice = false;
@@ -272,6 +288,7 @@ export class ReaderComponent implements OnInit {
     this.showReadBookDetails = false;
     this.showSearchDetails = true;
   }
+
   EditSearch(input: any) {
     debugger;
     this.isEdit = true;

@@ -2,7 +2,7 @@ export class Order{
     quantity:number=0;
     total:number=0;
     bookId:number=0;
-    paymentType:string='';
+    paymentMethod:string='';
     price:number=0;
     emailId:any='';
     userName:string='';
@@ -11,4 +11,6 @@ export class Order{
     orderId:number=0;
     active:string="yes";
     content:any='';
+    paymentId:string='';
+    orderPlacedTime:Date= new Date();
 }
