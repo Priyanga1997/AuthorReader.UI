@@ -21,6 +21,7 @@ import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import * as htmlToPdfmake from 'html-to-pdfmake';
+import { Observable, timer,map } from 'rxjs';
 
 @Component({
   selector: 'app-reader',
@@ -59,6 +60,8 @@ export class ReaderComponent implements OnInit {
   showInvoice=false;
   public emailId ="";
   public emailIdJson = localStorage.getItem('emailId');
+  public username ="";
+  public usernameJson = localStorage.getItem('username');
   public bookContent ="";
   public bookId ="";
   public bookTitle ="";
@@ -66,7 +69,7 @@ export class ReaderComponent implements OnInit {
   public orderPlacedSuccessMessage ="";
   public ReadBookErrorMessage ="";
   public paymentId="";
-  public orderPlacedTime:number=0;
+  public orderPlacedTime:Date=new Date();
   public RefundGreaterThan24HrMessage = "";
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
@@ -108,6 +111,12 @@ export class ReaderComponent implements OnInit {
       })
     })
     this.emailId = this.emailIdJson !== null ? JSON.parse(this.emailIdJson) : " ";
+    this.username = this.usernameJson !== null ? JSON.parse(this.usernameJson) : " ";
+    // timer(0,1000).pipe(
+    //   map(()=>{
+    //     return new Date()
+    //   })
+    // )
     //this.bookContent = this.contentJson !== null ? JSON.parse(this.contentJson) : " ";
     //this.bookContent=JSON.parse(localStorage.getItem('content')!);
   }
@@ -184,8 +193,10 @@ export class ReaderComponent implements OnInit {
     debugger;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     this.paymentId = uuidv4();
-    var OneDay = new Date().getHours();
-    this.orderPlacedTime = OneDay;
+    // var OneDay = new Date().getHours();
+    // this.orderPlacedTime = OneDay;
+    //console.log(this.orderPlacedTime);
+    // this.OrderModel.orderPlacedTime = this.orderPlacedTime;
     var postOrderData = {
       EmailId:this.OrderModel.emailId,
       BookId: this.id,
@@ -237,19 +248,27 @@ export class ReaderComponent implements OnInit {
   }
   cancelOrder(cancelorder:any){
     debugger;
-    this.orderService.cancelOrder(cancelorder.orderId).subscribe(res=>this.CancelSuccess(res),res=>console.log(res));
+    this.orderService.cancelOrder(cancelorder.orderId).subscribe(res=>this.CancelSuccess(res,cancelorder.orderPlacedTime),res=>console.log(res));
+    //this.orderPlacedTime = cancelorder.orderPlacedTime;
   }
-  CancelSuccess(input:any){
-    console.log(this.orderPlacedTime);
-    if(this.orderPlacedTime < 24)
-    {
-    this.SuccessMessage ="You can get your refund within 24hrs of payment.";
-    document.getElementById('btnSuccessMsg')?.click();
-    }
-    else{
-      this.RefundGreaterThan24HrMessage ="Sorry, you cannot get your refund as the time got expired.";
-      document.getElementById('btnRefundErrorMsg')?.click();
-    }
+  dateTimeDifference(input:any){
+    var time = Date.now() - new Date(input).getTime();
+    var hours = Math.floor(time/(1000*60*60))
+    return hours;
+  }
+  CancelSuccess(res:any,input:any){
+    var time = Date.now() - new Date(input).getTime();
+    var hours = Math.floor(time/(1000*60*60))
+    if(hours <=24)
+     {
+     this.SuccessMessage ="You can get your refund within 24hrs of payment.";
+     document.getElementById('btnSuccessMsg')?.click();
+     }
+    else
+     {
+     this.RefundGreaterThan24HrMessage ="Sorry, you cannot get your refund as the time got expired.";
+    document.getElementById('btnRefundErrorMsg')?.click();
+     }
   }
   getReadBookUrl() {
     return "url('../assets/ReadBookImage.jpg')";

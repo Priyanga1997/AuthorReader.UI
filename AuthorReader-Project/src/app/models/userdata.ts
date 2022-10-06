@@ -3,4 +3,5 @@ export class UserData{
     password:string='';
     userType:string='';
     id:number=0;
+    emailId:string='';
 }

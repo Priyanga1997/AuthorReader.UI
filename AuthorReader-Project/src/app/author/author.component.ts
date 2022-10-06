@@ -125,15 +125,12 @@ export class AuthorComponent implements OnInit {
      formData.append('Publisher', this.publisher);
      formData.append('EmailId', this.emailId);
      formData.append('Id', (this.dataID).toString());
-     //console.log(this.authorId);
     if (this.isEdit) {
 
       this.http.put("https://localhost:44393/api/author" + '?id=' + this.dataID, formData)
         .subscribe(res => this.PutSuccess(res), res => console.log(res));
     }
     else {
-     // this.http.post("https://localhost:44398/api/author", data)
-       // .subscribe(res => this.PostSuccess(res), res => console.log(res));
         this.http.post('https://localhost:44393/api/author/',formData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
     }
   }

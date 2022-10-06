@@ -14,6 +14,7 @@
                       <th>Total</th>
                       <th>Payment Type</th>
                       <th [style.display]="'none'">Content</th>
+                      <th>Order Placed Time</th>
                       <th>Action</th>
                    </tr>
                </thead>
@@ -27,6 +28,7 @@
                    <td>{{item.total}}</td>
                    <td>{{item.paymentMethod}}</td>
                    <td [style.display]="'none'">{{item.content}}</td>
+                   <td>{{item.orderPlacedTime}}</td>
                   <td>
                      <button class="btn btn-danger" (click)="cancelOrder(item)">Cancel Order</button>
                  </td>

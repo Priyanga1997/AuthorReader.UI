@@ -182,7 +182,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
  </div> -->
  <div class="example-button-row" *ngIf="showOrderDetails"  [ngStyle]="{'background-image': getViewOrdersUrl()}" style="height:100%">
   <ng-container>
-  <app-order [order-columns]="[{'colName':'orderId'},{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'},{'colName':'content'}]"
+  <app-order [order-columns]="[{'colName':'orderId'},{'colName':'bookId'},{'colName':'title'},{'colName':'price'},{'colName':'quantity'},{'colName':'total'},{'colName':'paymentMethod'},{'colName':'content'},{'colName':'orderPlacedTime'}]"
   [order-data]="OrderModels" (cancel-order)="cancelOrder($event)"
   ></app-order>
   </ng-container>

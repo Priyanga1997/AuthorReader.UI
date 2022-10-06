@@ -24,6 +24,7 @@ onOptionsSelected(event:any){
   ngOnInit(): void {
     this.login=this.fb.group({
       username:['',Validators.required],
+      emailId:['',Validators.required],
       password:['', Validators.compose([
         Validators.minLength(5),
         Validators.required])],
@@ -34,6 +35,7 @@ onOptionsSelected(event:any){
   loginSubmit(){
     var userdata = {
       userName:this.UserDataModel.userName,
+      emailId:this.UserDataModel.emailId,
       password:this.UserDataModel.password,
       userType:this.UserDataModel.userType
     };
@@ -51,7 +53,8 @@ onOptionsSelected(event:any){
       this._service.authorLogin(userdata).subscribe(res=>{
       //localStorage.setItem('authorId',res.userData.id);
       localStorage.setItem('token',res.token);
-      localStorage.setItem('emailId',this.UserDataModel.userName);
+      localStorage.setItem('emailId',this.UserDataModel.emailId);
+      localStorage.setItem('username',this.UserDataModel.userName);
       document.getElementById('btnSuccessMessage')?.click();
       this.router.navigate(['author']);
     },res=>
@@ -65,7 +68,8 @@ onOptionsSelected(event:any){
     this._service.readerLogin(userdata).subscribe(res=>{
       //localStorage.setItem('authorId',res.userData.id);
       localStorage.setItem('token',res.token);
-      localStorage.setItem('emailId',this.UserDataModel.userName);
+      localStorage.setItem('emailId',this.UserDataModel.emailId);
+      localStorage.setItem('username',this.UserDataModel.userName);
       document.getElementById('btnSuccessMessage')?.click();
      this.router.navigate(['reader']);
     },res=>
