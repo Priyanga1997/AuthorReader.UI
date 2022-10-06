@@ -15,7 +15,7 @@ import { NavbarService } from '../services/navbar.service';
   styleUrls: ['./author.component.css']
 })
 export class AuthorComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'title', 'category', 'price', 'publisher', 'active', 'content', 'action'];
+  displayedColumns: string[] = ['id', 'title', 'category', 'price', 'author', 'publisher', 'active', 'content', 'action'];
   dataSource!: MatTableDataSource<any>;
   isEdit = false;
   actionBtn: string = "Save";
@@ -37,6 +37,7 @@ export class AuthorComponent implements OnInit {
   public content: string = '';
   public selectedFile!: File;
   public image: string = '';
+  public author: string = '';
   AddSuccessMessage ='';
   UpdateSuccessMessage='';
   DeleteSuccessMessage='';
@@ -55,7 +56,8 @@ export class AuthorComponent implements OnInit {
       publisher: ['', Validators.required],
       price: ['', Validators.required],
       active: ['yes', Validators.required],
-      content: ['', Validators.required]
+      content: ['', Validators.required],
+      author:['',Validators.required]
     });
     this.emailId = this.emailJson;
     //this.authorId = this.authorJson !== null ? JSON.parse(this.authorJson) : " ";
@@ -115,6 +117,7 @@ export class AuthorComponent implements OnInit {
      this.publisher = this.createForm.get('publisher')?.value;
      this.active = this.createForm.get('active')?.value;
      this.content = this.createForm.get('content')?.value;
+     this.author = this.createForm.get('author')?.value;
      const formData = new FormData();
      formData.append('image', this.selectedFile, this.selectedFile.name);
      formData.append('Title', this.title);
@@ -125,6 +128,7 @@ export class AuthorComponent implements OnInit {
      formData.append('Publisher', this.publisher);
      formData.append('EmailId', this.emailId);
      formData.append('Id', (this.dataID).toString());
+     formData.append('Author', this.author);
     if (this.isEdit) {
 
       this.http.put("https://localhost:44393/api/author" + '?id=' + this.dataID, formData)
@@ -158,6 +162,7 @@ export class AuthorComponent implements OnInit {
     this.createForm.controls['title'].setValue(row.title);
     this.createForm.controls['category'].setValue(row.category)
     this.createForm.controls['price'].setValue(row.price);
+    this.createForm.controls['author'].setValue(row.publisher);
     this.createForm.controls['publisher'].setValue(row.publisher);
     this.createForm.controls['active'].setValue(row.active);
     this.createForm.controls['content'].setValue(row.content);

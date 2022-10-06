@@ -46,6 +46,7 @@
 Title<input [(ngModel)]="ReaderModel.Title" formControlName="title" type="text" />
 Category <input [(ngModel)]="ReaderModel.Category" formControlName="category" type="text" />
 Price <input [(ngModel)]="ReaderModel.Price" formControlName="price" type="number" />
+Author <input [(ngModel)]="ReaderModel.Author" formControlName="author" type="text" />
 Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher" type="text" />
 <br/>
 <input type="button" value="Search" (click)="searchAllBooks()"/>
@@ -114,7 +115,7 @@ Publisher <input [(ngModel)]="ReaderModel.Publisher" formControlName="publisher"
 </div> -->
 <div class="example-button-row">
 <ng-container>
-<app-grid-ui [grid-columns]="[{'colName':'id'},{'colName':'image'},{'colName':'title'},{'colName':'category'},{'colName':'price'},{'colName':'publisher'},{'colName':'content'},{'colName':'Action'}]"
+<app-grid-ui [grid-columns]="[{'colName':'id'},{'colName':'image'},{'colName':'title'},{'colName':'category'},{'colName':'price'},{'colName':'author'},{'colName':'publisher'},{'colName':'content'},{'colName':'Action'}]"
 [grid-data]="ReaderModels" (grid-selected)="EditSearch($event)" (grid-deleted)="DeleteSearch($event)" (grid-buyBook)="BuyBook($event)"
 ></app-grid-ui>
 </ng-container>

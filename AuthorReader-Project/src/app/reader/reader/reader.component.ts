@@ -92,7 +92,8 @@ export class ReaderComponent implements OnInit {
       title: [''],
       category: [''],
       publisher: [''],
-      price: ['']
+      price: [''],
+      author:['']
     });
     this.readerLoginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -139,7 +140,7 @@ export class ReaderComponent implements OnInit {
   isEmpty: boolean = false;
   public ErrorMessage: any;
   searchAllBooks() {
-    this.http.get("https://localhost:44333/api/reader/" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher)
+    this.http.get("https://localhost:44333/api/reader/" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher + '&author=' + this.ReaderModel.Author)
       .subscribe((res: any) => {
         this.Success(res);
         if (res.length <= 0) {
