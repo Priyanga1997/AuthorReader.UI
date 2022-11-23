@@ -11,7 +11,7 @@ import { PurchaseService } from 'src/app/services/purchase.service';
 export class GridUiComponent implements OnInit {
   public bookList:any=[];
   public totalItem :number=0;
-  public imageURL="https://localhost:44393/";
+  public imageURL="https://digitalbooksimages.blob.core.windows.net/images/";
   SuccessMessage='';
   constructor(private purchase:PurchaseService,private api:ApiService,private router: Router) { }
 //getting column names

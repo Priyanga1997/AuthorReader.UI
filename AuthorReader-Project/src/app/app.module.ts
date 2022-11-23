@@ -28,7 +28,6 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import { PurchaseComponent } from './reader/purchase/purchase.component';
-import { ReaderLoginComponent } from './reader-login/reader-login.component';
 import { ReaderGridUiComponent } from './utilities/reader-grid-ui/reader-grid-ui.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
@@ -46,7 +45,6 @@ import { SearchComponent } from './search/search.component';
     PurchaseComponent,
     AuthorComponent,
     GridUiComponent,
-    ReaderLoginComponent,
     ReaderGridUiComponent,
     OrderComponent,
     SearchComponent

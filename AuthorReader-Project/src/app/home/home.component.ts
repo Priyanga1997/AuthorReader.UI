@@ -10,7 +10,7 @@ export class HomeComponent implements OnInit {
   public bookList:any;
   constructor(private api:ApiService) { }
   imageURL="./assets/DigitalBookImage.jpg";
-  public bookImageURL="https://localhost:44393/";
+  public bookImageURL="https://digitalbooksimages.blob.core.windows.net/images/";
   public id:any;
   ngOnInit(): void {
     this.api.getAllBooks().subscribe(res=>{this.bookList=res;})

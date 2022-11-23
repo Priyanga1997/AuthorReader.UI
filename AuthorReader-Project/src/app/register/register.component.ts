@@ -42,14 +42,18 @@ export class RegisterComponent implements OnInit {
     };
     if(this.userType == 'Author')
     {
-    this.http.post("https://localhost:44393/api/login/register-user",userdata).subscribe(res=>{
+    // this.http.post("https://localhost:44393/api/login/register-user",userdata).subscribe(res=>{
+    this.http.post("http://localhost:48726/api/gateway/login/register-user",userdata).subscribe(res=>{
+    //this.http.post("http://4.227.217.95/api/gateway/login/register-user",userdata).subscribe(res=>{
     console.log('You have successfully registered');
     this.SuccessMessage ="You have successfully registered.";
     document.getElementById('btnSuccessMsg')?.click();
     });
   }
     else{
-      this.http.post("https://localhost:44333/api/login/register-user",userdata).subscribe(res=>{
+      // this.http.post("https://localhost:44333/api/readerlogin/reader-register",userdata).subscribe(res=>{
+        this.http.post("http://localhost:48726/api/gateway/readerlogin/reader-register",userdata).subscribe(res=>{
+        //this.http.post("http://4.227.217.95/api/gateway/readerlogin/reader-register",userdata).subscribe(res=>{
         console.log('You have successfully registered');
         this.SuccessMessage ="You have successfully registered.";
         document.getElementById('btnSuccessMsg')?.click();

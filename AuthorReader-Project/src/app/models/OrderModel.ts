@@ -11,6 +11,6 @@ export class Order{
     orderId:number=0;
     active:string="yes";
     content:any='';
-    paymentId:string='';
+    paymentId:any='';
     orderPlacedTime:Date= new Date();
 }

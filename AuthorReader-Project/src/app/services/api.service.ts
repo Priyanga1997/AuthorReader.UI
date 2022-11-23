@@ -7,35 +7,55 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
- public _postOrders = "https://localhost:44333/api/order/";
- public _blockURL ="https://localhost:44393/api/author/blockBook";
- public _unblockURL="https://localhost:44393/api/author/unblockBook";;
+//  public postOrdersURL = "https://localhost:44333/api/order/";
+//  public blockURL ="https://localhost:44393/api/author/blockBook";
+//  public unblockURL="https://localhost:44393/api/author/unblockBook";
+//  public getAllBooksURL="https://localhost:44393/api/author/getAllBooks";
+//  public getBooksURL="https://localhost:44393/api/author/getBooksByEmailId?emailId=";
+//  public deleteBookURL = "https://localhost:44393/api/author/deleteBookDetails/" + '?id=';
+
+//public postOrdersURL = "http://4.227.217.95/api/order/";
+// public blockURL ="http://4.227.217.95/api/gateway/author/blockBook";
+// public unblockURL="http://4.227.217.95/api/gateway/author/unblockBook";
+// public getAllBooksURL="http://4.227.217.95/api/gateway/author/getAllBooks";
+// public getBooksURL="http://4.227.217.95/api/gateway/author/getBooksByEmailId?emailId=";
+
+public blockURL ="http://localhost:48726/api/gateway/author/blockBook";
+public unblockURL="http://localhost:48726/api/gateway/author/unblockBook";
+public getAllBooksURL="http://localhost:48726/api/gateway/author/getAllBooks";
+public getBooksURL="http://localhost:48726/api/gateway/author/getBooksByEmailId?emailId=";
+
+
  
   constructor(private http: HttpClient) { }
   getAllBooks() {
-    return this.http.get<any>("https://localhost:44393/api/author/getAllBooks").pipe(map((res: any) => {
+    return this.http.get(this.getAllBooksURL).pipe(map((res: any) => {
       return res;
     }));
   }
 
   getBooks(emailId: any) {
     debugger;
-    return this.http.get<any>("https://localhost:44393/api/author/getBooksByAuthorId?emailId=" + emailId);
+    return this.http.get(this.getBooksURL+ emailId);
   }
 
-  postOrders(postOrders:any) {
-    return this.http.post(this._postOrders,postOrders).pipe(map((res: any) => {
-      return res;
-    }));
-  }
+  // postOrders(postOrders:any) {
+  //   return this.http.post(this.postOrdersURL,postOrders).pipe(map((res: any) => {
+  //     return res;
+  //   }));
+  // }
 
   blockBook(id:any){
-    this.http.put(this._blockURL,id).subscribe(res=>this.Success(res),res=>console.log(res))
+    return this.http.put(this.blockURL,id).subscribe(res=>this.Success(res),res=>console.log(res))
   }
 
   unblockBook(id:any){
-    this.http.put(this._unblockURL,id).subscribe(res=>this.Success(res),res=>console.log(res))
+    return this.http.put(this.unblockURL,id).subscribe(res=>this.Success(res),res=>console.log(res))
   }
+
+  // deleteBook(id:any){
+  //   return this.http.delete(this.deleteBookURL,id);
+  // }
 
   Success(input:any){
    console.log(input);

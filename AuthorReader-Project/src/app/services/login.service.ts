@@ -5,19 +5,21 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LoginService {
-  _loginUrl="https://localhost:44393/api/login/login-user";
-  _readerLoginUrl="https://localhost:44333/api/login/login-user";
-  // _registerUrl="https://localhost:44398/api/login/register-user";
+  // public loginUrl="https://localhost:44393/api/login/login-user";
+  // public readerLoginUrl="https://localhost:44333/api/readerlogin/reader-login";
+  // public loginUrl="http://4.227.217.95/api/gateway/login/login-user";
+  // public readerLoginUrl="http://4.227.217.95/api/gateway/readerlogin/reader-login";
+
+  public loginUrl="http://localhost:48726/api/gateway/login/login-user";
+  public readerLoginUrl="http://localhost:48726/api/gateway/readerlogin/reader-login";
+
   constructor(private http:HttpClient) { }
   authorLogin(login:any){
-    return this.http.post<any>(this._loginUrl,login);
+    return this.http.post<any>(this.loginUrl,login);
   }
   readerLogin(login:any){
-    return this.http.post<any>(this._readerLoginUrl,login);
+    return this.http.post<any>(this.readerLoginUrl,login);
   }
-  // register(register:any){
-  //   return this.http.post<any>(this._registerUrl,register);
-  // }
   getToken(){
     return localStorage.getItem('token');
   }

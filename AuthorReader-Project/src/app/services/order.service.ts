@@ -6,20 +6,22 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  _orderUrl="https://localhost:44333/api/order/getOrderDetails/";
-  _cancelorderUrl="https://localhost:44333/api/order/cancelOrder/";
+  // public orderUrl="https://localhost:44333/api/order/getOrderDetails?EmailId=";
+  // public cancelorderUrl="https://localhost:44333/api/order/cancelOrder/";
+  // public orderUrl="http://4.227.217.95/api/gateway/order/getOrderDetails?EmailId=";
+  // public cancelorderUrl="http://4.227.217.95/api/gateway/order/cancelOrder";
+
+  public orderUrl="http://localhost:48726/api/gateway/order/getOrderDetails?EmailId=";
+  public cancelorderUrl="http://localhost:48726/api/gateway/order/cancelOrder";
   constructor(private http:HttpClient) { }
-  // viewOrders(emailId:any) {
-  //   return this.http.get(this._orderUrl+'?EmailId='+ emailId).pipe(map((res: any) => {
-  //     return res;
-  //   }));
-  // }
+
   viewOrders(emailId:any) {
     debugger;
-    return this.http.get<any>("https://localhost:44333/api/order/getOrderDetails?EmailId="+ emailId);
+    return this.http.get(this.orderUrl+ emailId);
   }
+
   cancelOrder(orderId:any) {
-    return this.http.put(this._cancelorderUrl+'?OrderId='+ orderId,'').pipe(map((res: any) => {
+    return this.http.put(this.cancelorderUrl+'?OrderId='+ orderId,'').pipe(map((res: any) => {
       return res;
     }));
   }

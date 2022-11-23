@@ -12,7 +12,7 @@ export class OrderComponent implements OnInit {
   public orders:any=[];
   public emailId:string='';
   OrderModel: Order = new Order();
-  public imageURL="https://localhost:44393/";
+  public imageURL="https://digitalbooksimages.blob.core.windows.net/images/";
   constructor(private orderService:OrderService, public router:Router) { }
 
   ngOnInit(): void {
@@ -38,6 +38,13 @@ export class OrderComponent implements OnInit {
   cancelOrder(_cancelOrder:any){
     debugger;
     this.emitemittercancelorder.emit(_cancelOrder);
+  }
+
+  @Output("refund")
+  emitemitterrefund:EventEmitter<any>=new EventEmitter<any>();
+  refund(_refund:any){
+    debugger;
+    this.emitemitterrefund.emit(_refund);
   }
   }
 

@@ -22,9 +22,7 @@ export class AuthorComponent implements OnInit {
   public dataID: number = 0;
   public emailId :any;
   public emailJson = localStorage.getItem('emailId');
-  // public authorJson = localStorage.getItem('authorId');
   public authorId ="";
-  //public authorJson = localStorage.getItem('authorId')
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   activeList = ["yes", "No"];
@@ -38,6 +36,8 @@ export class AuthorComponent implements OnInit {
   public selectedFile!: File;
   public image: string = '';
   public author: string = '';
+  public authorName ="";
+  public username = localStorage.getItem('userName');
   AddSuccessMessage ='';
   UpdateSuccessMessage='';
   DeleteSuccessMessage='';
@@ -60,11 +60,8 @@ export class AuthorComponent implements OnInit {
       author:['',Validators.required]
     });
     this.emailId = this.emailJson;
-    //this.authorId = this.authorJson !== null ? JSON.parse(this.authorJson) : " ";
     this.getAllBooks();
     this.nav.hide();
-    // this.http.get("https://localhost:44398/api/home/get-images").subscribe(res => this.SuccessGet(res), res => console.log(res));
-
   }
   images: any;
   uploadFile(event: any) {
@@ -78,7 +75,6 @@ export class AuthorComponent implements OnInit {
   }
   getAllBooks() {
      this.api.getBooks(this.emailId).subscribe({
-     // this.http.get("https://localhost:44398/api/author").subscribe({
       next: (res: any) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
@@ -89,28 +85,9 @@ export class AuthorComponent implements OnInit {
         alert("Error while fetching records!");
       }
     })
-    //  this.api.getBooksOfAllAuthors(this.authorId).subscribe({
-    //    next: (res: any) => {
-    //      this.dataSource = new MatTableDataSource(res);
-    //      this.dataSource.paginator = this.paginator;
-    //      this.dataSource.sort = this.sort;
-    //    },
-    //    error: (err) => {
-    //      alert("Error while fetching records!");
-    //    }
-    //  })
    }
 
   addBook() {
-    //var data ={
-     // Title :this.createForm.get('title')?.value,
-     // Category : this.createForm.get('category')?.value,
-     // Price : this.createForm.get('price')?.value,
-     // Publisher : this.createForm.get('publisher')?.value,
-     // Active : this.createForm.get('active')?.value,
-     // Content : this.createForm.get('content')?.value
-     // }
-    
      this.title = this.createForm.get('title')?.value;
      this.category = this.createForm.get('category')?.value;
      this.price = this.createForm.get('price')?.value;
@@ -131,11 +108,16 @@ export class AuthorComponent implements OnInit {
      formData.append('Author', this.author);
     if (this.isEdit) {
 
-      this.http.put("https://localhost:44393/api/author" + '?id=' + this.dataID, formData)
+      // this.http.put("https://localhost:44393/api/author/updateBookDetails/" + '?id=' + this.dataID, formData)
+      //   .subscribe(res => this.PutSuccess(res), res => console.log(res));
+      this.http.put("http://localhost:48726/api/gateway/author/updateBookDetails" + '?id=' + this.dataID, formData)
+       //this.http.put("http://4.227.217.95/api/gateway/author/updateBookDetails" + '?id=' + this.dataID, formData)
         .subscribe(res => this.PutSuccess(res), res => console.log(res));
     }
     else {
-        this.http.post('https://localhost:44393/api/author/',formData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
+        // this.http.post('https://localhost:44393/api/author/createBooks/',formData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
+        this.http.post('http://localhost:48726/api/gateway/author/createBooks',formData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
+         //this.http.post('http://4.227.217.95/api/gateway/author/createBooks',formData).subscribe(res=>this.PostSuccess(res),res=>console.log(res));
     }
   }
   PostSuccess(input: any) {
@@ -162,14 +144,17 @@ export class AuthorComponent implements OnInit {
     this.createForm.controls['title'].setValue(row.title);
     this.createForm.controls['category'].setValue(row.category)
     this.createForm.controls['price'].setValue(row.price);
-    this.createForm.controls['author'].setValue(row.publisher);
+    this.createForm.controls['author'].setValue(row.author);
     this.createForm.controls['publisher'].setValue(row.publisher);
     this.createForm.controls['active'].setValue(row.active);
     this.createForm.controls['content'].setValue(row.content);
   }
 
   deleteBook(row: any) {
-    this.http.delete("https://localhost:44393/api/author/" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
+    //this.api.deleteBook(row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
+    // this.http.delete("https://localhost:44393/api/author/deleteBookDetails/" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
+    this.http.delete("https://localhost:48726/api/gateway/author/deleteBookDetails" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
+    //this.http.delete("http://4.227.217.95/api/gateway/author/deleteBookDetails" + '?id=' + row.id).subscribe(res => this.DeleteSuccess(res), res => console.log(res));
   }
 
   blockBook(row:any){

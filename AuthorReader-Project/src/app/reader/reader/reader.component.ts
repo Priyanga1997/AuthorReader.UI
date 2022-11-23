@@ -58,19 +58,24 @@ export class ReaderComponent implements OnInit {
   showOrders = false;
   showReadBookDetails = false;
   showInvoice=false;
+  showPaymentIdSearch=false;
   public emailId ="";
   public emailIdJson = localStorage.getItem('emailId');
-  public username ="";
-  public usernameJson = localStorage.getItem('username');
+  public readerName ="";
+  public username = localStorage.getItem('userName');
   public bookContent ="";
   public bookId ="";
   public bookTitle ="";
+  public buyBookTitle ="";
+  public buyBookPrice:number=0;
   public buyBookSuccessMessage ="";
   public orderPlacedSuccessMessage ="";
   public ReadBookErrorMessage ="";
   public paymentId="";
   public orderPlacedTime:Date=new Date();
   public RefundGreaterThan24HrMessage = "";
+  public RefundSuccessMessage="";
+  public PaymentIdErrorMessage="";
   ReaderLoginModel: ReaderLogin = new ReaderLogin();
   OrderModel: Order = new Order();
   OrderModels: Array<Order> = new Array<Order>();
@@ -100,6 +105,8 @@ export class ReaderComponent implements OnInit {
       emailId: ['', Validators.required]
     });
     this.orderForm = this.formBuilder.group({
+      buyBookTitle:[''],
+      buyBookPrice:[''],
       quantity: ['', Validators.required]
     });
     this.purchase.getBooks().subscribe(res => {
@@ -112,14 +119,6 @@ export class ReaderComponent implements OnInit {
       })
     })
     this.emailId = this.emailIdJson !== null ? JSON.parse(this.emailIdJson) : " ";
-    this.username = this.usernameJson !== null ? JSON.parse(this.usernameJson) : " ";
-    // timer(0,1000).pipe(
-    //   map(()=>{
-    //     return new Date()
-    //   })
-    // )
-    //this.bookContent = this.contentJson !== null ? JSON.parse(this.contentJson) : " ";
-    //this.bookContent=JSON.parse(localStorage.getItem('content')!);
   }
   getUrl() {
     return "url('../assets/SearchBookImage.jpg')";
@@ -140,7 +139,9 @@ export class ReaderComponent implements OnInit {
   isEmpty: boolean = false;
   public ErrorMessage: any;
   searchAllBooks() {
-    this.http.get("https://localhost:44333/api/reader/" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher + '&author=' + this.ReaderModel.Author)
+    // this.http.get("https://localhost:44333/api/reader/searchBook/" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher + '&author=' + this.ReaderModel.Author)
+    this.http.get("http://localhost:48726/api/gateway/reader/searchBook" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher + '&author=' + this.ReaderModel.Author)
+     //this.http.get("http://4.227.217.95/api/gateway/reader/searchBook" + '?title=' + this.ReaderModel.Title + '&category=' + this.ReaderModel.Category + '&price=' + this.ReaderModel.Price + '&publisher=' + this.ReaderModel.Publisher + '&author=' + this.ReaderModel.Author)
       .subscribe((res: any) => {
         this.Success(res);
         if (res.length <= 0) {
@@ -160,24 +161,21 @@ export class ReaderComponent implements OnInit {
   }
   BuyBook(input: any) {
     this.readerLogin = true;
+    this.showPaymentIdSearch = false;
     this.dialog.open(this.callAPIDialog);
     this.buyBookSuccessMessage ="Enter your payment details to place an order.";
     document.getElementById('btnBuyBookSuccessMsg')?.click();
-    // alert('Enter your payment details to place an order');
     this.id = input.id;
-    this.title = input.title;
-    this.price = input.price;
-    this.selectedTitle = this.title;
-    this.selectedPrice = this.price;
+    this.buyBookTitle = input.title;
+    this.buyBookPrice = input.price;
+    this.selectedTitle = this.buyBookTitle;
+    this.selectedPrice = this.buyBookPrice;
     this.ReaderModel.Title = this.selectedTitle;
     this.OrderModel.content = input.content;
   }
   orderDetails(event: any) {
     debugger;
     this.showOrder = true;
-    // this.selectedTitle = this.title;
-    // this.selectedPrice = this.price;
-    // this.ReaderModel.Title = this.selectedTitle;
   }
   updateTotal(event: any) {
     this.quantity = parseInt(event.target.value);
@@ -194,10 +192,7 @@ export class ReaderComponent implements OnInit {
     debugger;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     this.paymentId = uuidv4();
-    // var OneDay = new Date().getHours();
-    // this.orderPlacedTime = OneDay;
-    //console.log(this.orderPlacedTime);
-    // this.OrderModel.orderPlacedTime = this.orderPlacedTime;
+    localStorage.setItem('paymentId',this.paymentId);
     var postOrderData = {
       EmailId:this.OrderModel.emailId,
       BookId: this.id,
@@ -212,7 +207,9 @@ export class ReaderComponent implements OnInit {
       OrderPlacedTime:this.orderPlacedTime
     };
     console.log(postOrderData);
-    this.http.post('https://localhost:44333/api/order/postOrder', postOrderData)
+    // this.http.post('https://localhost:44333/api/order/postOrder', postOrderData)
+    this.http.post('http://localhost:48726/api/gateway/order/postOrder', postOrderData)
+     //.217.95/api/gateway/order/postOrder', postOrderData)
       .subscribe(res => this.PostSuccess(res), res => console.log(res));
   }
   SuccessMessage='';
@@ -229,6 +226,7 @@ export class ReaderComponent implements OnInit {
     this.showSearchDetails = false;
     this.showReadBookDetails = false;
     this.showInvoice = false;
+    this.showPaymentIdSearch = false;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
@@ -244,13 +242,13 @@ export class ReaderComponent implements OnInit {
     this.showSearchDetails = false;
     this.showReadBookDetails = true;
     this.showInvoice = false;
+    this.showPaymentIdSearch = false;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
   }
   cancelOrder(cancelorder:any){
     debugger;
     this.orderService.cancelOrder(cancelorder.orderId).subscribe(res=>this.CancelSuccess(res,cancelorder.orderPlacedTime),res=>console.log(res));
-    //this.orderPlacedTime = cancelorder.orderPlacedTime;
   }
   dateTimeDifference(input:any){
     var time = Date.now() - new Date(input).getTime();
@@ -262,8 +260,22 @@ export class ReaderComponent implements OnInit {
     var hours = Math.floor(time/(1000*60*60))
     if(hours <=24)
      {
-     this.SuccessMessage ="You can get your refund within 24hrs of payment.";
+     this.SuccessMessage ="You can get your refund within 24hrs of payment.Click on the refund option to get it";
      document.getElementById('btnSuccessMsg')?.click();
+     }
+    else
+     {
+     this.RefundGreaterThan24HrMessage ="Sorry, you cannot get your refund as the time got expired.";
+    document.getElementById('btnRefundErrorMsg')?.click();
+     }
+  }
+  refund(input:any){
+    var time = Date.now() - new Date(input.orderPlacedTime).getTime();
+    var hours = Math.floor(time/(1000*60*60))
+    if(hours <=24)
+     {
+     this.RefundSuccessMessage ="Process has been initiated.You will receive your amount shortly.";
+     document.getElementById('btnSuccessMsgRefund')?.click();
      }
     else
      {
@@ -282,13 +294,37 @@ export class ReaderComponent implements OnInit {
   }
   showInvoiceDetails()
   {
+    // this.showPaymentIdSearch = true;
     this.showInvoice = true;
     this.showOrderDetails = false;
     this.showReadBookDetails = false;
     this.showSearchDetails = false;
     this.OrderModel.emailId = localStorage.getItem('emailId');
     this.orderService.viewOrders(this.OrderModel.emailId).subscribe(res => this.GetSuccess(res), res => console.log(res));
+
   }
+//   searchByPaymentId(){
+//     //this.OrderModel.paymentId = localStorage.getItem('paymentId');
+//     // this.http.get("https://localhost:44333/api/order/getOrderDetailsByPaymentId/" + '?paymentId=' + this.OrderModel.paymentId)
+//     this.http.get("http://localhost:48726/api/gateway/order/getOrderDetailsByPaymentId" + '?paymentId=' + this.OrderModel.paymentId)
+//     // this.http.get("http://4.227.217.95/api/gateway/order/getOrderDetailsByPaymentId" + '?paymentId=' + this.OrderModel.paymentId)
+//       .subscribe((res: any) => {
+//         this.SearchSuccessByPaymentId(res);
+//         if (res.length <= 0) {
+//           this.PaymentIdErrorMessage = "No Payment Id Found. Search by entering valid payment Id!!";
+//           document.getElementById('btnErrorMsgPaymentId')?.click();
+//           console.log(this.PaymentIdErrorMessage);
+//         };
+//       },
+//         (err: any) => {
+//           console.log(err);
+//         });
+//  }
+  // SearchSuccessByPaymentId(input:any){
+  //   this.OrderModels = input;
+  //   localStorage.removeItem('paymentId');
+  //   this.showInvoice = true;
+  // }
   ReadBook(item:any){
     debugger;
     if(item.active == "yes"){
@@ -306,18 +342,8 @@ export class ReaderComponent implements OnInit {
     this.showInvoice = false;
     this.showOrderDetails = false;
     this.showReadBookDetails = false;
+    this.showPaymentIdSearch = false;
     this.showSearchDetails = true;
-  }
-
-  EditSearch(input: any) {
-    debugger;
-    this.isEdit = true;
-    this.ReaderModel = input;
-    this.id = input.id;
-    //this.http.put("https://localhost:44398/api/reader?id="+input.id).subscribe(res=>this.Success(res),res=>console.log(res));
-  }
-  DeleteSearch(input: any) {
-    this.http.delete("https://localhost:44333/api/reader?id=" + input.id).subscribe(res => this.Success(res), res => console.log(res));
   }
   
   //PDF genrate button click function

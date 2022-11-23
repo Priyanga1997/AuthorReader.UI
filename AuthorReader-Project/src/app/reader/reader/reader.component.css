@@ -158,15 +158,9 @@ table tr:nth-child(even) {
 .card{
   background-color: mediumaquamarine;
 }
-
-/* .searchbtn{
-    display: flex;
-    justify-content: space-between;
-    width: 30%;
-} */
-/* :host {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
+.searchByPaymentId{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
