@@ -1,0 +1,319 @@
+INSERT INTO BookCategory VALUES
+('Fantasy')
+('Spirituality')
+('Fiction')
+('Science Fiction')
+('Thriller')
+
+INSERT INTO BookAuthor VALUES
+('J.R.R. Tolkien')
+('Osho')
+('Stephen King')
+('David Wong')
+('Agatha Christie')
+
+INSERT INTO BookPrice VALUES
+('100')
+('110')
+('120')
+('130')
+('140')
+
+CREATE TABLE BookCategory
+{
+  Id INT NOT NULL,
+  NAME NVARCHAR(50) NOT NULL,
+  PRIMARY KEY(Id)
+}
+
+CREATE TABLE BookPublisher
+{
+  Id INT
+  NAME NVARCHAR(100) NOT NULL,
+  PRIMARY KEY(Id)
+}
+
+CREATE TABLE Book
+{
+  Id INT NOT NULL,
+  Title NVARCHAR(150) NOT NULL,
+  CategoryId INT NOT NULL,
+  PublisherId INT NOT NULL,
+  PRIMARY KEY(Id),
+  FOREIGN KEY(CategoryId) REFERENCES BookCategory(Id),
+  FOREIGN KEY(PublisherId) REFRENCES BookPublisher(Id)
+}
+
+
+All good people here - Random House Publishing Group
+All Good People Here is a debut thriller written by podcast host Ashley Flowers.
+Pride and Prejudice-T. Egerton, Whitehall
+Pride and Prejudice has consistently appeared near the top of lists of "most-loved books" among literary scholars and the reading public
+
+The Name of the Wind, also referred to as The Kingkiller Chronicle: Day One, is a heroic fantasy novel written by American author Patrick Rothfuss.
+
+1.Master component - navigation apply(Logo,application name,signin and signup)
+2.create component-Reader - create all the textboxes
+
+1.Can use json-server for time being to login
+2.create book
+.card img{
+width:200px;
+height:200px;
+margin-bottom:15px;
+transition:0.3s ease-in-out;
+
+.card img:hover{
+transition:0.3s ease-in-out;
+transform:scale(1.1);
+}
+
+Fantasy books:
+1.The Name Of The Wind
+The Name of the Wind, also referred to as The Kingkiller Chronicle: Day One, is a heroic fantasy novel written by American author Patrick Rothfuss. It is the first book in the ongoing fantasy trilogy The Kingkiller Chronicle, followed by The Wise Man's Fear.
+DAW Books
+2.A Wizard Of Earthsea
+A Wizard of Earthsea is a fantasy novel written by American author Ursula K. Le Guin and first published by the small press Parnassus in 1968. It is regarded as a classic of children's literature and of fantasy, within which it is widely influential.
+Parnassus Press
+3.Where The Mountain Meets The Moon 
+Little, Brown and Company
+Fiction books:
+1. Pride and Prejudice
+Pride and Prejudice is an 1813 novel of manners by Jane Austen. The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book who learns about the repercussions of hasty judgments and comes to appreciate the difference between superficial goodness and actual goodness.
+T. Egerton, Whitehall
+2.The Complete Grimm’s Fairy Tales
+Cinderella, Rapunzel, Snow-White, Hänsel and Gretel, Little Red-Cap (Little Red Riding Hood), and Briar-Rose (Sleeping Beauty) are only a few of the more than two hundred enchanting characters included in this volume
+Simon & Schuster
+3.The Little Prince
+The story follows a young prince who visits various planets in space, including Earth, and addresses themes of loneliness, friendship, love, and loss.
+Reynal & Hitchcock (U.S.) Gallimard (France)
+Science Fiction books:
+RingWorld
+Ringworld is a 1970 science fiction novel by Larry Niven, set in his Known Space universe and considered a classic of science fiction literature.
+Ballantine Books
+Spirituality Books:
+1.The Power Of Now:
+New World Library
+2.The Big Five For Life:
+St. Martin's Press
+
+https://github.com/zaracooper/lime-app
+
+ <span class="text-danger" [class.d-none]="usertype.valid||usertype.untouched">*Please select the user type.</span>
+ required #usertype="ngModel" [class.is-invalid]="usertype.invalid && usertype.touched"
+
+
+
+
+
+
+
+
+
+
+scaffold-DbContext "Data Source=CTSDOTNET852;Initial Catalog=Customer;User ID=sa;Password=pass@word1;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f
+
+
+
+
+
+The Name of the Wind:
+The Name of the Wind, also referred to as The Kingkiller Chronicle: Day One, is a heroic fantasy novel written by American author Patrick Rothfuss. It is the first book in the ongoing fantasy trilogy The Kingkiller Chronicle, followed by The Wise Man's Fear.
+
+The Kingkiller Chronicle takes place in the fictional world of Temerant, a large continent of which the known part, called the Four Corners of Civilization, is divided into several distinct nations and cultures. Much of the world follows a faith vaguely similar to medieval Christianity. Coexisting alongside the mortal world is the realm of the Fae, a parallel universe inhabited by supernatural creatures which can move between the two realms only when the moon is full. Magic exists in Temerant, too, but obeys a well-defined set of rules and principles that can only be exploited by those who have trained in its professional and scientific use.
+
+As the novel begins, the reader hears an old storyteller speaking of a famous old wizard called Taborlin the Great, who was captured by evil beings called the Chandrian. Escaping them, Taborlin fell from a great height—but since he knew the "Name of the Wind", he called it and the Wind came and set him down safely. In later parts of the book, characters are often skeptical of such stories. Some kinds of magic are taught in the university as academic disciplines and have daily-life applications (those who can afford it are able to buy magical lamps, for example, much better than the candles used by poorer people). However, most of the population does not have reliable knowledge of the magical disciplines and many still doubt that magicians can truly call upon the Wind. The Chandrian—whose appearance is supposedly heralded by flames turning blue—are often dismissed as mythical bogeymen.
+
+In the rural town of Newarre, the Waystone Inn is managed by an innkeeper named Kote and his assistant Bast. It is revealed that Kote is actually the renowned Kvothe: an unequaled sword fighter, magician, and musician, rumored to have killed a king—earning the title Kingkiller—and caused the present war in which the civilized world is embroiled. Bast is Kvothe's assistant and student and a prince of the Fae. Kvothe has gone into hiding and assumed the identity of Kote in order to keep a low profile. Kvothe saves a traveling scribe known as Chronicler from spider-like creatures called scrael, whereupon Chronicler, recognizing Kvothe, asks to record his story. Upon consenting, Kvothe tells Chronicler that this will take three days (corresponding to the planned trilogy of novels).
+
+Kvothe begins his story during his childhood, when he lived amongst a troupe of highly reputed traveling performers known as Edema Ruh. His loving parents train him from a young age as an actor, singer, and lute player. He does extremely well in all of these as in every other field to which he turns his hand. The troupe acquires the scholar and arcanist Abenthy, who trains Kvothe in science and sympathy: a discipline that creates links from one physical object to allow manipulation of another. Kvothe also witnesses Abenthy calling the wind to fend off suspicious townspeople and vows to discover the titular "name of the wind", permitting this control.
+
+Kvothe's father, the famous bard Arliden, starts composing what was to be the greatest of his works—a ballad of the ancient tragic hero Lanre. For this composition, Arliden starts collecting all the various tales of the mythical Chandrian and tries to get at the kernel of truth behind them—without explaining how this is related to Lanre. This inquiry turns out to have fatal consequences. When the troupe makes camp, Kvothe's mother sends him to gather sage in the surrounding woods. Upon returning, he finds his parents and all members of his troupe dead, and the all-too-real Chandrian seated around the campfire, which has turned blue. They disliked Arliden's researches and came to silence him and everybody else with whom he might have shared his findings. The eleven-year-old Kvothe is on the point of being killed by the Chandrian named Cinder when their leader, Lord Haliax, pressures them to depart due to the approach of some mysterious enemies of theirs.
+
+The traumatized Kvothe, alive but alone, spends three years in the slums of the city of Tarbean as a beggar and pickpocket. He is nudged out of this life by hearing a storyteller recount a story of how the hero Lanre became a renegade after the death of his beloved wife, went over to the evil forces he had fought and destroyed the cities with whose protection he was charged—and then changed his name and became himself the fearsome Lord Haliax of the Chandrian. Before Kvothe can ask more, the storyteller is arrested by the dominant Church on charges of heresy.
+
+Kvothe then resolves to get into the university, whose vast Archives include all kinds of accumulated knowledge, including, presumably, also on the Chandrian. Having through great effort obtained some minimal funds for both clothing and traveling, he sets out. En route Kvothe becomes enamored with a talented young woman known as Denna, who is a musician like himself. Kvothe enters the university despite his lack of tuition funds and performs admirably as a student, but faces continuous poverty and rivalries with the wealthy student Ambrose Jakis and the arrogant Master Hemme, who sees that Kvothe receives lashing for misbehaviour. A trick by Ambrose causes Kvothe to be banished from the Archives, hampering his research on the Chandrian. However he does very well in other fields of study, advancing in medicine and runic metalworking, and gaining some loyal friends. Kvothe buys a lute despite his poverty, and performs brilliantly at a famous musical tavern to earn money, where he also befriends Denna again.
+
+Hearing reports of blue fire and murder at a rural wedding, he suspects the Chandrian and visits the site. There, Kvothe finds Denna, injured. They meet a local swineherd who tells of blue fire, and later they encounter a draccus, which nearly destroys the local town before it is slain by Kvothe. He does succeed in discovering the reason the Chandrian murdered all of the wedding's participants: the bride's father had dug in the earth and discovered an old pot on which were paintings of all seven Chandrian; they came to recover the pot and kill anyone who may have seen it.
+
+Back at the university, Ambrose taunts Kvothe and breaks his lute. In a fit of rage, Kvothe unintentionally calls the name of the wind, breaking Ambrose's arm in the process. As a result of the confrontation, Kvothe is sentenced to further lashing but avoids expulsion. Thanks to his clear magical aptitude, he is also promoted in rank as a student under Master Namer Elodin's tutelage.
+
+In the inn at the present day, a mercenary possessed by a supposed skin dancer attacks the patrons and kills one of them. When Kvothe seemingly fails to use magic to help, the skin dancer dies after the local blacksmith's apprentice, Aaron, strikes the possessed mercenary with a rod of iron. The first day ends when Kvothe finishes the first chapter of his story and the town settles down for the night after the commotion. At night, Bast breaks into Chronicler's room and reveals Chronicler's coming was part of his plan all along. He threatens Chronicler, demanding that he focus Kote on the more heroic aspects of his story in the hope that he will abandon his apathy and return to his former heroic self.
+
+In the epilogue, it is implied Bast's fears are well-founded, as the present-day Kvothe is described as just a man "waiting to die."
+
+
+A Wizard of Earthsea:
+A Wizard of Earthsea is a fantasy novel written by American author Ursula K. Le Guin and first published by the small press Parnassus in 1968. It is regarded as a classic of children's literature and of fantasy, within which it is widely influential.
+
+The novel follows a young boy called Duny, nicknamed "Sparrowhawk", born on the island of Gont. Discovering that the boy has great innate power, his aunt, a witch, teaches him the little magic she knows. When his village is attacked by Kargish raiders, Duny summons a fog to conceal the village and its inhabitants, enabling the residents to drive off the Kargs. Hearing of this, the powerful mage Ogion takes him as an apprentice, and later gives him his "true name"—Ged. Ogion tries to teach Ged about the "equilibrium", the concept that magic can upset the natural order of the world if used improperly. In an attempt to impress a girl, however, Ged searches Ogion's spell books and inadvertently summons a strange shadow, which has to be banished by Ogion. Sensing Ged's eagerness to act and impatience with his slow teaching methods, Ogion asks if he would rather go to the renowned school for wizards on the island of Roke. Ged loves Ogion, but decides to go to the school.
+
+At the school, Ged meets Jasper, and is immediately on bad terms with him. He is befriended by an older student named Vetch, but generally remains aloof from anyone else. Ged's skills inspire admiration from teachers and students alike. He finds a small creature—an otak, named Hoag, and keeps it as a pet. During a festival, Jasper, acts condescendingly towards Ged, provoking the latter's proud nature. Ged challenges him to a duel of magic, and casts a powerful spell intended to raise the spirit of a legendary dead woman. The spell goes awry and instead releases a shadow creature, which attacks him and scars his face. The Archmage Nemmerle drives the shadow away, but at the cost of his life.
+
+Ged spends many months healing before resuming his studies. The new Archmage, Gensher, describes the shadow as an ancient evil that wishes to possess Ged, and warns him that the creature has no name. Ged eventually graduates and receives his wizard's staff. He then takes up residence in the Ninety Isles, providing the poor villagers protection from the dragons that have seized and taken up residence on the nearby island of Pendor, but discovers that he is still being sought by the shadow. Knowing that he cannot guard against both threats at the same time, he sails to Pendor and gambles his life on a guess of the adult dragon's true name. When he is proved right, the dragon offers to tell him the name of the shadow, but Ged instead extracts a promise that the dragon and his offspring will never threaten the archipelago.
+
+Chased by the shadow, Ged flees to Osskil, having heard of the stone of the Terrenon. He is attacked by the shadow, and barely escapes into the Court of Terrenon. Serret, the lady of the castle, and the same girl that Ged had tried to impress, shows him the stone, and urges Ged to speak to it, claiming it can give him limitless knowledge and power. Recognizing that the stone harbors one of the Old Powers—ancient, powerful, malevolent beings—Ged refuses. He flees and is pursued by the stone's minions, but transforms into a swift falcon and escapes. He loses his otak.
+
+Ged flies back to Ogion on Gont. Unlike Gensher, Ogion insists that all creatures have a name and advises Ged to confront the shadow. Ogion is proved right; when Ged seeks out the shadow, it flees from him. Ged pursues it in a small sailboat, until it lures him into a fog where the boat is wrecked on a reef. Ged recovers with the help of an elderly couple marooned on a small island since they were children; the woman gives Ged part of a broken bracelet as a gift. Ged patches his boat and resumes his pursuit of the creature into the East Reach. On the island of Iffish, he meets his friend Vetch, who insists on joining him. They journey east far beyond the last known lands before they finally come upon the shadow. Naming it with his own name, Ged merges with it and joyfully tells Vetch he is healed and whole.
+
+
+Where The Mountain Meets The Moon:
+Where the Mountain Meets the Moon is a fantasy-adventure children's novel inspired by Chinese folklore. It was written and illustrated by Grace Lin and published in 2009.
+
+By a bare mountain, where the Jade River runs through, lies a poor, mud-covered village known as the Village of Fruitless Mountain, where the protagonist, Minli lives. Minli is a young ten-year-old girl with a fast and eager spirit, and is constantly ready for adventure. However, what she especially enjoys are her father Ba's stories, which are often told at the dinner table. Minli's mother, Ma, instead despises the stories that Ba tells, feeling that they are simply "nonsense." Also, she is full of bitterness and resentment due to their poverty.
+
+All of the villagers, along with Minli's family, are also very poor, as farming is difficult in the hard and dry land due to Fruitless Mountain being the broken and lonely heart of the immortal Jade Dragon, a dragon that once brought rain to the Earth. Plus, there is barely enough rice to feed the people there, causing Minli to develop a wish for good fortune.
+
+Much to the displeasure of Ma, Minli spends her precious money on a goldfish. It turns out the goldfish can talk when people want to hear it. She decides to let it go because of how bitter it made Ma. When she does so, the goldfish tells her directions to Never-Ending Mountain, where a wise immortal known as the Old Man of the Moon lives. According to the goldfish, the wise man can answer Minli's question on how to bring good fortune to her family and the village. The following day, Minli then sets out, freeing the goldfish so as not to burden her parents further, and leaves the village to find "the old man of the moon". When her parents find out she is gone, they try to look for her, but are stopped by the goldfish seller, who tells them to trust Minli. Meanwhile, Minli sleeps for the night in the forest, only to wake up to find a trapped dragon, which she saves. They become friends, and Dragon offers to be her steed for the journey, despite the fact that he cannot fly, unlike other dragons. Dragon also reveals that he was born from a painting and came to life when his eyes were painted.
+
+Along the way, they encounter selfish monkeys, whom Minli manages to trick into letting them pass, and together they enter the City of Bright Moonlight, where Minli leaves Dragon in a cave and takes refuge in a boy's home. The boy is poor and has nothing but a buffalo but helps her find the king, who possesses a borrowed line of text, which is essential to finding the Old Man of the Moon. She ultimately meets the king, and he willingly gives up the borrowed line, which is revealed to be a page from the Book of Fortune, a legendary book that tells of fates and can be read only by immortal folk. Outside the city, Dragon also obtains a red string of destiny that is used to tie people destined to meet and marry together, which he believes is the borrowed line. The two then meet and after relating their adventures, set off once again, puzzled as to which is the real borrowed line.
+
+Meanwhile, at the Village of Fruitless Mountain, Ba and Ma have decided to return home and wait for Minli, and during this time, Ma feels remorse for having been so discontent when she already had her own precious treasure: her daughter.
+
+On the journey, Dragon tries to protect Minli from a poisonous Green Tiger but gets injured in the process and would have died had Minli not sought help from a nearby village of Moon Rain. The grandfather, A-Gong, gives Dragon medicine that doubles as tea. A set of twins from the village manage to trick the Green Tiger down an abandoned well and the next day take Minli and Dragon to Never-Ending Mountain, which turns out to be very close to the village. The twins explain that their village's name is due to raining seeds that fall from the moon every night, allowing flowering trees to bloom there. The blooms of the flowering trees also provide the antidote to the Green Tiger's poison, which saved Dragon. Using the borrowed line of text and the line of destiny, the adventurers stitch a kite that stretches into a bridge, and Minli goes on alone to meet the Old Man of the Moon. However, he informs her that she can ask only one question. After contemplating her choices, Minli chooses to ask Dragon's question for him: Why can he not fly? The old man instructs her to remove a rock from Dragon's head, which has been preventing him from flying. She does so, and immediately Dragon can fly. Together they fly home to Minli's village. The "rock" turns out to be the coveted Dragon's Pearl, which brings enormous wealth to her village. The Jade Dragon reunites with one of her children, Dragon, and transforms Fruitless Mountain to Fruitful Mountain. Because of Minli's sacrifice to help a friend, she and her family receive everything they could ever have hoped for.
+
+Pride and Prejudice:
+Pride and Prejudice is an 1813 novel of manners by Jane Austen. The novel follows the character development of Elizabeth Bennet, the dynamic protagonist of the book who learns about the repercussions of hasty judgments and comes to appreciate the difference between superficial goodness and actual goodness.
+
+In the early 19th century, the Bennet family live at their Longbourn estate, situated near the village of Meryton in Hertfordshire, England. Mrs. Bennet's greatest desire is to marry off her five daughters in order to secure their futures. The arrival of Mr. Bingley, a rich bachelor who rents the neighbouring Netherfield estate, gives her hope that one of her daughters might contract an advantageous marriage, because "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife".
+
+At a ball, the family is introduced to the Netherfield party, including Mr. Bingley, his two sisters and Mr. Darcy, his dearest friend. Mr. Bingley's friendly and cheerful manner earns him popularity among the guests. He appears interested in Jane, the eldest Bennet daughter. Mr. Darcy, reputed to be twice as wealthy as Mr Bingley, is haughty and aloof, causing a decided dislike of him. He declines to dance with Elizabeth, the second-eldest Bennet daughter, as she is "not handsome enough". Although she jokes about it with her friend, Elizabeth is deeply offended. Despite this first impression, Mr. Darcy secretly begins to find himself drawn to Elizabeth as they continue to encounter each other at social events, appreciating her wit and frankness.
+
+Mr. Collins, the heir to the Longbourn estate, visits the Bennet family with the intention of finding a wife among the five girls under the advice of his patroness Lady Catherine de Bourgh, also revealed to be Mr. Darcy's aunt. He decides to pursue Elizabeth. The Bennet family meet the charming army officer George Wickham, who tells Elizabeth in confidence Mr. Darcy's horrible past actions in his regards. Elizabeth, blinded by her prejudice toward Mr. Darcy, believes him.
+
+Elizabeth dances with Mr. Darcy at a ball, where Mrs. Bennet hints loudly that she expects Jane and Bingley to become engaged. Elizabeth rejects Mr. Collins' marriage proposal, to her mother's fury and her father's relief. Mr. Collins instead proposes to Charlotte Lucas, a friend of Elizabeth. Having heard Mrs. Bennet's words at the ball and disapproving of the marriage, Mr. Darcy joins Mr. Bingley in a trip to London and, with the help of his sisters, convinces him not to return to Netherfield. A heartbroken Jane visits her Aunt and Uncle Gardiner in London to raise her spirits, while Elizabeth's hatred for Mr. Darcy grows as she suspects he was responsible for Mr Bingley's departure.
+
+Elizabeth tells her father that Darcy was responsible for uniting Lydia and Wickham, in one of the two earliest illustrations of Pride and Prejudice. The clothing styles reflect the time the illustration was engraved (the 1830s), not the time in which the novel was written or set.
+In the spring, Elizabeth visits Charlotte and Mr. Collins in Kent. Elizabeth and her hosts are invited to Rosings Park, Lady Catherine's home. Mr. Darcy and his cousin, Colonel Fitzwilliam, are also visiting Rosings Park. Fitzwilliam tells Elizabeth how Mr. Darcy recently saved a friend, presumably Bingley, from an undesirable match. Elizabeth realises that the prevented engagement was to Jane. Mr. Darcy proposes to Elizabeth, declaring his love for her despite her low social connections. She is shocked, as she was unaware of Mr. Darcy's interest, and rejects him angrily, saying that he is the last person she would ever marry and that she could never love a man who caused her sister such unhappiness; she further accuses him of treating Wickham unjustly. Mr. Darcy brags about his success in separating Bingley and Jane and sarcastically dismisses the accusation regarding Wickham without addressing it.
+
+Mr. Darcy gives Elizabeth a letter, explaining that Wickham, the son of his late father's steward, had refused the "living" his father had arranged for him and was instead given money for it. Wickham quickly squandered the money and tried to elope with Darcy's 15-year-old sister, Georgiana, for her considerable dowry. Mr. Darcy also writes that he separated Jane and Bingley because he believed her indifferent to Bingley and because of the lack of propriety displayed by her family. Elizabeth is ashamed by her family's behaviour and her own prejudice against Mr. Darcy.
+
+Months later, Elizabeth accompanies the Gardiners on a tour of Derbyshire. They visit Pemberley, Darcy's estate. When Mr. Darcy returns unexpectedly, he is exceedingly gracious with Elizabeth and the Gardiners. Elizabeth is surprised by Darcy's behaviour and grows fond of him, even coming to regret rejecting his proposal. She receives news that her sister Lydia has run off with Wickham. She tells Mr. Darcy, then departs in haste. After an agonising interim, Wickham agrees to marry Lydia. She visits the family and tells Elizabeth that Mr. Darcy was at her wedding. Though Mr. Darcy had sworn everyone involved to secrecy, Mrs. Gardiner now feels obliged to inform Elizabeth that he secured the match, at great expense and trouble to himself.
+
+Mr. Bingley and Mr. Darcy return to Netherfield. Jane accepts Mr. Bingley's proposal. Lady Catherine, having heard rumours that Elizabeth intends to marry Mr. Darcy, visits her and demands she promise never to accept Mr. Darcy's proposal, as she and Darcy's late mother had already planned his marriage to her daughter Anne. Elizabeth refuses and asks the outraged Lady Catherine to leave. Darcy, heartened by his aunt's indignant relaying of Elizabeth's response, again proposes to her and is accepted.
+
+The Grimm's fairy tale:
+Jacob and Wilhelm Grimm 
+Cinderella, Rapunzel, Snow-White, Hänsel and Gretel, Little Red-Cap (Little Red Riding Hood), and Briar-Rose (Sleeping Beauty) are only a few of the more than two hundred enchanting characters included in this volume
+
+Jacob and Wilhelm Grimm were two of 10 children from Dorothea and Philipp Wilhelm Grimm. Philipp was a highly regarded district magistrate in Steinau an der Straße, about 50 kilometres (31 mi) from Hanau. Jacob and Wilhelm were sent to school for a classical education once they were of age, while their father was working. They were very hard-working pupils throughout their education. They followed in their father's footsteps and started to pursue a degree in law, and German history. However, in 1796, their father died at the age of 44 from pneumonia. This was a tragic time for the Grimms because the family lost all financial support and relied on their aunt, Henriette Zimmer, and grandfather, Johann Hermann Zimmer. At the age of 11, Jacob was compelled to be head of the household and provide for his family. After downsizing their home because of financial reasons, Henriette sent Jacob and Wilhelm to study at the prestigious high school, Lyzeum, in Kassel. In school, their grandfather wrote to them saying that because of their current situation, they needed to apply themselves industriously to secure their future welfare.
+
+Shortly after attending Lyzeum, their grandfather died and they were again left to themselves to support their family in the future. The two became intent on becoming the best students at Lyzeum, since they wanted to live up to their deceased father. They studied more than twelve hours a day and established similar work habits. They also shared the same bed and room at school. After four years of rigorous schooling, Jacob graduated head of his class in 1802. Wilhelm contracted asthma and scarlet fever, which delayed his graduation by one year although he was also head of his class. Both were given special dispensations for studying law at the University of Marburg. They particularly needed this dispensation because their social standing at the time was not high enough to have normal admittance. University of Marburg was a small, 200-person university where most students were more interested in activities other than schooling. Most of the students received stipends even though they were the richest in the state. The Grimms did not receive any stipends because of their social standing; however, they were not upset by it since it kept the distractions away.
+
+
+The Little Prince:
+The story follows a young prince who visits various planets in space, including Earth, and addresses themes of loneliness, friendship, love, and loss.
+Reynal & Hitchcock (U.S.) Gallimard (France).
+
+The narrator begins with a discussion on the nature of grown-ups and their inability to perceive "important things". As a test to determine if a grown-up is as enlightened as a child, he shows them a picture depicting a boa constrictor which has eaten an elephant. The grown-ups always reply that the picture depicts a hat, and so he knows to only talk of "reasonable" things to them, rather than the fanciful.
+
+The narrator becomes an aircraft pilot, and one day, his plane crashes in the Sahara desert, far from civilization. The narrator has an eight-day supply of water and must fix his aeroplane. Here, he is unexpectedly greeted by a young boy nicknamed "the little prince." The prince has golden hair, a loveable laugh, and will repeat questions until they are answered.
+
+The prince asks the narrator to draw a sheep. The narrator first shows him the picture of the elephant inside the snake, which, to the narrator's surprise, the prince interprets correctly. After three failed attempts at drawing a sheep, the frustrated narrator draws a simple crate, claiming the sheep is inside. The prince exclaims that this was exactly the drawing he wanted.
+
+Over the course of eight days in the desert, while the narrator attempts to repair his plane, the prince recounts his life story. He begins describing his tiny home planet: in effect, a house-sized asteroid known as "B 612" on Earth. The asteroid's most prominent features are three minuscule volcanoes (two active, and one dormant or extinct) and a variety of plants.
+
+The prince describes his earlier days cleaning the volcanoes and weeding unwanted seeds and sprigs that infest his planet's soil; in particular, pulling out baobab trees that are constantly on the verge of overrunning the surface. If the baobabs are not rooted out the moment they are recognised, its roots can have a catastrophic effect on the tiny planet. Therefore, the prince wants a sheep to eat the undesirable plants, but worries it will also eat plants with thorns.
+
+The prince tells of his love for a vain and silly rose that began growing on the asteroid's surface some time ago. The rose is given to pretension, exaggerating ailments to gain attention and have the prince care for her. The prince says he nourished the rose and tended to her, making a screen and glass globe to protect her from the cold and wind, watering her, and keeping the caterpillars off.
+
+Although the prince fell in love with the rose, he also began to feel that she was taking advantage of him, and he resolved to leave the planet to explore the rest of the universe. Upon their goodbyes, the rose apologises for failing to show that she loved him. She wishes him well and turns down his desire to leave her in the glass globe, saying she will protect herself. The prince laments that he did not understand how to love his rose while he was with her and should have listened to her kind actions, rather than her vain words.
+
+The prince has since visited six other planets, each of which was inhabited by a single, irrational, narrow-minded adult, each meant to critique an element of society. They include:
+
+A king with no subjects, who only issues orders that can be followed, such as commanding the sun to set at sunset.
+A narcissistic man who only wants the praise which comes from admiration and being the most-admirable person on his otherwise uninhabited planet.
+A drunkard who drinks to forget the shame of drinking.
+A businessman who is blind to the beauty of the stars and instead endlessly counts and catalogues them in order to "own" them all (critiquing materialism).
+A lamplighter on a planet so small, a full day lasts a minute. He wastes his life blindly following orders to extinguish and relight the lamp-post every 30 seconds to correspond with his planet's day and night.
+An elderly geographer who has never been anywhere, or seen any of the things he records, providing a caricature of specialisation in the contemporary world.
+It is the geographer who tells the prince that his rose is an ephemeral being, which is not recorded, and recommends that the prince next visit the planet Earth. The visit to Earth begins with a deeply pessimistic appraisal of humanity. The six absurd people the prince encountered earlier comprise, according to the narrator, just about the entire adult world. On earth there were:
+
+111 kings ... 7,000 geographers, 900,000 businessmen, 7,500,000 tipplers, 311,000,000 conceited men; that is to say, about 2,000,000,000 grown-ups.
+
+Since the prince landed in a desert, he believed that Earth was uninhabited. He then met a yellow snake that claimed to have the power to return him to his home, if he ever wished to return. The prince next met a desert flower, who told him that she had only seen a handful of men in this part of the world and that they had no roots, letting the wind blow them around and living hard lives. After climbing the highest mountain he had ever seen, the prince hoped to see the whole of Earth, thus finding the people; however, he saw only the enormous, desolate landscape. When the prince called out, his echo answered him, which he interpreted as the voice of a boring person who only repeats what another says.
+
+The prince encountered a whole row of rosebushes, becoming downcast at having once thought that his own rose was unique and thinking his rose had lied about being unique. He began to feel that he was not a great prince at all, as his planet contained only three tiny volcanoes and a flower that he now thought of as common. He laid down on the grass and wept, until a fox came along.
+
+The fox desired to be tamed and taught the prince how to tame him. By being tamed, something goes from being ordinary and just like all the others to being special and unique. There are drawbacks since the connection can lead to sadness and longing when apart.
+
+From the fox, the prince learns that his rose was indeed unique and special because she was the object of the prince's love and time; he had "tamed" her, and now she was more precious than all of the roses he had seen in the garden. Upon their sad departing, the fox imparts a secret: important things can only be seen with the heart, not the eyes.
+
+The prince finally met two people from Earth:
+
+A railway switchman who told him how passengers constantly rushed from one place to another aboard trains, never satisfied with where they were and not knowing what they were after; only the children among them ever bothered to look out the windows.
+A merchant who talked to the prince about his product, a pill that eliminated the need to drink for a week, saving people 53 minutes.
+Back in the present moment, it is the eighth day after the narrator's plane crash and the narrator and the prince are dying of thirst. The prince has become visibly morose and saddened over his recollections and longs to return home and see his flower.
+
+The prince finds a well, saving them. The narrator later finds the prince talking to the snake, discussing his return home and his desire to see his rose again, who, he worries, has been left to fend for herself. The prince bids an emotional farewell to the narrator and states that if it looks as though he has died, it is only because his body was too heavy to take with him to his planet. The prince warns the narrator not to watch him leave, as it will upset him. The narrator, realising what will happen, refuses to leave the prince's side. The prince consoles the narrator by saying that he only need look at the stars to think of the prince's loveable laughter, and that it will seem as if all the stars are laughing. The prince then walks away from the narrator and allows the snake to bite him, soundlessly falling down.
+
+The next morning, the narrator is unable to find the prince's body. He finally manages to repair his aeroplane and leave the desert. It is left up to the reader to determine if the prince returned home or died. The story ends with a drawing of the landscape where the prince and the narrator met and where the snake took the prince's corporeal life. The narrator requests to be immediately contacted by anyone in that area encountering a small person with golden curls who refuses to answer any questions.
+
+RingWorld:
+Ringworld is a 1970 science fiction novel by Larry Niven, set in his Known Space universe and considered a classic of science fiction literature.
+
+On planet Earth in 2850 AD, Louis Gridley Wu is celebrating his 200th birthday. Despite his age, Louis is in perfect physical condition due to the longevity drug boosterspice. He meets Nessus, a Pierson's puppeteer, who offers him a mysterious job. Intrigued, Louis eventually accepts. Speaker-to-Animals (Speaker), who is a Kzin, and Teela Brown, a young human woman who becomes Louis's lover, also join the crew.
+
+On the puppeteer home world, they are told that the expedition's goal is to investigate the Ringworld,[3] a gigantic artificial ring, to see if it poses any threat. The Ringworld is about one million miles (1.6 million km) wide and approximately the diameter of Earth's orbit (which makes it about 584.3 million miles or 940.4 million km in circumference), encircling a sunlike star. It rotates to provide artificial gravity 99.2% as strong as Earth's from centrifugal force. The Ringworld has a habitable, flat inner surface (equivalent in area to approximately three million Earths), a breathable atmosphere and a temperature optimal for humans. Night is provided by an inner ring of shadow squares which are connected to each other by thin, ultra-strong wire. When the crew completes their mission, they will be given the starship in which they travelled to the puppeteer home world; it is orders of magnitude faster than any possessed by humans or Kzinti.
+
+When they reach the vicinity of the Ringworld, they are unable to contact anyone, and their ship, the Lying Bastard, is disabled by the Ringworld's automated meteoroid-defense system. The severely damaged vessel collides with a strand of shadow-square wire and crash-lands near a huge mountain, "Fist-of-God". As the fusion drive is destroyed, they are unable to launch back into space where they could use the undamaged faster-than-light hyperdrive to return home. They set out to find a way to get the Lying Bastard off the Ringworld.
+
+Using their flycycles (similar to antigravity motorcycles), they try to reach the rim of the ring, where they hope to find some technology that will help them. It will take them months to cross the vast distance. When Teela develops "Plateau trance" (a kind of highway hypnosis), they are forced to land. On the ground, they encounter apparently primitive human natives who live in the crumbling ruins of a once-advanced city and think that the crew are the engineers who created the ring, and whom they revere as gods. The crew is attacked when they commit what the natives consider blasphemy (the misuse of certain technologies).
+
+They continue their journey, during which Nessus reveals some Puppeteer secrets: they have conducted experiments on both humans (breeding for luck via Birthright Lotteries: all of Teela's ancestors for six generations were born from winning the lottery) and Kzinti (breeding for reduced aggression via the Man-Kzin wars, which the Kzinti always lost). Speaker's outrage forces Nessus to flee and follow them from a safe distance.
+
+In a floating building over the ruins of a city, they find a map of the Ringworld and videos of its past civilization.
+
+While flying through a giant storm caused by air escaping through a hole in the Ring floor due to a meteoroid impact, Teela becomes separated from the others. While Louis and Speaker search for her, their flycycles are caught by an automated police trap designed to catch traffic offenders. They are trapped in the basement of a floating police station. Nessus enters the station to try to help them.
+
+In the station, they meet Halrloprillalar Hotrufan ("Prill"), a former crew member of a trading spaceship that collected plants and animals that couldn't adapt to the Ringworld. When her ship returned to the Ringworld the last time, they found that civilization had collapsed. The crew managed to enter the Ringworld, but some of them were killed and others suffered brain damage when the device that let them pass through the Ringworld floor failed. From her account, they learn that a mold was brought back from one of the original planets of the engineers by a spaceship like Prill's; it broke down the superconductors vital to the Ringworld civilization, dooming it.
+
+Teela reaches the police station, accompanied by her new lover, a native "hero" called Seeker who helped her survive. Based on an insight gained from studying an ancient Ringworld map, Louis comes up with a plan to get home. Teela chooses to remain on the Ringworld with Seeker. Louis, formerly skeptical about breeding for luck, now wonders if the entire mission was caused by Teela's luck, to unite her with her true love and help her mature.
+
+The party collects one end of the shadow-square wire that was snapped when the ship crashed. They travel back to their crashed ship in the floating police station, dragging the wire behind them. Louis threads it through the ship to tether it to the police station. He then takes the police station up to the summit of "Fist-of-God", the enormous mountain near their crash site. The mountain had not appeared on the Ringworld map, leading Louis to conclude that it is in fact the result of a meteoroid impact with the underside of the ring, which pushed the "mountain" up from the ring's floor and broke through. The top of the mountain, above the atmosphere, is therefore just a hole in the Ringworld floor. Louis drives the police station over the edge, dragging the Lying Bastard along with it. The Ringworld spins very quickly, so once the ship drops through the hole and clears the ring, they can use the ship's hyperdrive to get home. The book concludes with Louis and Speaker discussing returning to the Ringworld.
+
+
+The Power of Now: 
+Eckhart Tolle
+Yogi Impressions Books Pvt Ltd
+A Guide to Spiritual Enlightenment is a book by Eckhart Tolle. It presents itself as a discussion about how people interact with themselves and others. The concept of self reflection and presence in the moment are presented along with simple exercises for the achievement of its principles.
+
+In the book's introduction the author relates his past experiences of continuous anxiety with periods of suicidal depression. Later, when he was 29 years old, he had a personal epiphany and writes: "I heard the words 'resist nothing' as if spoken inside my chest." He relates that he felt as if he were falling into a void and afterwards "there was no more fear."
+
+Chapter Two: "Consciousness: The Way Out of Pain"
+In Chapter Two, Tolle tells the reader that they must recognize their personal ego "without the ego creating an antagonistic response to its own denial or destruction" and explains the purposelessness of the "mental pain and anguish" that people hold on to. According to the book: "The pain-body consists of trapped life-energy that has split off from your total energy field and has temporarily become autonomous through the unnatural process of mind identification." In this chapter the author writes: "pain can only feed on pain. Pain cannot feed on joy. It finds it quite indigestible". The author goes on to write that "many people live with a tormentor in their head that continuously attacks and punishes them and drains them of vital energy. It is the cause of untold misery and unhappiness."
+
+Chapter Three: "Moving Deeply Into the Now"
+In Chapter Three, the author writes: "In the normal, mind-identified or unenlightened state of consciousness, the power and creative potential that lie concealed in the Now are completely obscured by psychological time. You cannot find yourself by going into the past. You can find yourself by coming into the present. Life is now. There was never a time when your life was not now, nor will there ever be."
+
+Chapter Four: "Mind Strategies for Avoiding the Now"
+In Chapter Four, Tolle says that "tomorrow's bills are not the problem" and can be a "core delusion" that changes a "mere situation, event or emotion" into a reason for suffering and unhappiness. The book also calls "waiting" a "state of mind" that we should snap ourselves out of.
+
+
+
+The Big Five For Life:
+Joe is dissatisfied with his life, especially with his job. By chance he meets the successful businessman Thomas and learns about his profound corporate philosophy and the secrets of his success. The story begins and takes its course: Thomas becomes Joe's mentor and shows him the guiding principles of his companies. This consists of two essential factors: First, every employee must know his or her personal purpose, the so-called purpose of existence (ZDE).
+
+Secondly, each employee must have his or her individual "Big Five for Life" and live by them. The "Big Five for Life" are the five goals that you should definitely achieve in life. What really counts for you in life? The exciting thoughts touch Joe and move him a lot. With the novel "The Big Five for Life" you also hold Thomas' collected thoughts in your hands.
+
+John Strelecky: Integrating "The Big Five for Life" on the Job
+In his companies, for example, Thomas asks at every single interview what the Big Five of the respective applicant are. Only if the candidate can explain what he or she wants to achieve in life, and if those goals fit with the company's goals, does Thomas hire the applicant. Everyone who works at one of Thomas' companies has their Big Five taped as a note above their desk. Employees regularly talk to their supervisors about whether these five goals still fit their job - or whether something should change about their job because their goals have shifted.
+
+As a result, the employees in his companies are motivated. And not because they are well paid - they are, of course - but because they are convinced of the company's purpose. So they pursue the company's goals and their own goals at the same time. That not only motivates, but also makes happy. And it's no surprise that employee turnover at Thomas is almost five times lower than at comparable companies. Because once you've really come on board, you don't want to leave the team. 
+
+
+All good people here - Random House Publishing Group
+All Good People Here is a debut thriller written by podcast host Ashley Flowers.
+
+In the propulsive debut novel from the host of the #1 true crime podcast Crime Junkie, a journalist uncovers her hometown’s dark secrets when she becomes obsessed with the unsolved murder of her childhood neighbor—and the disappearance of another girl twenty years later.
+ 
+You can’t ever know for sure what happens behind closed doors.
+
+Everyone from Wakarusa, Indiana, remembers the infamous case of January Jacobs, who was discovered in a ditch hours after her family awoke to find her gone. Margot Davies was six at the time, the same age as January—and they were next-door neighbors. In the twenty years since, Margot has grown up, moved away, and become a big-city journalist. But she’s always been haunted by the feeling that it could’ve been her. And the worst part is, January’s killer has never been brought to justice.
+
+When Margot returns home to help care for her uncle after he is diagnosed with early-onset dementia, she feels like she’s walked into a time capsule. Wakarusa is exactly how she remembers—genial, stifled, secretive. Then news breaks about five-year-old Natalie Clark from the next town over, who’s gone missing under circumstances eerily similar to January’s. With all the old feelings rushing back, Margot vows to find Natalie and to solve January’s murder once and for all.
+
+But the police, Natalie’s family, the townspeople—they all seem to be hiding something. And the deeper Margot digs into Natalie’s disappearance, the more resistance she encounters, and the colder January’s case feels. Could January’s killer still be out there? Is it the same person who took Natalie? And what will it cost to finally discover what truly happened that night twenty years ago?
+
+Twisty, chilling, and intense, All Good People Here is a searing tale that asks: What are your neighbors capable of when they think no one is watching?
+
